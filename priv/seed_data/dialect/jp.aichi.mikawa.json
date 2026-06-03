@@ -1,0 +1,27 @@
+{
+  "region_path": "jp.aichi.mikawa",
+  "region_name": "三河",
+  "prefecture": "愛知県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/三河弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "じゃん", "reading": "じゃん", "meaning": "〜だ・〜ね", "example": "俺、今週給食当番じゃんか！"},
+    {"headword": "だら", "reading": "だら", "meaning": "〜だろう", "example": "次、お前の番だら？"},
+    {"headword": "ずら", "reading": "ずら", "meaning": "〜だろう（推量）", "example": ""},
+    {"headword": "のん", "reading": "のん", "meaning": "〜ね・〜なあ", "example": ""},
+    {"headword": "ほい", "reading": "ほい", "meaning": "おい（呼びかけ）", "example": "東三河で使用"},
+    {"headword": "えらい", "reading": "えらい", "meaning": "疲れた・大変だ", "example": "こんきいわ と類似"},
+    {"headword": "けった", "reading": "けった", "meaning": "自転車", "example": "けったマシーン とも"},
+    {"headword": "ぼっこ", "reading": "ぼっこ", "meaning": "ぼろ", "example": "ぼっこ集め＝廃品回収"},
+    {"headword": "あんき", "reading": "あんき", "meaning": "安心・気が楽", "example": "あんきだ"},
+    {"headword": "へぼ", "reading": "へぼ", "meaning": "地蜂の子（クロスズメバチの幼虫)", "example": ""},
+    {"headword": "おしの", "reading": "おしの", "meaning": "あなた", "example": "「お主」から変化"},
+    {"headword": "かやす", "reading": "かやす", "meaning": "返す・帰す", "example": "かやいた"}
+  ]
+}

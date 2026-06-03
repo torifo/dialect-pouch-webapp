@@ -1,0 +1,28 @@
+{
+  "region_path": "jp.oita",
+  "region_name": "大分",
+  "prefecture": "大分県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/大分弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "あたる", "reading": "あたる", "meaning": "さわる", "example": ""},
+    {"headword": "ええらしい", "reading": "ええらしい", "meaning": "かわいい", "example": ""},
+    {"headword": "おじい", "reading": "おじい", "meaning": "怖い", "example": ""},
+    {"headword": "かてる", "reading": "かてる", "meaning": "参加させる・仲間に入れる", "example": ""},
+    {"headword": "きばる", "reading": "きばる", "meaning": "頑張る・力を入れる", "example": ""},
+    {"headword": "くびる", "reading": "くびる", "meaning": "結ぶ", "example": ""},
+    {"headword": "さっちゃ", "reading": "さっちゃ", "meaning": "強いて・無理に", "example": ""},
+    {"headword": "しちくじい", "reading": "しちくじい", "meaning": "しつこい", "example": ""},
+    {"headword": "しょうもねえ", "reading": "しょうもねえ", "meaning": "つまらない", "example": ""},
+    {"headword": "よだきい", "reading": "よだきい", "meaning": "めんどう・疲れた", "example": ""},
+    {"headword": "ほかる", "reading": "ほかる", "meaning": "捨てる", "example": ""},
+    {"headword": "びこ", "reading": "びこ", "meaning": "娘", "example": ""},
+    {"headword": "むげねえ", "reading": "むげねえ", "meaning": "かわいそう", "example": ""}
+  ]
+}

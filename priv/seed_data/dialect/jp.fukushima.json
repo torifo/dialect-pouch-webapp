@@ -1,0 +1,29 @@
+{
+  "region_path": "jp.fukushima",
+  "region_name": "福島",
+  "prefecture": "福島県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/福島弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "べ", "reading": "べ", "meaning": "〜しよう・〜だろう", "example": "いこうべ"},
+    {"headword": "さ", "reading": "さ", "meaning": "〜へ・〜に（方向）", "example": "町さえぐ"},
+    {"headword": "あんべぇわりー", "reading": "あんべぇわりー", "meaning": "具合が悪い・病気", "example": "あんべぇわりーなぁ"},
+    {"headword": "めんこい", "reading": "めんこい", "meaning": "かわいい", "example": "めんこい子どもだね"},
+    {"headword": "なじょうだ", "reading": "なじょうだ", "meaning": "どうした", "example": "なじょうしたんだい"},
+    {"headword": "べこ", "reading": "べこ", "meaning": "牛", "example": ""},
+    {"headword": "したっけ", "reading": "したっけ", "meaning": "そしたら", "example": "したっけバイバイ"},
+    {"headword": "くらすける", "reading": "くらすける", "meaning": "殴る・叩く", "example": "くらつけられっつぉ"},
+    {"headword": "なんぼ", "reading": "なんぼ", "meaning": "いくら・どれくらい", "example": "子どもなんぼになった"},
+    {"headword": "はねる", "reading": "はねる", "meaning": "走る", "example": "はねていく"},
+    {"headword": "ねっぱる", "reading": "ねっぱる", "meaning": "貼り付ける・くっつける", "example": "これ糊でねっぱして"},
+    {"headword": "じさま", "reading": "じさま", "meaning": "おじいさん", "example": "じさまが来た"},
+    {"headword": "ぎっちょ", "reading": "ぎっちょ", "meaning": "左利き", "example": "あの子ぎっちょだね"},
+    {"headword": "やばっせ", "reading": "やばっせ", "meaning": "行こう・行こうよ", "example": "やばっせ遊びに"}
+  ]
+}
