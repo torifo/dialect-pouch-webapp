@@ -1,0 +1,19 @@
+# OS
+.DS_Store
+
+# Editor
+*.swp
+.idea/
+.vscode/
+
+# Secrets / env
+.env
+*.secret
+
+# Phoenix (Task 1.1 の scaffold で上書き・追補される)
+/_build/
+/deps/
+/.elixir_ls/
+*.beam
+erl_crash.dump
+/priv/static/assets/
