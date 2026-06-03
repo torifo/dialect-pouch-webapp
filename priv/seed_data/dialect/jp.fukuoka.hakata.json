@@ -1,0 +1,27 @@
+{
+  "region_path": "jp.fukuoka.hakata",
+  "region_name": "博多",
+  "prefecture": "福岡県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/博多弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "どげん", "reading": "どげん", "meaning": "どんなに・どう", "example": ""},
+    {"headword": "やけん", "reading": "やけん", "meaning": "〜だから（理由）", "example": ""},
+    {"headword": "ばい", "reading": "ばい", "meaning": "〜だよ（断定・詠嘆）", "example": "俺は男ばい"},
+    {"headword": "と？", "reading": "と", "meaning": "〜の？（疑問）", "example": "知っとーと？＝知ってるの？"},
+    {"headword": "おいしゃん", "reading": "おいしゃん", "meaning": "伯父さん", "example": "佐藤のおいしゃん"},
+    {"headword": "がと", "reading": "がと", "meaning": "〜の分", "example": "300円がと買うて来んしゃい"},
+    {"headword": "かべちょろ", "reading": "かべちょろ", "meaning": "ヤモリ", "example": ""},
+    {"headword": "きさん", "reading": "きさん", "meaning": "貴様", "example": ""},
+    {"headword": "ごりょんさん", "reading": "ごりょんさん", "meaning": "主婦", "example": ""},
+    {"headword": "しゃあしい", "reading": "しゃあしい", "meaning": "うるさい", "example": "しゃあしか＝うるさい"},
+    {"headword": "えずい", "reading": "えずい", "meaning": "怖い・恐ろしい", "example": ""},
+    {"headword": "こまい", "reading": "こまい", "meaning": "小さい・細い", "example": ""}
+  ]
+}

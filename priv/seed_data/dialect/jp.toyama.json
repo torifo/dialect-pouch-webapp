@@ -1,0 +1,27 @@
+{
+  "region_path": "jp.toyama",
+  "region_name": "富山",
+  "prefecture": "富山県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/富山弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "きときと", "reading": "きときと", "meaning": "新鮮な", "example": "きときとな魚やね"},
+    {"headword": "だら", "reading": "だら", "meaning": "ばか", "example": "だらないがけ"},
+    {"headword": "ねね", "reading": "ねね", "meaning": "赤ちゃん・子供", "example": ""},
+    {"headword": "あたる", "reading": "あたる", "meaning": "もらう", "example": "小遣いがあたる"},
+    {"headword": "ちんちんかく", "reading": "ちんちんかく", "meaning": "正座する", "example": "ちんちんかかれんか"},
+    {"headword": "まいけ", "reading": "まいけ", "meaning": "〜しよう（勧誘）", "example": "行こまいけ"},
+    {"headword": "され", "reading": "され", "meaning": "〜しなさい", "example": "富山にこられ"},
+    {"headword": "け", "reading": "け", "meaning": "〜ですか（疑問）", "example": "知っとっけ？"},
+    {"headword": "ちゃ", "reading": "ちゃ", "meaning": "〜よ・〜ね", "example": "そんながいちゃ"},
+    {"headword": "だやい", "reading": "だやい", "meaning": "だるい・面倒くさい", "example": ""},
+    {"headword": "いじくらしい", "reading": "いじくらしい", "meaning": "うっとうしい", "example": ""},
+    {"headword": "まいどはや", "reading": "まいどはや", "meaning": "こんにちは（挨拶）", "example": ""}
+  ]
+}

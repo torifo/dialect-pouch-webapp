@@ -1,0 +1,28 @@
+{
+  "region_path": "jp.kochi",
+  "region_name": "土佐",
+  "prefecture": "高知県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/土佐弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "おら", "reading": "おら", "meaning": "私（男性・高齢者）", "example": "おらんくの池には潮吹く魚がおよぎよる"},
+    {"headword": "わし", "reading": "わし", "meaning": "私（男性）", "example": "わしんくの子は川へあいをおさえにいったでよ"},
+    {"headword": "あて", "reading": "あて", "meaning": "私（女性・高齢者）", "example": ""},
+    {"headword": "うち", "reading": "うち", "meaning": "私（女性）", "example": "うちんくのたーは年がいてよう作らん"},
+    {"headword": "おまん", "reading": "おまん", "meaning": "お前（二人称）", "example": "おまんらーご飯食べー"},
+    {"headword": "われ", "reading": "われ", "meaning": "お前（二人称・男性）", "example": ""},
+    {"headword": "おどろく", "reading": "おどろく", "meaning": "目が覚める", "example": "おとろしい夢を見たきにおどろいたがよ"},
+    {"headword": "かく", "reading": "かく", "meaning": "（重いものを）持ち上げる・担ぐ", "example": ""},
+    {"headword": "ばー", "reading": "ばー", "meaning": "〜くらい", "example": "20cmばぁあったらえいと思うで"},
+    {"headword": "ひーとい", "reading": "ひーとい", "meaning": "一日", "example": ""},
+    {"headword": "なんちゃあない", "reading": "なんちゃあない", "meaning": "なんでもない", "example": ""},
+    {"headword": "かまえる", "reading": "かまえる", "meaning": "準備する", "example": "明日までにかまえちょくき"},
+    {"headword": "のう", "reading": "のう", "meaning": "具合", "example": "のうが悪いろう"}
+  ]
+}

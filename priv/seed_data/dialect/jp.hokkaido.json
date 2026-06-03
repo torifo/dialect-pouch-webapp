@@ -1,0 +1,25 @@
+{
+  "region_path": "jp.hokkaido",
+  "region_name": "北海道",
+  "prefecture": "北海道",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/北海道方言",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "なまら", "reading": "なまら", "meaning": "とても・かなり", "example": "なまら寒いべ"},
+    {"headword": "だべ", "reading": "だべ", "meaning": "〜だろう", "example": "ここの海きれいだべ？"},
+    {"headword": "しょ", "reading": "しょ", "meaning": "〜でしょう", "example": "そのくらいなんとかなるしょ"},
+    {"headword": "けっぱる", "reading": "けっぱる", "meaning": "頑張る", "example": "もう少しでゴールだ、けっぱれ！"},
+    {"headword": "あずましい", "reading": "あずましい", "meaning": "居心地が良い", "example": "この場所、あずましいね"},
+    {"headword": "いずい", "reading": "いずい", "meaning": "身体に違和感がある", "example": "歯がいずい"},
+    {"headword": "わや", "reading": "わや", "meaning": "めちゃくちゃ", "example": "部屋が散らかってわやだ"},
+    {"headword": "したっけ", "reading": "したっけ", "meaning": "そうしたら／それじゃあ", "example": "裸で寝たら、したっけ風邪ひいた"},
+    {"headword": "かい", "reading": "かい", "meaning": "〜ですか（疑問）", "example": "大丈夫かい？"},
+    {"headword": "とうきび", "reading": "とうきび", "meaning": "とうもろこし", "example": ""}
+  ]
+}

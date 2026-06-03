@@ -1,0 +1,30 @@
+{
+  "region_path": "jp.kagoshima",
+  "region_name": "鹿児島",
+  "prefecture": "鹿児島県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/鹿児島弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "あい", "reading": "あい", "meaning": "彼・奴", "example": ""},
+    {"headword": "あたい", "reading": "あたい", "meaning": "私（一人称）", "example": "あたいや、したん"},
+    {"headword": "あち", "reading": "あち", "meaning": "熱い・暑い", "example": ""},
+    {"headword": "いっき", "reading": "いっき", "meaning": "すぐに", "example": ""},
+    {"headword": "うったくっ", "reading": "うったくっ", "meaning": "殴る", "example": "ゆこちゅ、きかんと、うったくっど"},
+    {"headword": "おい", "reading": "おい", "meaning": "俺（男性一人称）", "example": ""},
+    {"headword": "げー", "reading": "げー", "meaning": "家・家族", "example": "あたいげー＝私の家"},
+    {"headword": "かたる", "reading": "かたる", "meaning": "喋る", "example": ""},
+    {"headword": "びんた", "reading": "びんた", "meaning": "頭", "example": "びんたが、いたか＝頭が痛い"},
+    {"headword": "やっせん", "reading": "やっせん", "meaning": "駄目", "example": ""},
+    {"headword": "わい", "reading": "わい", "meaning": "お前（二人称）", "example": ""},
+    {"headword": "むぞか", "reading": "むぞか", "meaning": "可愛い", "example": ""},
+    {"headword": "したん", "reading": "したん", "meaning": "知らない", "example": ""},
+    {"headword": "しっちょ", "reading": "しっちょ", "meaning": "知っている", "example": ""},
+    {"headword": "のんべ", "reading": "のんべ", "meaning": "酒飲み", "example": ""}
+  ]
+}

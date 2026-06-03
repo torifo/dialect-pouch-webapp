@@ -1,0 +1,30 @@
+{
+  "region_path": "jp.akita",
+  "region_name": "秋田",
+  "prefecture": "秋田県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/秋田弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "おど", "reading": "おど", "meaning": "父", "example": ""},
+    {"headword": "ばっちゃ", "reading": "ばっちゃ", "meaning": "祖母・伯叔母", "example": ""},
+    {"headword": "わらし", "reading": "わらし", "meaning": "子供", "example": ""},
+    {"headword": "べご", "reading": "べご", "meaning": "牛", "example": ""},
+    {"headword": "まなぐ", "reading": "まなぐ", "meaning": "目・眼", "example": ""},
+    {"headword": "なづぎ", "reading": "なづぎ", "meaning": "おでこ", "example": ""},
+    {"headword": "ごんぼ", "reading": "ごんぼ", "meaning": "ゴボウ", "example": ""},
+    {"headword": "がっこ", "reading": "がっこ", "meaning": "漬け物", "example": ""},
+    {"headword": "なげる", "reading": "なげる", "meaning": "捨てる", "example": "「なげる／なけげる」"},
+    {"headword": "ねまる", "reading": "ねまる", "meaning": "座る", "example": ""},
+    {"headword": "おめァ", "reading": "おめあ", "meaning": "君・お前", "example": ""},
+    {"headword": "おら", "reading": "おら", "meaning": "私・俺", "example": ""},
+    {"headword": "どご", "reading": "どご", "meaning": "どこ", "example": ""},
+    {"headword": "んめァ", "reading": "んめあ", "meaning": "甘い・おいしい", "example": ""},
+    {"headword": "さっけ", "reading": "さっけ", "meaning": "冷たい", "example": ""}
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "region_path": "jp.kyoto",
+  "region_name": "京都",
+  "prefecture": "京都府",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/京言葉",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "どす", "reading": "どす", "meaning": "です（丁寧語）", "example": "なんどすいな＝何ですかね"},
+    {"headword": "はる", "reading": "はる", "meaning": "〜なさる（敬語）", "example": "乗って来はるわ＝乗ってこられるよ"},
+    {"headword": "へん", "reading": "へん", "meaning": "〜ない（否定）", "example": "誰もおへん＝誰もいません"},
+    {"headword": "さかい", "reading": "さかい", "meaning": "〜から（理由）", "example": "いま行くさかい待っててや"},
+    {"headword": "かて", "reading": "かて", "meaning": "〜でも（逆接）", "example": "叱られたかて、かまへん"},
+    {"headword": "おおきに", "reading": "おおきに", "meaning": "ありがとう", "example": ""},
+    {"headword": "ごめんやす", "reading": "ごめんやす", "meaning": "ごめんなさい・御免ください", "example": ""},
+    {"headword": "やろ", "reading": "やろ", "meaning": "〜だろう（推量）", "example": "長いやろ＝長いだろう"},
+    {"headword": "ざんない", "reading": "ざんない", "meaning": "だらしない", "example": ""}
+  ]
+}

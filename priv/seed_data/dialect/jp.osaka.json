@@ -1,0 +1,25 @@
+{
+  "region_path": "jp.osaka",
+  "region_name": "大阪",
+  "prefecture": "大阪府",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/大阪弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "へん", "reading": "へん", "meaning": "〜ない（否定）", "example": "行かへん＝行かない"},
+    {"headword": "ねん", "reading": "ねん", "meaning": "〜のだ", "example": "何すんねん＝何をするのだ"},
+    {"headword": "やん", "reading": "やん", "meaning": "〜ない／〜じゃない", "example": ""},
+    {"headword": "だす", "reading": "だす", "meaning": "です", "example": "年配層が使用"},
+    {"headword": "おます", "reading": "おます", "meaning": "あります", "example": "「ある」の丁寧語"},
+    {"headword": "はん", "reading": "はん", "meaning": "敬称（さん）", "example": "第三者同士の会話で使用"},
+    {"headword": "いきはる", "reading": "いきはる", "meaning": "行きなさる", "example": "「お行きなさる」の意"},
+    {"headword": "すもじ", "reading": "すもじ", "meaning": "寿司", "example": "船場言葉の女房言葉"},
+    {"headword": "もうかりまっか", "reading": "もうかりまっか", "meaning": "儲かりますか", "example": "有名な挨拶表現"},
+    {"headword": "ぼちぼちでんな", "reading": "ぼちぼちでんな", "meaning": "ぼちぼちですな", "example": ""}
+  ]
+}

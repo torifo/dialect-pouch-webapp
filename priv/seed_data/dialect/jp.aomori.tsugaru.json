@@ -1,0 +1,35 @@
+{
+  "region_path": "jp.aomori.tsugaru",
+  "region_name": "津軽",
+  "prefecture": "青森県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/津軽弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "あずましい", "reading": "あずましい", "meaning": "気持ち良い・落ち着く", "example": "（温泉で）あずましぃ〜"},
+    {"headword": "あんべ", "reading": "あんべ", "meaning": "気分・居心地", "example": ""},
+    {"headword": "いずい", "reading": "いずい", "meaning": "違和感がある・気持ち悪い", "example": ""},
+    {"headword": "うだで", "reading": "うだで", "meaning": "凄い・大変", "example": ""},
+    {"headword": "うって", "reading": "うって", "meaning": "沢山", "example": ""},
+    {"headword": "えへる", "reading": "えへる", "meaning": "いじける", "example": ""},
+    {"headword": "おがる", "reading": "おがる", "meaning": "伸びる・成長する", "example": ""},
+    {"headword": "かっちゃぐ", "reading": "かっちゃぐ", "meaning": "引っ掻く", "example": ""},
+    {"headword": "くっちゃべんな", "reading": "くっちゃべんな", "meaning": "静かにしなさい", "example": ""},
+    {"headword": "けっぱる", "reading": "けっぱる", "meaning": "頑張る", "example": "けっぱれ＝頑張れ"},
+    {"headword": "しばれる", "reading": "しばれる", "meaning": "厳しく寒くなる", "example": ""},
+    {"headword": "しみる", "reading": "しみる", "meaning": "凍る", "example": ""},
+    {"headword": "じゃま", "reading": "じゃま", "meaning": "身長", "example": ""},
+    {"headword": "じょっぱり", "reading": "じょっぱり", "meaning": "意地っ張り・頑固者", "example": ""},
+    {"headword": "たなぐ", "reading": "たなぐ", "meaning": "持つ・担ぐ", "example": ""},
+    {"headword": "どんず", "reading": "どんず", "meaning": "お尻", "example": ""},
+    {"headword": "なげる", "reading": "なげる", "meaning": "捨てる", "example": ""},
+    {"headword": "へば", "reading": "へば", "meaning": "それじゃあ・さようなら", "example": ""},
+    {"headword": "まいね", "reading": "まいね", "meaning": "駄目・いやだ", "example": ""},
+    {"headword": "わや", "reading": "わや", "meaning": "とても・めちゃくちゃ", "example": ""}
+  ]
+}

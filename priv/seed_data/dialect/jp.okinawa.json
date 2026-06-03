@@ -1,0 +1,19 @@
+{
+  "region_path": "jp.okinawa",
+  "region_name": "沖縄",
+  "prefecture": "沖縄県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/沖縄方言",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "_note": "Wikipedia記事は音韻・文法中心で語彙例が少ない。後で専門辞典/コミュニティ出典で補完予定。",
+  "entries": [
+    {"headword": "うちなーぐち", "reading": "うちなーぐち", "meaning": "沖縄語（沖縄の言葉の自称）", "example": ""},
+    {"headword": "ちぶる", "reading": "ちぶる", "meaning": "頭", "example": ""},
+    {"headword": "たかさん", "reading": "たかさん", "meaning": "高い", "example": "形容詞の活用例"}
+  ]
+}

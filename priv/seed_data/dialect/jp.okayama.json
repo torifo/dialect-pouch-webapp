@@ -1,0 +1,29 @@
+{
+  "region_path": "jp.okayama",
+  "region_name": "岡山",
+  "prefecture": "岡山県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/岡山弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "でーれー", "reading": "でーれー", "meaning": "すごい・とても", "example": "でーれーでけえ＝すごく大きい"},
+    {"headword": "おえん", "reading": "おえん", "meaning": "いけない・だめ", "example": "そねーなことーしちゃー、おえん"},
+    {"headword": "けん", "reading": "けん", "meaning": "〜だから（理由）", "example": "けー とも言う"},
+    {"headword": "じゃ", "reading": "じゃ", "meaning": "〜だ（断定）", "example": "これはえーじゃ"},
+    {"headword": "ぼっけー", "reading": "ぼっけー", "meaning": "ものすごい", "example": "ぼっけー腫れもの"},
+    {"headword": "もんげー", "reading": "もんげー", "meaning": "とんでもない・ものすごい", "example": ""},
+    {"headword": "わや", "reading": "わや", "meaning": "無茶苦茶", "example": "わやなことゆーたら、おえんで"},
+    {"headword": "なんぼ", "reading": "なんぼ", "meaning": "いくら", "example": "なんぼ何でも"},
+    {"headword": "たいぎい", "reading": "たいぎい", "meaning": "面倒くさい", "example": "明日の運動会、たいぎーのー"},
+    {"headword": "いらち", "reading": "いらち", "meaning": "せっかち", "example": ""},
+    {"headword": "ねき", "reading": "ねき", "meaning": "近く・近所", "example": ""},
+    {"headword": "かる", "reading": "かる", "meaning": "借りる", "example": ""},
+    {"headword": "ほんま", "reading": "ほんま", "meaning": "本当", "example": ""},
+    {"headword": "べべ", "reading": "べべ", "meaning": "服（幼児語）", "example": "べべを着る"}
+  ]
+}

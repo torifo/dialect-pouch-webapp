@@ -1,0 +1,32 @@
+{
+  "region_path": "jp.ibaraki",
+  "region_name": "茨城",
+  "prefecture": "茨城県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/茨城弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "だっぺ", "reading": "だっぺ", "meaning": "〜だろう", "example": "なんだっぺ、うまぐいがねーな"},
+    {"headword": "っぺ", "reading": "っぺ", "meaning": "〜しよう", "example": "紙をハサミで切っぺ"},
+    {"headword": "ごじゃっぺ", "reading": "ごじゃっぺ", "meaning": "でたらめ・いい加減", "example": "あいつはごじゃっぺで信用でぎね"},
+    {"headword": "いじやげる", "reading": "いじやげる", "meaning": "いらいらする・じれったい", "example": ""},
+    {"headword": "おじる", "reading": "おじる", "meaning": "降りる", "example": ""},
+    {"headword": "さ", "reading": "さ", "meaning": "〜へ・〜に", "example": "水戸さ行ってきた"},
+    {"headword": "けー", "reading": "けー", "meaning": "〜かい", "example": "それは本当なのけ？"},
+    {"headword": "こわい", "reading": "こわい", "meaning": "疲れた・くたびれた", "example": "あー、こわいこわい"},
+    {"headword": "いしこい", "reading": "いしこい", "meaning": "粗末な・出来が悪い", "example": ""},
+    {"headword": "しゃでー", "reading": "しゃでー", "meaning": "弟", "example": "しゃでーのほうは今何やってんの？"},
+    {"headword": "じゃんぼ", "reading": "じゃんぼ", "meaning": "葬式", "example": ""},
+    {"headword": "ちぐ", "reading": "ちぐ", "meaning": "嘘", "example": ""},
+    {"headword": "とーみぎ", "reading": "とーみぎ", "meaning": "トウモロコシ", "example": ""},
+    {"headword": "あぎれる", "reading": "あぎれる", "meaning": "飽きる", "example": ""},
+    {"headword": "めんごい", "reading": "めんごい", "meaning": "可愛い", "example": ""},
+    {"headword": "やーこい", "reading": "やーこい", "meaning": "柔らかい", "example": ""},
+    {"headword": "おもしー", "reading": "おもしー", "meaning": "面白い", "example": ""}
+  ]
+}

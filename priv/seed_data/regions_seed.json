@@ -1,0 +1,33 @@
+{
+  "_meta": {
+    "note": "初期シードの地域ツリー。国>都道府県>(一部)地域。pathはdialect/*.jsonのregion_pathと対応。parent_pathでローダが親解決。",
+    "observed_at": "2026-06-03",
+    "boundary_source_todo": "ポリゴン(geom)はCODH Geoshape(CC BY 4.0)/国土数値情報N03で後付け予定(本シードは階層のみ)"
+  },
+  "regions": [
+    {"path": "jp", "name": "日本", "level": "country", "parent_path": null},
+
+    {"path": "jp.hokkaido", "name": "北海道", "level": "prefecture", "parent_path": "jp"},
+    {"path": "jp.aomori", "name": "青森県", "level": "prefecture", "parent_path": "jp"},
+    {"path": "jp.akita", "name": "秋田県", "level": "prefecture", "parent_path": "jp"},
+    {"path": "jp.miyagi", "name": "宮城県", "level": "prefecture", "parent_path": "jp"},
+    {"path": "jp.ibaraki", "name": "茨城県", "level": "prefecture", "parent_path": "jp"},
+    {"path": "jp.toyama", "name": "富山県", "level": "prefecture", "parent_path": "jp"},
+    {"path": "jp.aichi", "name": "愛知県", "level": "prefecture", "parent_path": "jp"},
+    {"path": "jp.kyoto", "name": "京都府", "level": "prefecture", "parent_path": "jp"},
+    {"path": "jp.osaka", "name": "大阪府", "level": "prefecture", "parent_path": "jp"},
+    {"path": "jp.hyogo", "name": "兵庫県", "level": "prefecture", "parent_path": "jp"},
+    {"path": "jp.okayama", "name": "岡山県", "level": "prefecture", "parent_path": "jp"},
+    {"path": "jp.hiroshima", "name": "広島県", "level": "prefecture", "parent_path": "jp"},
+    {"path": "jp.kochi", "name": "高知県", "level": "prefecture", "parent_path": "jp"},
+    {"path": "jp.fukuoka", "name": "福岡県", "level": "prefecture", "parent_path": "jp"},
+    {"path": "jp.kagoshima", "name": "鹿児島県", "level": "prefecture", "parent_path": "jp"},
+    {"path": "jp.okinawa", "name": "沖縄県", "level": "prefecture", "parent_path": "jp"},
+
+    {"path": "jp.aomori.tsugaru", "name": "津軽", "level": "area", "parent_path": "jp.aomori"},
+    {"path": "jp.miyagi.sendai", "name": "仙台", "level": "area", "parent_path": "jp.miyagi"},
+    {"path": "jp.aichi.nagoya", "name": "名古屋", "level": "area", "parent_path": "jp.aichi"},
+    {"path": "jp.hyogo.banshu", "name": "播州", "level": "area", "parent_path": "jp.hyogo"},
+    {"path": "jp.fukuoka.hakata", "name": "博多", "level": "area", "parent_path": "jp.fukuoka"}
+  ]
+}

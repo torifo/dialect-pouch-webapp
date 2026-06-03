@@ -1,0 +1,33 @@
+{
+  "region_path": "jp.hiroshima",
+  "region_name": "広島",
+  "prefecture": "広島県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/広島弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "じゃ", "reading": "じゃ", "meaning": "〜だ", "example": "ほんまじゃ＝本当だ"},
+    {"headword": "じゃけえ", "reading": "じゃけえ", "meaning": "〜だから", "example": "じゃけん とも言う"},
+    {"headword": "かばち", "reading": "かばち", "meaning": "文句・屁理屈", "example": "かばちたれな＝文句を言うな"},
+    {"headword": "たいぎい", "reading": "たいぎい", "meaning": "面倒くさい・だるい", "example": "たいぎいけぇ行かんかった"},
+    {"headword": "ぶち", "reading": "ぶち", "meaning": "とても・すごく", "example": "ぶちうまいのう"},
+    {"headword": "たう", "reading": "たう", "meaning": "届く", "example": "天井に手がたう"},
+    {"headword": "たわん", "reading": "たわん", "meaning": "届かない", "example": "梯子がたわん"},
+    {"headword": "めげる", "reading": "めげる", "meaning": "壊れる", "example": "ゲームがめげてしもうた"},
+    {"headword": "もげる", "reading": "もげる", "meaning": "取れる", "example": "腕がもげた"},
+    {"headword": "ええ", "reading": "ええ", "meaning": "良い・いい", "example": "ええけぇやってみんさい"},
+    {"headword": "いたしい", "reading": "いたしい", "meaning": "難しい", "example": "いたしいことをいいんさるのぉ"},
+    {"headword": "おらん", "reading": "おらん", "meaning": "いない", "example": "あんなはおるかい＝あの人はいますか"},
+    {"headword": "はぶてる", "reading": "はぶてる", "meaning": "すねる・腹を立てる", "example": "そがぁにはぶてんなさんなや"},
+    {"headword": "わや", "reading": "わや", "meaning": "めちゃくちゃ", "example": "わやすんなや"},
+    {"headword": "ちぃたぁ", "reading": "ちぃたぁ", "meaning": "少し", "example": "ちぃたぁゆうことを聞け"},
+    {"headword": "みやすい", "reading": "みやすい", "meaning": "簡単な", "example": "そりゃみやすいの"},
+    {"headword": "こまい", "reading": "こまい", "meaning": "小さい", "example": "肝っ玉こまいのぉ"},
+    {"headword": "よう", "reading": "よう", "meaning": "しばしば・たくさん", "example": "ようこの辺散歩しよる"}
+  ]
+}

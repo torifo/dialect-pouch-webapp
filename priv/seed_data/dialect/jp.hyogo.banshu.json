@@ -1,0 +1,25 @@
+{
+  "region_path": "jp.hyogo.banshu",
+  "region_name": "播州",
+  "prefecture": "兵庫県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/播州弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "いぬ", "reading": "いぬ", "meaning": "帰る", "example": "はよいね＝早く帰れ"},
+    {"headword": "ぎょうさん", "reading": "ぎょうさん", "meaning": "たくさん", "example": ""},
+    {"headword": "けったい", "reading": "けったい", "meaning": "妙・変", "example": "けったいなやっちゃのう"},
+    {"headword": "ごっつい", "reading": "ごっつい", "meaning": "とても・すごい", "example": "ごっついのう"},
+    {"headword": "さんこ", "reading": "さんこ", "meaning": "散らかっている状態", "example": "さんこにしとらんとなおしよ"},
+    {"headword": "じっき", "reading": "じっき", "meaning": "すぐ", "example": "じっきに帰ってくっさかい"},
+    {"headword": "しんどい", "reading": "しんどい", "meaning": "疲れた", "example": "今日はしんどかったのう"},
+    {"headword": "よーけ", "reading": "よーけ", "meaning": "沢山・いっぱい", "example": ""},
+    {"headword": "ぬかす", "reading": "ぬかす", "meaning": "言う", "example": "誰にものぬかしよんなら"},
+    {"headword": "わや", "reading": "わや", "meaning": "無茶苦茶", "example": "わやにしくさりおって"}
+  ]
+}

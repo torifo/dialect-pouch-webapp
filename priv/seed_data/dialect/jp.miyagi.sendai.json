@@ -1,0 +1,25 @@
+{
+  "region_path": "jp.miyagi.sendai",
+  "region_name": "仙台",
+  "prefecture": "宮城県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/仙台弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "だっちゃ", "reading": "だっちゃ", "meaning": "〜だよ・〜ですね", "example": ""},
+    {"headword": "べ", "reading": "べ", "meaning": "〜だろう・〜しよう", "example": "みんなでがんばっぺ＝みんなで頑張ろう"},
+    {"headword": "ば", "reading": "ば", "meaning": "〜を（目的格）", "example": "酒ば飲む＝酒を飲む"},
+    {"headword": "さ", "reading": "さ", "meaning": "〜に・〜へ（方向）", "example": "東京さ行く＝東京に行く"},
+    {"headword": "あんべぇ", "reading": "あんべぇ", "meaning": "体調・具合", "example": "あんべぇ大丈夫か？"},
+    {"headword": "めんこい", "reading": "めんこい", "meaning": "可愛い", "example": "めんこい子ども"},
+    {"headword": "いずい", "reading": "いずい", "meaning": "不快感がある・しっくりこない", "example": ""},
+    {"headword": "おらい", "reading": "おらい", "meaning": "うちの家", "example": "おらいさ来てけろ＝うちに来てください"},
+    {"headword": "べこ", "reading": "べこ", "meaning": "牛", "example": "べごさ餌かせでくる"},
+    {"headword": "わらすこ", "reading": "わらすこ", "meaning": "子ども", "example": ""}
+  ]
+}

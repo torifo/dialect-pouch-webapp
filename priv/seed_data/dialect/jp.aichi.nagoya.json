@@ -1,0 +1,32 @@
+{
+  "region_path": "jp.aichi.nagoya",
+  "region_name": "名古屋",
+  "prefecture": "愛知県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/名古屋弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "がや", "reading": "がや", "meaning": "〜だね（感動）", "example": "雪が降っとるがや"},
+    {"headword": "だで", "reading": "だで", "meaning": "〜だから", "example": "そこだでね"},
+    {"headword": "えらい", "reading": "えらい", "meaning": "疲れた・しんどい", "example": "えらかったねぇ"},
+    {"headword": "ようけ", "reading": "ようけ", "meaning": "たくさん", "example": "ようけ来やぁした"},
+    {"headword": "やっとかめ", "reading": "やっとかめ", "meaning": "久しぶり", "example": "やっとかめだなも"},
+    {"headword": "ほかす", "reading": "ほかす", "meaning": "捨てる", "example": "ゴミをほかす"},
+    {"headword": "つる", "reading": "つる", "meaning": "机などを持ち上げて移動させる", "example": "机をつる"},
+    {"headword": "けった", "reading": "けった", "meaning": "自転車", "example": ""},
+    {"headword": "おみゃあ", "reading": "おみゃあ", "meaning": "お前", "example": "おみゃあさん"},
+    {"headword": "ぬくとい", "reading": "ぬくとい", "meaning": "温かい", "example": "ぬくとい飲み物"},
+    {"headword": "こわい", "reading": "こわい", "meaning": "固い（食べ物）", "example": "ご飯がこわい"},
+    {"headword": "あやすい", "reading": "あやすい", "meaning": "簡単・容易", "example": "あやすいことだ"},
+    {"headword": "どえらい", "reading": "どえらい", "meaning": "すごい・とても", "example": "どえらい雨だなも"},
+    {"headword": "なも", "reading": "なも", "meaning": "〜ですね（丁寧）", "example": "お丈夫だなも"},
+    {"headword": "ちゃっと", "reading": "ちゃっと", "meaning": "すぐに・急いで", "example": "ちゃっと来てや"},
+    {"headword": "はよ", "reading": "はよ", "meaning": "早く", "example": "はよやらな"},
+    {"headword": "わや", "reading": "わや", "meaning": "めちゃくちゃ・台無し", "example": "物がわやになった"}
+  ]
+}
