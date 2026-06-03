@@ -27,6 +27,14 @@ defmodule DialectPocket.Regions.Region do
 
   def levels, do: @levels
 
+  @doc """
+  Whether a string is a structurally valid region path
+  (dot-separated `[a-z0-9-]` labels). Use this to guard raw, externally
+  supplied path arguments before they reach a `LIKE` query.
+  """
+  def valid_path?(path) when is_binary(path), do: Regex.match?(@path_format, path)
+  def valid_path?(_), do: false
+
   @doc false
   def changeset(region, attrs) do
     region
