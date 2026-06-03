@@ -21,6 +21,12 @@ defmodule DialectPocketWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    live_session :public,
+      on_mount: [{DialectPocketWeb.AdminAuth, :mount_current_scope}] do
+      live "/search", SearchLive, :index
+      live "/e/:slug", EntryLive, :show
+    end
   end
 
   # Other scopes may use custom stacks.
