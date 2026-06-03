@@ -35,4 +35,45 @@ defmodule DialectPocketWeb.ConnCase do
     DialectPocket.DataCase.setup_sandbox(tags)
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
+
+  @doc """
+  Setup helper that registers and logs in admins.
+
+      setup :register_and_log_in_admin
+
+  It stores an updated connection and a registered admin in the
+  test context.
+  """
+  def register_and_log_in_admin(%{conn: conn} = context) do
+    admin = DialectPocket.AccountsFixtures.admin_fixture()
+    scope = DialectPocket.Accounts.Scope.for_admin(admin)
+
+    opts =
+      context
+      |> Map.take([:token_authenticated_at])
+      |> Enum.into([])
+
+    %{conn: log_in_admin(conn, admin, opts), admin: admin, scope: scope}
+  end
+
+  @doc """
+  Logs the given `admin` into the `conn`.
+
+  It returns an updated `conn`.
+  """
+  def log_in_admin(conn, admin, opts \\ []) do
+    token = DialectPocket.Accounts.generate_admin_session_token(admin)
+
+    maybe_set_token_authenticated_at(token, opts[:token_authenticated_at])
+
+    conn
+    |> Phoenix.ConnTest.init_test_session(%{})
+    |> Plug.Conn.put_session(:admin_token, token)
+  end
+
+  defp maybe_set_token_authenticated_at(_token, nil), do: nil
+
+  defp maybe_set_token_authenticated_at(token, authenticated_at) do
+    DialectPocket.AccountsFixtures.override_token_authenticated_at(token, authenticated_at)
+  end
 end

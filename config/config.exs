@@ -7,6 +7,19 @@
 # General application configuration
 import Config
 
+config :dialect_pocket, :scopes,
+  admin: [
+    default: true,
+    module: DialectPocket.Accounts.Scope,
+    assign_key: :current_scope,
+    access_path: [:admin, :id],
+    schema_key: :admin_id,
+    schema_type: :id,
+    schema_table: :admins,
+    test_data_fixture: DialectPocket.AccountsFixtures,
+    test_setup_helper: :register_and_log_in_admin
+  ]
+
 config :dialect_pocket,
   ecto_repos: [DialectPocket.Repo],
   generators: [timestamp_type: :utc_datetime]

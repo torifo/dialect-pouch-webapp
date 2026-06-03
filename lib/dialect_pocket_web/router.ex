@@ -1,6 +1,8 @@
 defmodule DialectPocketWeb.Router do
   use DialectPocketWeb, :router
 
+  import DialectPocketWeb.AdminAuth
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -8,6 +10,7 @@ defmodule DialectPocketWeb.Router do
     plug :put_root_layout, html: {DialectPocketWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :fetch_current_scope_for_admin
   end
 
   pipeline :api do
@@ -40,5 +43,33 @@ defmodule DialectPocketWeb.Router do
       live_dashboard "/dashboard", metrics: DialectPocketWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
+  end
+
+  ## Authentication routes
+
+  scope "/", DialectPocketWeb do
+    pipe_through [:browser, :require_authenticated_admin]
+
+    live_session :require_authenticated_admin,
+      on_mount: [{DialectPocketWeb.AdminAuth, :require_authenticated}] do
+      live "/admins/settings", AdminLive.Settings, :edit
+      live "/admins/settings/confirm-email/:token", AdminLive.Settings, :confirm_email
+    end
+
+    post "/admins/update-password", AdminSessionController, :update_password
+  end
+
+  scope "/", DialectPocketWeb do
+    pipe_through [:browser]
+
+    live_session :current_admin,
+      on_mount: [{DialectPocketWeb.AdminAuth, :mount_current_scope}] do
+      live "/admins/register", AdminLive.Registration, :new
+      live "/admins/log-in", AdminLive.Login, :new
+      live "/admins/log-in/:token", AdminLive.Confirmation, :new
+    end
+
+    post "/admins/log-in", AdminSessionController, :create
+    delete "/admins/log-out", AdminSessionController, :delete
   end
 end
