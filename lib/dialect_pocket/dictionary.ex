@@ -11,6 +11,7 @@ defmodule DialectPocket.Dictionary do
   import Ecto.Query, warn: false
 
   alias DialectPocket.Repo
+  alias DialectPocket.Regions
   alias DialectPocket.Dictionary.{Entry, EntryRegion}
 
   @preloads [:senses, :examples, :provenance, entry_regions: :region]
@@ -116,4 +117,44 @@ defmodule DialectPocket.Dictionary do
 
   def count_published,
     do: Repo.one(from e in Entry, where: e.status == :published, select: count())
+
+  @doc """
+  Published entries linked to `region_path` or any of its descendants
+  (e.g. a prefecture page includes its area sub-regions). `[]` for unknown paths.
+  """
+  def list_published_in_subtree(region_path, limit \\ 200) do
+    case Regions.subtree_ids(region_path) do
+      [] ->
+        []
+
+      ids ->
+        Repo.all(
+          from e in Entry,
+            join: er in EntryRegion,
+            on: er.entry_id == e.id,
+            where: er.region_id in ^ids and e.status == :published,
+            distinct: true,
+            order_by: [asc: e.headword],
+            limit: ^limit,
+            preload: ^@preloads
+        )
+    end
+  end
+
+  @doc "Count of published entries in `region_path` and its descendants."
+  def count_published_in_subtree(region_path) do
+    case Regions.subtree_ids(region_path) do
+      [] ->
+        0
+
+      ids ->
+        Repo.one(
+          from e in Entry,
+            join: er in EntryRegion,
+            on: er.entry_id == e.id,
+            where: er.region_id in ^ids and e.status == :published,
+            select: count(e.id, :distinct)
+        )
+    end
+  end
 end
