@@ -92,4 +92,29 @@ defmodule DialectPocket.DictionaryTest do
       assert Dictionary.get_published_by_slug(entry.slug) == nil
     end
   end
+
+  describe "lookups and region linking" do
+    test "get_published_by_slug/1 returns nil for an unknown slug" do
+      assert Dictionary.get_published_by_slug("does-not-exist") == nil
+    end
+
+    test "links one entry to multiple regions" do
+      jp = region!("jp", "日本", :country)
+      a = region!("jp.hiroshima", "広島県", :prefecture, jp.id)
+      b = region!("jp.okayama", "岡山県", :prefecture, jp.id)
+
+      {:ok, entry} = Dictionary.create_entry(valid_attrs(), [a.id, b.id])
+      loaded = Dictionary.get_by_slug_admin(entry.slug)
+      paths = loaded.entry_regions |> Enum.map(& &1.region.path) |> Enum.sort()
+      assert paths == ["jp.hiroshima", "jp.okayama"]
+    end
+
+    test "duplicate entry+region link is rejected and rolls back" do
+      jp = region!("jp", "日本", :country)
+      r = region!("jp.hiroshima", "広島県", :prefecture, jp.id)
+      assert {:error, _} = Dictionary.create_entry(valid_attrs(), [r.id, r.id])
+      # transaction rolled back: no entry persisted
+      assert DialectPocket.Repo.aggregate(Entry, :count) == 0
+    end
+  end
 end
