@@ -26,6 +26,7 @@ defmodule DialectPocketWeb.Router do
       on_mount: [{DialectPocketWeb.AdminAuth, :mount_current_scope}] do
       live "/search", SearchLive, :index
       live "/e/:slug", EntryLive, :show
+      live "/convert", ConvertLive, :index
     end
   end
 
