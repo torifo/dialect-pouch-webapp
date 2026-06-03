@@ -1,0 +1,28 @@
+{
+  "region_path": "jp.tokushima",
+  "region_name": "阿波",
+  "prefecture": "徳島県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/阿波弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "あかん", "reading": "あかん", "meaning": "駄目・大丈夫でない", "example": ""},
+    {"headword": "いける", "reading": "いける", "meaning": "大丈夫", "example": ""},
+    {"headword": "うっとい", "reading": "うっとい", "meaning": "鬱陶しい", "example": ""},
+    {"headword": "えっと", "reading": "えっと", "meaning": "長い・たくさん", "example": ""},
+    {"headword": "おげった", "reading": "おげった", "meaning": "嘘", "example": "おげっちょこくな"},
+    {"headword": "おせ", "reading": "おせ", "meaning": "大人・成人", "example": ""},
+    {"headword": "かー", "reading": "かー", "meaning": "頂戴", "example": ""},
+    {"headword": "ちゃり", "reading": "ちゃり", "meaning": "自転車", "example": ""},
+    {"headword": "つべ", "reading": "つべ", "meaning": "お尻", "example": ""},
+    {"headword": "なんぼ", "reading": "なんぼ", "meaning": "いくら", "example": ""},
+    {"headword": "ばんげ", "reading": "ばんげ", "meaning": "夕方", "example": ""},
+    {"headword": "ほかす", "reading": "ほかす", "meaning": "捨てる", "example": ""},
+    {"headword": "わや", "reading": "わや", "meaning": "だめ・むちゃくちゃ", "example": ""}
+  ]
+}

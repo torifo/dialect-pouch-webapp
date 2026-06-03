@@ -1,0 +1,25 @@
+{
+  "region_path": "jp.gunma",
+  "region_name": "群馬",
+  "prefecture": "群馬県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/群馬弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "たまげる", "reading": "たまげる", "meaning": "驚く", "example": ""},
+    {"headword": "ぼっこす", "reading": "ぼっこす", "meaning": "壊す", "example": ""},
+    {"headword": "ぶちゃる", "reading": "ぶちゃる", "meaning": "捨てる", "example": "高崎・渋川地域"},
+    {"headword": "んまい", "reading": "んまい", "meaning": "美味しい", "example": "うんまい とも"},
+    {"headword": "やらかい", "reading": "やらかい", "meaning": "柔らかい", "example": "やっこい とも"},
+    {"headword": "かたす", "reading": "かたす", "meaning": "片付ける", "example": ""},
+    {"headword": "なっから", "reading": "なっから", "meaning": "すごく・随分と", "example": ""},
+    {"headword": "だがね", "reading": "だがね", "meaning": "〜だよ", "example": "そうだがね"},
+    {"headword": "べえ", "reading": "べえ", "meaning": "〜だろう（推量）", "example": "だんべえ の形も"},
+    {"headword": "きない", "reading": "きない", "meaning": "来ない", "example": "吾妻郡では「こない」"}
+  ]
+}

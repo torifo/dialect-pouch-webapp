@@ -1,0 +1,25 @@
+{
+  "region_path": "jp.yamaguchi",
+  "region_name": "山口",
+  "prefecture": "山口県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/山口弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "いけん", "reading": "いけん", "meaning": "いけない・駄目だ", "example": "そねえことしちゃいけん"},
+    {"headword": "えらい", "reading": "えらい", "meaning": "疲れた", "example": ""},
+    {"headword": "よーけ", "reading": "よーけ", "meaning": "たくさん", "example": "ミカンよーけもろうたでよ"},
+    {"headword": "こわい", "reading": "こわい", "meaning": "固い", "example": "この昆布はちいとこわい"},
+    {"headword": "たう", "reading": "たう", "meaning": "届く", "example": "このひも、たうか？"},
+    {"headword": "てご", "reading": "てご", "meaning": "手伝い", "example": "ちーとてごーせてくれんか？"},
+    {"headword": "なおす", "reading": "なおす", "meaning": "片づける", "example": "おもちゃをなおしーっちゃ！"},
+    {"headword": "みやすい", "reading": "みやすい", "meaning": "容易だ・簡単だ", "example": "今日のテストみやすいわぁーね"},
+    {"headword": "ぶち", "reading": "ぶち", "meaning": "とても・すごく", "example": ""},
+    {"headword": "せんない", "reading": "せんない", "meaning": "仕方がない・つらい", "example": ""}
+  ]
+}

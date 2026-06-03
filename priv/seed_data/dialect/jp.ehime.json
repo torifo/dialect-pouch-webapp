@@ -1,0 +1,28 @@
+{
+  "region_path": "jp.ehime",
+  "region_name": "伊予",
+  "prefecture": "愛媛県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/伊予弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "よもだ", "reading": "よもだ", "meaning": "いい加減・だらだらした様", "example": ""},
+    {"headword": "ほやけん", "reading": "ほやけん", "meaning": "だから", "example": ""},
+    {"headword": "ほーなん", "reading": "ほーなん", "meaning": "そうなの", "example": ""},
+    {"headword": "ぞなもし", "reading": "ぞなもし", "meaning": "〜ですよ・ねぇ", "example": ""},
+    {"headword": "おる", "reading": "おる", "meaning": "いる", "example": "家におる"},
+    {"headword": "つかーさい", "reading": "つかーさい", "meaning": "ください", "example": ""},
+    {"headword": "つむ", "reading": "つむ", "meaning": "〜を切る", "example": "髪をつむ"},
+    {"headword": "だんだん", "reading": "だんだん", "meaning": "ありがとう", "example": ""},
+    {"headword": "がいに", "reading": "がいに", "meaning": "ものすごく", "example": ""},
+    {"headword": "いなげ", "reading": "いなげ", "meaning": "おかしな・変な", "example": ""},
+    {"headword": "しまう", "reading": "しまう", "meaning": "片づける", "example": "しもうとけ"},
+    {"headword": "まがる", "reading": "まがる", "meaning": "触る・触れる", "example": "まがるなや"},
+    {"headword": "もんた", "reading": "もんた", "meaning": "帰った", "example": "今もんたで"}
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "region_path": "jp.kumamoto",
+  "region_name": "熊本",
+  "prefecture": "熊本県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/熊本弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "ばってん", "reading": "ばってん", "meaning": "しかし・だけれども", "example": ""},
+    {"headword": "いっちょん", "reading": "いっちょん", "meaning": "全く・全然", "example": "いっちょんわからん"},
+    {"headword": "せからしか", "reading": "せからしか", "meaning": "うるさい・やかましい", "example": "せからしかったい！"},
+    {"headword": "よか", "reading": "よか", "meaning": "いい・良い", "example": "今日は天気のよか"},
+    {"headword": "なか", "reading": "なか", "meaning": "ない", "example": "なかとよ"},
+    {"headword": "あご", "reading": "あご", "meaning": "口・物言い", "example": "あごが立つね"},
+    {"headword": "ぬし", "reading": "ぬし", "meaning": "お前", "example": "ぬしゃ、なんば言いよっとや？"},
+    {"headword": "あた", "reading": "あた", "meaning": "あなた", "example": "あーたんゆうこつが正しか"},
+    {"headword": "しっとる", "reading": "しっとる", "meaning": "知っている", "example": ""},
+    {"headword": "もなか", "reading": "もなか", "meaning": "おいしくない・まずい", "example": "こん弁当、もなかね"}
+  ]
+}

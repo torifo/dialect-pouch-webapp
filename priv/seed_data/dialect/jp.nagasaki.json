@@ -1,0 +1,27 @@
+{
+  "region_path": "jp.nagasaki",
+  "region_name": "長崎",
+  "prefecture": "長崎県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/長崎弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "ばい", "reading": "ばい", "meaning": "〜よ（文末詞）", "example": ""},
+    {"headword": "たい", "reading": "たい", "meaning": "〜だ（文末詞）", "example": ""},
+    {"headword": "ばってん", "reading": "ばってん", "meaning": "けれども", "example": "逆接の接続助詞"},
+    {"headword": "ん", "reading": "ん", "meaning": "〜ない（否定）", "example": "行かん＝行かない"},
+    {"headword": "よる", "reading": "よる", "meaning": "〜ている（進行）", "example": "降りよる＝降っている最中"},
+    {"headword": "とる", "reading": "とる", "meaning": "〜ている（完了）", "example": "降っとる"},
+    {"headword": "か", "reading": "か", "meaning": "〜い（形容詞語尾）", "example": "赤か＝赤い"},
+    {"headword": "けん", "reading": "けん", "meaning": "〜から（理由）", "example": "けー・け とも"},
+    {"headword": "ぎー", "reading": "ぎー", "meaning": "〜なら（仮定）", "example": "行くぎー＝行くなら"},
+    {"headword": "らしか", "reading": "らしか", "meaning": "〜らしい（伝聞）", "example": ""},
+    {"headword": "げな", "reading": "げな", "meaning": "〜そうだ（伝聞）", "example": ""},
+    {"headword": "こん", "reading": "こん", "meaning": "来ない", "example": "カ変「こん」"}
+  ]
+}

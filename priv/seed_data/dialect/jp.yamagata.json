@@ -1,0 +1,20 @@
+{
+  "region_path": "jp.yamagata",
+  "region_name": "山形",
+  "prefecture": "山形県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/山形弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "おっかね", "reading": "おっかね", "meaning": "怖い", "example": "おっかねがった＝怖かった"},
+    {"headword": "べ", "reading": "べ", "meaning": "〜だろう・〜しよう", "example": "推量・意志・勧誘"},
+    {"headword": "っす", "reading": "っす", "meaning": "〜です（丁寧）", "example": "えく゜っす＝行きます"},
+    {"headword": "ね", "reading": "ね", "meaning": "〜ない", "example": "買わんなえ＝買えない"},
+    {"headword": "んだ", "reading": "んだ", "meaning": "そうだ", "example": "んだず／んだじゅー／んだっそ（地域差）"}
+  ]
+}

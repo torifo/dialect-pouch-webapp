@@ -1,0 +1,23 @@
+{
+  "region_path": "jp.yamanashi",
+  "region_name": "甲州",
+  "prefecture": "山梨県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/甲州弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "おばやん", "reading": "おばやん", "meaning": "おばさん", "example": ""},
+    {"headword": "おまん", "reading": "おまん", "meaning": "あなた・お前", "example": ""},
+    {"headword": "かじる", "reading": "かじる", "meaning": "掻く", "example": "背中かじって＝背中掻いて"},
+    {"headword": "こぴっと", "reading": "こぴっと", "meaning": "ちゃんと・きちんと", "example": "こぴっとしろし"},
+    {"headword": "はんで", "reading": "はんで", "meaning": "急いで・早く", "example": "はんで車に乗れし"},
+    {"headword": "ぼこ", "reading": "ぼこ", "meaning": "子ども", "example": "悪いぼこじゃん"},
+    {"headword": "ずら", "reading": "ずら", "meaning": "〜だろう（推量）", "example": ""},
+    {"headword": "し", "reading": "し", "meaning": "〜しろよ（語尾）", "example": "しろし・こうし"}
+  ]
+}

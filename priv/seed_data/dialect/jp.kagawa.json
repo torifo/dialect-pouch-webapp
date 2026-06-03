@@ -1,0 +1,27 @@
+{
+  "region_path": "jp.kagawa",
+  "region_name": "讃岐",
+  "prefecture": "香川県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/讃岐弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "えらい", "reading": "えらい", "meaning": "疲れた・しんどい", "example": "えろうて動けんわ"},
+    {"headword": "けん", "reading": "けん", "meaning": "〜から（理由）", "example": "暑いきん、クーラーつけようで"},
+    {"headword": "すかん", "reading": "すかん", "meaning": "好かない・嫌い", "example": "私納豆すかんのや"},
+    {"headword": "たいぎ", "reading": "たいぎ", "meaning": "面倒", "example": "宿題するんたいぎなわ"},
+    {"headword": "つぶれる", "reading": "つぶれる", "meaning": "故障する", "example": "テレビつぶれてもうたが"},
+    {"headword": "へらこい", "reading": "へらこい", "meaning": "ずるい", "example": "あんた、へらこいわ"},
+    {"headword": "ほっこ", "reading": "ほっこ", "meaning": "ばか・あほ", "example": "あんたがいにほっこやのお"},
+    {"headword": "よっけ", "reading": "よっけ", "meaning": "たくさん", "example": "人がよっけおんのお"},
+    {"headword": "ねき", "reading": "ねき", "meaning": "側・近く", "example": "駅のねきのうどん屋"},
+    {"headword": "もうた", "reading": "もうた", "meaning": "貰った", "example": "お土産もうたん？"},
+    {"headword": "ばんげ", "reading": "ばんげ", "meaning": "夜・夕方", "example": "ばんげに来まい"},
+    {"headword": "いぬ", "reading": "いぬ", "meaning": "帰る", "example": "ぼちぼちいぬんな？"}
+  ]
+}

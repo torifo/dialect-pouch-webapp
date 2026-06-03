@@ -1,0 +1,26 @@
+{
+  "region_path": "jp.tochigi",
+  "region_name": "栃木",
+  "prefecture": "栃木県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/栃木弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "あおなじみ", "reading": "あおなじみ", "meaning": "青あざ", "example": ""},
+    {"headword": "ばんげ", "reading": "ばんげ", "meaning": "夕食・晩ごはん", "example": "ばんげ何こしゃう？"},
+    {"headword": "でれすけ", "reading": "でれすけ", "meaning": "馬鹿・あほ", "example": "でれすけ！と叱咤"},
+    {"headword": "ごじゃっぺ", "reading": "ごじゃっぺ", "meaning": "嘘・冗談・いい加減", "example": "ごじゃっぺいってんじゃねぇ"},
+    {"headword": "だいじ", "reading": "だいじ", "meaning": "大丈夫", "example": "だいじけぇ？"},
+    {"headword": "めっける", "reading": "めっける", "meaning": "見つける", "example": "いいもん、めっけ"},
+    {"headword": "よばれる", "reading": "よばれる", "meaning": "ご馳走になる", "example": "お菓子よばれよう"},
+    {"headword": "こしゃう", "reading": "こしゃう", "meaning": "作る", "example": "ばんげ何こしゃう？"},
+    {"headword": "あんべえわりい", "reading": "あんべえわりい", "meaning": "具合が悪い", "example": "あんべえはどうだい？"},
+    {"headword": "いかんべ", "reading": "いかんべ", "meaning": "いいだろう？", "example": "この壺いかんべぇ？"},
+    {"headword": "したっけ", "reading": "したっけ", "meaning": "そうしたら", "example": "したっけ先生に怒られた"}
+  ]
+}

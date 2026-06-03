@@ -1,0 +1,25 @@
+{
+  "region_path": "jp.ishikawa",
+  "region_name": "金沢",
+  "prefecture": "石川県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/金沢弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "あいそない", "reading": "あいそない", "meaning": "物足りない・さびしい", "example": ""},
+    {"headword": "いじくらしい", "reading": "いじくらしい", "meaning": "しつこい・うっとうしい", "example": ""},
+    {"headword": "がんこ", "reading": "がんこ", "meaning": "とても・すごく", "example": "がんこムカつく"},
+    {"headword": "きんかんなまなま", "reading": "きんかんなまなま", "meaning": "路面凍結", "example": "きんかんなまなまやろう"},
+    {"headword": "ごぼる", "reading": "ごぼる", "meaning": "雪や泥に足がはまる", "example": ""},
+    {"headword": "だら", "reading": "だら", "meaning": "アホ・バカ", "example": "だらぶち（愛情込め）"},
+    {"headword": "はがいしい", "reading": "はがいしい", "meaning": "悔しい・もどかしい", "example": ""},
+    {"headword": "りくつな", "reading": "りくつな", "meaning": "よくできた・巧みな", "example": "りくつなー"},
+    {"headword": "きのどくな", "reading": "きのどくな", "meaning": "ありがとう（恐縮です）", "example": ""},
+    {"headword": "ほーや", "reading": "ほーや", "meaning": "そうだ・そうだね", "example": "あいづち"}
+  ]
+}

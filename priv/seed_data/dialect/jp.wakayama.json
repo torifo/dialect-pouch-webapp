@@ -1,0 +1,29 @@
+{
+  "region_path": "jp.wakayama",
+  "region_name": "紀州",
+  "prefecture": "和歌山県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/紀州弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-03"
+  },
+  "entries": [
+    {"headword": "かだら", "reading": "かだら", "meaning": "体", "example": "かだらの調子悪いわ"},
+    {"headword": "おもしゃい", "reading": "おもしゃい", "meaning": "面白い", "example": ""},
+    {"headword": "わい", "reading": "わい", "meaning": "僕・俺", "example": "わえ とも"},
+    {"headword": "おまはん", "reading": "おまはん", "meaning": "あなた", "example": ""},
+    {"headword": "つれもて", "reading": "つれもて", "meaning": "一緒に", "example": "つれもて飲もら"},
+    {"headword": "いこら", "reading": "いこら", "meaning": "行きましょう", "example": ""},
+    {"headword": "いんでくる", "reading": "いんでくる", "meaning": "帰る", "example": "ほな、去んでくるわ"},
+    {"headword": "どてらい", "reading": "どてらい", "meaning": "凄い", "example": ""},
+    {"headword": "てき", "reading": "てき", "meaning": "あいつ", "example": ""},
+    {"headword": "うたとい", "reading": "うたとい", "meaning": "面倒くさい", "example": ""},
+    {"headword": "じょう", "reading": "じょう", "meaning": "しょっちゅう", "example": "てきゃ、じょうあんなこと言う"},
+    {"headword": "やにこい", "reading": "やにこい", "meaning": "とっても", "example": ""},
+    {"headword": "がいな", "reading": "がいな", "meaning": "途方もない・すごい", "example": "がいな嫁やなあ"},
+    {"headword": "ほる", "reading": "ほる", "meaning": "捨てる", "example": "ほかす とも"}
+  ]
+}
