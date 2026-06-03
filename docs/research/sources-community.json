@@ -1,0 +1,83 @@
+{
+  "_meta": {
+    "added_on": "2026-06-03",
+    "policy": "確実性より網羅性。規約が明確でない場所(SNS/まとめ/個人投稿)も provenance を添えて採用。複製でなく『事実+出典ポインタ』として保持。",
+    "provenance_required": ["source_platform", "source_url", "observed_author?", "observed_at", "reliability"],
+    "reliability_levels": ["verified", "unverified", "community"],
+    "ui_rule": "reliability!=verified は『出典:○○(真偽未確認)』バッジ必須"
+  },
+  "sources": [
+    {
+      "name": "goo方言辞典",
+      "url": "https://dictionary.goo.ne.jp/dialect/",
+      "type": "structured-aggregator",
+      "license": "商用・非オープン(規約明確でない)",
+      "scale": "約3,800項目, 47都道府県, 県別研究者選定, 例文付",
+      "adopt_as": "個別項目を出典リンク付きで採用(全文コピー不可)",
+      "reliability": "unverified",
+      "category": "community",
+      "notes": "規模・質ともに高い。リンク+事実で参照採用。"
+    },
+    {
+      "name": "方言ジャパン",
+      "url": "https://hougen-japan.com/",
+      "type": "structured-aggregator",
+      "license": "規約明確でない",
+      "scale": "全国一覧",
+      "adopt_as": "個別項目+出典リンク",
+      "reliability": "unverified",
+      "category": "community"
+    },
+    {
+      "name": "47都道府県方言百科辞典",
+      "url": "https://japanese-dialects.com/",
+      "type": "structured-aggregator",
+      "license": "規約明確でない",
+      "scale": "県別",
+      "adopt_as": "個別項目+出典リンク",
+      "reliability": "unverified",
+      "category": "community"
+    },
+    {
+      "name": "全国方言一覧検索",
+      "url": "https://goiryoku-kitaeru.com/hougen/",
+      "type": "structured-aggregator",
+      "license": "規約明確でない",
+      "scale": "県別, 標準語↔方言比較",
+      "adopt_as": "個別項目+出典リンク",
+      "reliability": "unverified",
+      "category": "community"
+    },
+    {
+      "name": "Wikipedia 日本語の方言",
+      "url": "https://ja.wikipedia.org/wiki/日本語の方言",
+      "type": "encyclopedia",
+      "license": "CC BY-SA 4.0",
+      "scale": "方言区画・分類(東条操16分類)・代表語",
+      "adopt_as": "CC BY-SAで採用(出典・継承)。区画/分類の出典に有用",
+      "reliability": "unverified",
+      "category": "recommended-cc"
+    },
+    {
+      "name": "#方言note (UGC)",
+      "url": "https://note.com/hashtag/方言",
+      "type": "ugc",
+      "license": "投稿者帰属(規約: 引用/リンク)",
+      "scale": "個別投稿多数",
+      "adopt_as": "個別投稿を出典リンク+ハンドル付きで採用",
+      "reliability": "community",
+      "category": "community"
+    },
+    {
+      "name": "SNS投稿(X / Instagram / TikTok / YouTube)",
+      "url": "(プラットフォーム個別)",
+      "type": "social",
+      "license": "各プラットフォーム規約(複製不可前提)",
+      "scale": "散発・中央索引なし",
+      "adopt_as": "手動で1件ずつ。事実+source_url+observed_author(分かれば)+observed_at。本文/メディアは転載しない",
+      "reliability": "community",
+      "category": "community",
+      "notes": "ユーザー例『Instagramで見た(投稿者不明でも可)』。kind=:community, source_platform=:instagram 等で格納。"
+    }
+  ]
+}
