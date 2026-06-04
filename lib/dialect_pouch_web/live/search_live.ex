@@ -6,7 +6,8 @@ defmodule DialectPouchWeb.SearchLive do
   @impl true
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} current_scope={@current_scope}>
+    <Layouts.app flash={@flash} current_scope={@current_scope} active_tab={:search}>
+      <div class="pc-only">
       <div id="search-page" class="wrap wrap-narrow" style="padding: 40px 24px 72px;">
         <h1 class="page-title">方言を検索</h1>
         <p class="muted" style="margin-top: 6px;">見出し語・読み・意味・用例から部分一致で探します。</p>
@@ -113,6 +114,59 @@ defmodule DialectPouchWeb.SearchLive do
                   </.link>
                 </li>
               </ul>
+          <% end %>
+        </div>
+      </div>
+      </div>
+      <%!-- /pc-only --%>
+
+      <%!-- ===== MOBILE SEARCH ===== --%>
+      <div class="m-app sp-only">
+        <div class="m-pad">
+          <form
+            id="m-search-form"
+            phx-change="search"
+            phx-submit="search"
+            class="m-search"
+            style="margin-bottom:8px"
+          >
+            <span class="m-search__icon">
+              <.icon name="hero-magnifying-glass" class="size-5" style="color:var(--color-text-muted)" />
+            </span>
+            <input
+              id="m-search-input"
+              class="m-field m-field--search"
+              type="search"
+              name="q"
+              value={@q}
+              phx-debounce="300"
+              placeholder="方言・読み・意味で検索"
+              autocomplete="off"
+            />
+          </form>
+          <%= cond do %>
+            <% @q == "" -> %>
+              <p class="m-tiny m-muted" style="margin-bottom:10px">人気の検索</p>
+              <div class="m-chips" style="flex-wrap:wrap;overflow:visible">
+                <.link navigate={~p"/search?q=なまら"} class="m-chip">なまら</.link>
+                <.link navigate={~p"/search?q=ほんま"} class="m-chip">ほんま</.link>
+                <.link navigate={~p"/search?q=めんそーれ"} class="m-chip">めんそーれ</.link>
+                <.link navigate={~p"/search?q=かわいい"} class="m-chip">かわいい</.link>
+                <.link navigate={~p"/search?q=とても"} class="m-chip">とても</.link>
+                <.link navigate={~p"/search?q=だめ"} class="m-chip">だめ</.link>
+              </div>
+            <% @results == [] -> %>
+              <div class="m-empty">
+                <p>「<strong>{@q}</strong>」に一致する項目はありません。</p>
+                <p class="m-tiny m-muted" style="margin-top:6px">別のキーワードでお試しください。</p>
+              </div>
+            <% true -> %>
+              <p class="m-tiny m-muted" style="margin:4px 0 12px">
+                {length(@results)}件 見つかりました
+              </p>
+              <div class="m-list">
+                <.m_entry :for={entry <- @results} entry={entry} />
+              </div>
           <% end %>
         </div>
       </div>

@@ -23,7 +23,8 @@ defmodule DialectPouchWeb.ConvertLive do
   @impl true
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} current_scope={@current_scope}>
+    <Layouts.app flash={@flash} current_scope={@current_scope} active_tab={:convert}>
+      <div class="pc-only">
       <div class="wrap wrap-narrow">
         <div id="convert-page" class="section" style="padding-top: 40px; padding-bottom: 72px;">
           <h1 class="page-title">標準語を方言に変換</h1>
@@ -245,6 +246,165 @@ defmodule DialectPouchWeb.ConvertLive do
               <% end %>
             </div>
           </section>
+        </div>
+      </div>
+      </div>
+      <%!-- /pc-only --%>
+
+      <%!-- ===== MOBILE CONVERT ===== --%>
+      <div class="m-app sp-only">
+        <div class="m-pad">
+          <h1 class="m-h2" style="font-size:22px">標準語を方言に変換</h1>
+          <p class="m-help" style="margin-top:6px">
+            登録済みの方言のみ表示。該当が無ければ推測せず「データなし」と出します。
+          </p>
+
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">
+            <div class="m-segtabs" style="align-self:flex-start">
+              <button
+                type="button"
+                phx-click="set_mode"
+                phx-value-mode="word"
+                class={"m-segtab#{if @mode == :word, do: " is-active", else: ""}"}
+              >
+                語変換
+              </button>
+              <button
+                type="button"
+                phx-click="set_mode"
+                phx-value-mode="sentence"
+                class={"m-segtab#{if @mode == :sentence, do: " is-active", else: ""}"}
+              >
+                文章変換
+              </button>
+            </div>
+          </div>
+
+          <%= if @mode == :word do %>
+            <form
+              id="m-convert-word-form"
+              phx-change="convert_word"
+              phx-submit="convert_word"
+              style="margin-top:14px"
+            >
+              <div class="m-selectwrap" style="margin-bottom:10px">
+                <.icon name="hero-map-pin" class="size-4" style="color:var(--color-text-muted)" />
+                <select name="region_path" class="m-select">
+                  <option
+                    :for={{label, value} <- @region_options}
+                    value={value}
+                    selected={@region_path == nilify(value)}
+                  >
+                    {label}
+                  </option>
+                </select>
+              </div>
+              <input
+                id="m-convert-word-input"
+                class="m-field"
+                type="text"
+                name="word"
+                value={@word}
+                phx-debounce="300"
+                placeholder="標準語を入力（例: とても）"
+                autocomplete="off"
+              />
+            </form>
+            <div style="margin-top:16px">
+              <%= cond do %>
+                <% @word == "" -> %>
+                  <div class="m-chips" style="flex-wrap:wrap;overflow:visible">
+                    <button :for={t <- ["とても", "かわいい", "ありがとう", "だめ"]} phx-click="convert_word" phx-value-word={t} class="m-chip">{t}</button>
+                  </div>
+                <% @candidates == [] -> %>
+                  <div class="m-convnone">
+                    <p>「<strong>{@word}</strong>」に対応する方言データはありません。</p>
+                    <p class="m-tiny m-muted" style="margin-top:5px">推測した方言は出しません。</p>
+                  </div>
+                <% true -> %>
+                  <p class="m-tiny m-muted" style="margin-bottom:10px">
+                    「{@word}」→ {length(@candidates)}件
+                  </p>
+                  <div class="m-list">
+                    <.link :for={c <- @candidates} navigate={~p"/e/#{c.slug}"} class="m-entry">
+                      <div class="m-entry__top">
+                        <span class="m-entry__word">{c.headword}</span>
+                        <span :if={c.reading && c.reading != ""} class="m-entry__reading">
+                          【{c.reading}】
+                        </span>
+                        <span
+                          :if={c.provenance && c.provenance.reliability != :verified}
+                          class="m-badge m-badge--unverified"
+                        >
+                          真偽未確認
+                        </span>
+                      </div>
+                      <p :if={c.gloss} class="m-entry__gloss">{c.gloss}</p>
+                      <div :if={c.regions != []} class="m-entry__meta">
+                        <span class="m-entry__region">
+                          <.icon name="hero-map-pin" class="size-3" />{Enum.join(c.regions, "・")}
+                        </span>
+                      </div>
+                    </.link>
+                  </div>
+              <% end %>
+            </div>
+          <% else %>
+            <form
+              id="m-convert-sentence-form"
+              phx-change="convert_sentence"
+              phx-submit="convert_sentence"
+              style="margin-top:14px"
+            >
+              <div class="m-selectwrap" style="margin-bottom:10px">
+                <.icon name="hero-map-pin" class="size-4" style="color:var(--color-text-muted)" />
+                <select name="region_path" class="m-select">
+                  <option
+                    :for={{label, value} <- @region_options}
+                    value={value}
+                    selected={@region_path == nilify(value)}
+                  >
+                    {label}
+                  </option>
+                </select>
+              </div>
+              <textarea
+                id="m-convert-sentence-input"
+                class="m-field"
+                name="sentence"
+                rows="3"
+                phx-debounce="400"
+                placeholder="文章を入力（例: とてもかわいい）"
+              >{@sentence}</textarea>
+            </form>
+            <div style="margin-top:16px">
+              <%= cond do %>
+                <% @sentence == "" -> %>
+                  <div class="m-chips" style="flex-wrap:wrap;overflow:visible">
+                    <button :for={t <- ["とてもかわいい", "本当にありがとう", "それはだめ"]} phx-click="convert_sentence" phx-value-sentence={t} class="m-chip">{t}</button>
+                  </div>
+                <% not match_present?(@segments) -> %>
+                  <div class="m-convnone">
+                    <p class="m-tiny m-muted">一致する標準語が見つかりませんでした。</p>
+                    <p class="m-convout" style="margin-top:8px">{@sentence}</p>
+                  </div>
+                <% true -> %>
+                  <p class="m-tiny m-muted" style="margin-bottom:8px">
+                    ハイライト部分が方言に置き換わりました
+                  </p>
+                  <p class="m-convout">
+                    <%= for {seg, idx} <- Enum.with_index(@segments) do %>
+                      <%= case seg do %>
+                        <% {:plain, text} -> %>
+                          <span id={"m-convert-seg-#{idx}"}>{text}</span>
+                        <% {:match, m} -> %>
+                          <span id={"m-convert-seg-#{idx}"} class="m-conv-token">{m.chosen}</span>
+                      <% end %>
+                    <% end %>
+                  </p>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       </div>
     </Layouts.app>

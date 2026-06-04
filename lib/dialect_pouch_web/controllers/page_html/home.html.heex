@@ -1,4 +1,5 @@
-<Layouts.app flash={@flash} current_scope={@current_scope}>
+<Layouts.app flash={@flash} current_scope={@current_scope} active_tab={:home}>
+  <div class="pc-only">
   <%!-- ===== HERO ===== --%>
   <section class="hero">
     <div class="wrap hero__inner">
@@ -107,17 +108,12 @@
             </div>
           </div>
 
-          <div class="jmap__legend">
-            <span class="tiny muted">登録件数</span>
-            <span class="legend-scale">
-              <i style="background:var(--color-surface-subtle);border-color:var(--hair)"></i>
-              <i style="background:var(--color-brand-primary-pale)"></i>
-              <i style="background:var(--color-brand-primary-soft)"></i>
-              <i style="background:var(--color-brand-primary-light)"></i>
-              <i style="background:var(--color-brand-primary)"></i>
+          <div class="jmap__key">
+            <span :for={r <- @regions} class="jmap__key-item">
+              <i style={"background:#{r.color}"}></i>{r.region}
             </span>
-            <span class="tiny muted">少 → 多</span>
           </div>
+          <p class="jmap__note tiny muted">地方ごとに色が異なります。色が濃いほど登録件数が多い地域です。</p>
         </div>
 
         <div class="hero__map-foot tiny muted">
@@ -264,4 +260,145 @@
       </div>
     </div>
   </section>
+  </div>
+  <%!-- /pc-only --%>
+
+  <%!-- ===== MOBILE HOME ===== --%>
+  <div class="m-app sp-only">
+    <section class="m-hero">
+      <span class="m-eyebrow">日本各地の方言・言い回し</span>
+      <h1 class="m-hero__title">
+        <span class="nb">うちの言葉、</span><span class="nb">ちょっと調べてみる？</span>
+      </h1>
+      <p class="m-hero__lead">
+        気軽に調べて・眺めて・遊ぶ。すべてのエントリに<strong>出典</strong>を付け、推測した「それっぽい嘘」は出しません。
+      </p>
+
+      <form action={~p"/search"} method="get" style="margin-top:18px">
+        <div class="m-search">
+          <span class="m-search__icon">
+            <.icon name="hero-magnifying-glass" class="size-5" style="color:var(--color-text-muted)" />
+          </span>
+          <input
+            class="m-field m-field--search"
+            type="search"
+            name="q"
+            placeholder="方言・読み・意味で検索"
+            autocomplete="off"
+          />
+        </div>
+        <div class="m-chips">
+          <.link navigate={~p"/search?q=なまら"} class="m-chip m-chip--key">なまら</.link>
+          <.link navigate={~p"/search?q=ほんま"} class="m-chip m-chip--key">ほんま</.link>
+          <.link navigate={~p"/search?q=めんそーれ"} class="m-chip m-chip--key">めんそーれ</.link>
+          <.link navigate={~p"/search?q=とても"} class="m-chip m-chip--key">とても</.link>
+          <.link navigate={~p"/search?q=かわいい"} class="m-chip m-chip--key">かわいい</.link>
+        </div>
+      </form>
+
+      <div class="m-stats">
+        <div>
+          <span class="m-stat__n">{@entry_count}+</span>
+          <span class="m-stat__l">登録エントリ</span>
+        </div>
+        <div>
+          <span class="m-stat__n">{Enum.count(@tiles, &(&1.count > 0))}</span>
+          <span class="m-stat__l">都道府県</span>
+        </div>
+        <div>
+          <span class="m-stat__n m-stat__n--ja">出典付き</span>
+          <span class="m-stat__l">すべてのデータ</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="m-sec">
+      <div class="m-quick">
+        <.link navigate={~p"/search"} class="m-quick__item">
+          <span class="m-quick__ic">
+            <.icon name="hero-magnifying-glass" class="size-5" style="color:var(--color-brand-primary)" />
+          </span>
+          <span class="m-quick__t">検索</span>
+          <span class="m-quick__d">見出し語・意味・用例を横断</span>
+        </.link>
+        <.link navigate={~p"/regions"} class="m-quick__item">
+          <span class="m-quick__ic">
+            <.icon name="hero-map" class="size-5" style="color:var(--color-brand-primary)" />
+          </span>
+          <span class="m-quick__t">地域ブラウズ</span>
+          <span class="m-quick__d">地図から「うちの言葉」へ</span>
+        </.link>
+        <.link navigate={~p"/convert"} class="m-quick__item">
+          <span class="m-quick__ic">
+            <.icon name="hero-arrows-right-left" class="size-5" style="color:var(--color-brand-primary)" />
+          </span>
+          <span class="m-quick__t">変換</span>
+          <span class="m-quick__d">標準語を方言に言い換え</span>
+        </.link>
+        <.link navigate={~p"/contribute"} class="m-quick__item">
+          <span class="m-quick__ic">
+            <.icon name="hero-pencil-square" class="size-5" style="color:var(--color-brand-primary)" />
+          </span>
+          <span class="m-quick__t">投稿</span>
+          <span class="m-quick__d">地元の言葉を教えて</span>
+        </.link>
+      </div>
+    </section>
+
+    <section :if={@featured != []} class="m-sec m-sec--subtle">
+      <div class="m-sec__head">
+        <h2 class="m-h2">いま面白い方言</h2>
+        <.link navigate={~p"/search"} class="m-more">
+          もっと見る <.icon name="hero-arrow-right" class="size-4" />
+        </.link>
+      </div>
+      <div class="m-list">
+        <.link :for={e <- @featured} navigate={~p"/e/#{e.slug}"} class="m-entry">
+          <div class="m-entry__top">
+            <span class="m-entry__word">{e.headword}</span>
+            <span
+              :if={e.reading && e.reading != "" && e.reading != e.headword}
+              class="m-entry__reading"
+            >
+              【{e.reading}】
+            </span>
+            <span
+              :if={e.provenance && e.provenance.reliability == :verified}
+              class="m-badge m-badge--verified"
+            >
+              <.icon name="hero-check" class="size-3" /> 確定
+            </span>
+            <span
+              :if={!e.provenance || e.provenance.reliability != :verified}
+              class="m-badge m-badge--unverified"
+            >
+              真偽未確認
+            </span>
+          </div>
+          <p :if={e.senses != []} class="m-entry__gloss">{hd(e.senses).gloss}</p>
+          <div :if={e.entry_regions != []} class="m-entry__meta">
+            <span class="m-entry__region">
+              <.icon name="hero-map-pin" class="size-3" />
+              {e.entry_regions |> Enum.map(& &1.region.name) |> Enum.join("・")}
+            </span>
+          </div>
+        </.link>
+      </div>
+    </section>
+
+    <section class="m-sec">
+      <div class="m-contrib">
+        <span class="m-contrib__t">
+          <.icon name="hero-users" class="size-4" style="color:var(--color-brand-primary)" />
+          みんなで育てる方言コレクション
+        </span>
+        <p class="m-help">
+          地元の言葉を知っていたら、ニックネームで気軽に投稿。キュレーターの確認をへて公開されます。
+        </p>
+        <.link navigate={~p"/contribute"} class="m-btn m-btn--ghost">
+          <.icon name="hero-pencil-square" class="size-4" /> 方言を投稿する
+        </.link>
+      </div>
+    </section>
+  </div>
 </Layouts.app>

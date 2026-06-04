@@ -43,7 +43,14 @@ defmodule DialectPouchWeb.RegionLive do
   @impl true
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} current_scope={@current_scope}>
+    <Layouts.app
+      flash={@flash}
+      current_scope={@current_scope}
+      active_tab={:regions}
+      mobile_title={@region.name <> "の方言"}
+      mobile_back={~p"/regions"}
+    >
+      <div class="pc-only">
       <div
         id="region-page"
         data-region-path={@region.path}
@@ -163,6 +170,56 @@ defmodule DialectPouchWeb.RegionLive do
             </.link>
           </div>
         </section>
+      </div>
+      </div>
+      <%!-- /pc-only --%>
+
+      <%!-- ===== MOBILE REGION DETAIL ===== --%>
+      <div class="m-app sp-only">
+        <div class="m-pad">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:16px;border-bottom:1px solid var(--color-surface-border)">
+            <div>
+              <h1 class="m-h2" style="font-size:22px">{@region.name}の方言</h1>
+              <p class="m-help" style="margin-top:4px">{length(@entries)}件が登録されています</p>
+            </div>
+            <div style="flex:none;display:flex;flex-direction:column;align-items:center;background:var(--color-brand-primary-pale);border-radius:var(--radius-md);padding:10px 16px">
+              <span style="font-family:var(--font-en);font-size:22px;font-weight:800;color:var(--color-brand-primary);line-height:1">
+                {length(@entries)}
+              </span>
+              <span class="m-tiny m-muted" style="margin-top:2px">件</span>
+            </div>
+          </div>
+
+          <div :if={@children_with_counts != []} style="margin-top:16px">
+            <p class="m-dsec__label">エリアで絞り込む</p>
+            <div class="m-regrid">
+              <.link
+                :for={{child, count} <- @children_with_counts}
+                navigate={~p"/r/#{child.path}"}
+                class="m-regrid__item"
+              >
+                <span class="m-regrid__name">{child.name}</span>
+                <span class="m-regrid__count">{count}件</span>
+              </.link>
+            </div>
+          </div>
+
+          <div class="m-list" style="margin-top:16px">
+            <%= if @entries == [] do %>
+              <div class="m-empty"><p class="m-muted">この地域の登録はまだありません。</p></div>
+            <% else %>
+              <.m_entry :for={entry <- @entries} entry={entry} />
+            <% end %>
+          </div>
+
+          <div class="m-contrib" style="margin-top:20px">
+            <span class="m-contrib__t">
+              <.icon name="hero-pencil-square" class="size-4" style="color:var(--color-brand-primary)" />
+              {@region.name}の言葉、知っていますか？
+            </span>
+            <.link navigate={~p"/contribute"} class="m-btn m-btn--ghost">投稿する</.link>
+          </div>
+        </div>
       </div>
     </Layouts.app>
     """

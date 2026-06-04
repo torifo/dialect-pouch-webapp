@@ -28,7 +28,13 @@ defmodule DialectPouchWeb.ContributeLive do
   @impl true
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} current_scope={@current_scope}>
+    <Layouts.app
+      flash={@flash}
+      current_scope={@current_scope}
+      mobile_title="方言を投稿"
+      mobile_back={~p"/"}
+    >
+      <div class="pc-only">
       <div class="wrap wrap-narrow">
         <div
           id="contribute-page"
@@ -156,6 +162,87 @@ defmodule DialectPouchWeb.ContributeLive do
                 <.icon name="hero-pencil" /> 投稿する
               </button>
             </div>
+          </form>
+        </div>
+      </div>
+      </div>
+      <%!-- /pc-only --%>
+
+      <%!-- ===== MOBILE CONTRIBUTE ===== --%>
+      <div class="m-app sp-only">
+        <div class="m-pad">
+          <h1 class="m-h2" style="font-size:22px">方言を投稿する</h1>
+          <p class="m-help" style="margin-top:6px;margin-bottom:16px">
+            投稿は確認のうえ公開されます。
+          </p>
+
+          <div :if={@status == :ok} class="m-note m-note--ok">
+            <.icon name="hero-check-circle" class="size-4" /> 投稿ありがとうございます。承認後に公開されます。
+          </div>
+          <div :if={@status == :rate_limited} class="m-note m-note--err">
+            <.icon name="hero-exclamation-circle" class="size-4" /> 短時間に投稿が多すぎます。少し待ってからお試しください。
+          </div>
+          <div :if={@errors != []} class="m-note m-note--err">
+            <.icon name="hero-exclamation-circle" class="size-4" /> 次を入力してください：{@errors
+            |> Enum.map(&field_label/1)
+            |> Enum.join("、")}
+          </div>
+
+          <form id="m-contribute-form" phx-submit="submit">
+            <div class="m-fieldset">
+              <label class="m-label">見出し語（方言）<span class="m-req">*</span></label>
+              <input class="m-field" name="headword" value={@form["headword"]} placeholder="例: なまら" />
+            </div>
+            <div class="m-fieldset">
+              <label class="m-label">読み（かな）</label>
+              <input class="m-field" name="reading" value={@form["reading"]} placeholder="例: なまら" />
+            </div>
+            <div class="m-fieldset">
+              <label class="m-label">地域<span class="m-req">*</span></label>
+              <div class="m-selectwrap">
+                <select class="m-select" name="region_path">
+                  <option value="">選択してください</option>
+                  <option
+                    :for={{label, value} <- @region_options}
+                    value={value}
+                    selected={@form["region_path"] == value}
+                  >
+                    {label}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="m-fieldset">
+              <label class="m-label">意味（標準語）<span class="m-req">*</span></label>
+              <input class="m-field" name="meaning" value={@form["meaning"]} placeholder="例: とても" />
+            </div>
+            <div class="m-fieldset">
+              <label class="m-label">用例</label>
+              <input
+                class="m-field"
+                name="example"
+                value={@form["example"]}
+                placeholder="例: 今日はなまら寒い"
+              />
+            </div>
+            <div class="m-fieldset">
+              <label class="m-label">ニックネーム（任意）</label>
+              <input
+                class="m-field"
+                name="nickname"
+                value={@form["nickname"]}
+                placeholder="匿名の場合は空欄"
+              />
+            </div>
+
+            <p class="m-help" style="margin-bottom:12px">
+              投稿は
+              <span class="m-badge m-badge--user" style="vertical-align:middle">ユーザー投稿</span>
+              として記録され、承認後に「真偽未確認」付きで公開されます。
+            </p>
+            <button type="submit" class="m-btn m-btn--primary">
+              <.icon name="hero-pencil-square" class="size-4" /> 投稿する
+            </button>
           </form>
         </div>
       </div>

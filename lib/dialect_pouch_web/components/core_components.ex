@@ -503,4 +503,45 @@ defmodule DialectPouchWeb.CoreComponents do
   def translate_errors(errors, field) when is_list(errors) do
     for {^field, {msg, opts}} <- errors, do: translate_error({msg, opts})
   end
+
+  @doc """
+  Mobile entry card (.m-entry) — shared across the mobile (.sp-only) screens.
+  Expects a published entry with headword/reading/senses/entry_regions/provenance.
+  """
+  attr :entry, :map, required: true
+
+  def m_entry(assigns) do
+    ~H"""
+    <.link navigate={"/e/" <> @entry.slug} class="m-entry">
+      <div class="m-entry__top">
+        <span class="m-entry__word">{@entry.headword}</span>
+        <span
+          :if={@entry.reading && @entry.reading != "" && @entry.reading != @entry.headword}
+          class="m-entry__reading"
+        >
+          【{@entry.reading}】
+        </span>
+        <span
+          :if={@entry.provenance && @entry.provenance.reliability == :verified}
+          class="m-badge m-badge--verified"
+        >
+          <.icon name="hero-check" class="size-3" /> 確定
+        </span>
+        <span
+          :if={!@entry.provenance || @entry.provenance.reliability != :verified}
+          class="m-badge m-badge--unverified"
+        >
+          真偽未確認
+        </span>
+      </div>
+      <p :if={@entry.senses != []} class="m-entry__gloss">{hd(@entry.senses).gloss}</p>
+      <div :if={@entry.entry_regions != []} class="m-entry__meta">
+        <span class="m-entry__region">
+          <.icon name="hero-map-pin" class="size-3" />
+          {@entry.entry_regions |> Enum.map(& &1.region.name) |> Enum.join("・")}
+        </span>
+      </div>
+    </.link>
+    """
+  end
 end

@@ -22,7 +22,13 @@ defmodule DialectPouchWeb.EntryLive do
   @impl true
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} current_scope={@current_scope}>
+    <Layouts.app
+      flash={@flash}
+      current_scope={@current_scope}
+      mobile_title="方言の詳細"
+      mobile_back={~p"/search"}
+    >
+      <div class="pc-only">
       <div
         id="entry-page"
         data-slug={@entry.slug}
@@ -155,6 +161,70 @@ defmodule DialectPouchWeb.EntryLive do
           <h2 class="dsec__label">出典 / provenance</h2>
           <.provenance_badge provenance={@entry.provenance} />
         </section>
+      </div>
+      </div>
+      <%!-- /pc-only --%>
+
+      <%!-- ===== MOBILE ENTRY DETAIL ===== --%>
+      <div class="m-app sp-only">
+        <div class="m-detail">
+          <h1 class="m-detail__word">{@entry.headword}</h1>
+          <p :if={@entry.reading && @entry.reading != ""} class="m-detail__reading">
+            【{@entry.reading}】
+          </p>
+          <div class="m-detail__tags">
+            <span :for={er <- @entry.entry_regions} class="m-chiptag">{er.region.name}</span>
+            <span
+              :if={@entry.provenance && @entry.provenance.reliability == :verified}
+              class="m-badge m-badge--verified"
+            >
+              <.icon name="hero-check" class="size-3" /> 確定
+            </span>
+            <span
+              :if={!@entry.provenance || @entry.provenance.reliability != :verified}
+              class="m-badge m-badge--unverified"
+            >
+              真偽未確認
+            </span>
+          </div>
+
+          <div class="m-dsec">
+            <p class="m-dsec__label">意味</p>
+            <div :for={{sense, idx} <- Enum.with_index(@entry.senses, 1)} class="m-sense">
+              <span class="m-sense__num">{idx}</span>
+              <div>
+                <p class="m-sense__gloss">{sense.gloss}</p>
+                <p :if={sense.standard_lemma} class="m-sense__std">
+                  標準語：<strong>{sense.standard_lemma}</strong>
+                </p>
+                <p :if={sense.note} class="m-sense__note">{sense.note}</p>
+              </div>
+            </div>
+            <p :if={@entry.senses == []} class="m-help">意味情報がありません。</p>
+          </div>
+
+          <div :if={@entry.examples != []} class="m-dsec">
+            <p class="m-dsec__label">用例</p>
+            <div :for={ex <- @entry.examples} class="m-example">
+              <span style="flex:none;padding-top:2px">
+                <.icon
+                  name="hero-chat-bubble-left"
+                  class="size-4"
+                  style="color:var(--color-brand-primary-soft)"
+                />
+              </span>
+              <div>
+                <p class="m-example__text">{ex.text}</p>
+                <p :if={ex.translation} class="m-example__tr">{ex.translation}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="m-dsec">
+            <p class="m-dsec__label">出典 / provenance</p>
+            <.provenance_badge provenance={@entry.provenance} />
+          </div>
+        </div>
       </div>
     </Layouts.app>
     """

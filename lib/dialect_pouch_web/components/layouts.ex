@@ -31,6 +31,16 @@ defmodule DialectPouchWeb.Layouts do
     default: nil,
     doc: "the current [scope](https://hexdocs.pm/phoenix/scopes.html)"
 
+  attr :active_tab, :atom,
+    default: nil,
+    doc: "mobile bottom-tab highlight: :home | :search | :regions | :convert"
+
+  attr :mobile_title, :string,
+    default: nil,
+    doc: "when set, the mobile top bar becomes a back+title page bar (detail screens)"
+
+  attr :mobile_back, :string, default: nil, doc: "path the mobile back button navigates to"
+
   slot :inner_block, required: true
 
   def app(assigns) do
@@ -70,11 +80,52 @@ defmodule DialectPouchWeb.Layouts do
         </div>
       </header>
 
+      <%!-- mobile top bar: back+title on detail screens, app bar otherwise --%>
+      <div :if={@mobile_title} class="m-bar m-bar--page">
+        <.link navigate={@mobile_back || ~p"/"} class="m-bar__back" aria-label="戻る">
+          <.icon name="hero-arrow-left" class="size-5" />
+        </.link>
+        <span class="m-bar__pagetitle">{@mobile_title}</span>
+      </div>
+      <div :if={is_nil(@mobile_title)} class="m-bar">
+        <.link navigate={~p"/"} class="m-bar__brand">
+          <.brand_mark />
+          <span class="m-bar__title">方言ポーチ</span>
+        </.link>
+        <span class="m-bar__spacer"></span>
+        <.link navigate={~p"/search"} class="m-bar__icon" aria-label="検索">
+          <.icon name="hero-magnifying-glass" class="size-5" />
+        </.link>
+        <.link navigate={~p"/contribute"} class="m-bar__icon" aria-label="投稿">
+          <.icon name="hero-pencil-square" class="size-5" />
+        </.link>
+      </div>
+
       <main style="flex:1">
         {render_slot(@inner_block)}
       </main>
 
       <.app_footer />
+
+      <%!-- mobile bottom tab bar (home / search / regions / convert) --%>
+      <nav class="m-tabs">
+        <.link navigate={~p"/"} class={["m-tab", @active_tab == :home && "is-active"]}>
+          <.icon name="hero-book-open" class="size-6" />
+          <span class="m-tab__label">ホーム</span>
+        </.link>
+        <.link navigate={~p"/search"} class={["m-tab", @active_tab == :search && "is-active"]}>
+          <.icon name="hero-magnifying-glass" class="size-6" />
+          <span class="m-tab__label">検索</span>
+        </.link>
+        <.link navigate={~p"/regions"} class={["m-tab", @active_tab == :regions && "is-active"]}>
+          <.icon name="hero-map" class="size-6" />
+          <span class="m-tab__label">地域</span>
+        </.link>
+        <.link navigate={~p"/convert"} class={["m-tab", @active_tab == :convert && "is-active"]}>
+          <.icon name="hero-arrows-right-left" class="size-6" />
+          <span class="m-tab__label">変換</span>
+        </.link>
+      </nav>
     </div>
 
     <.flash_group flash={@flash} />

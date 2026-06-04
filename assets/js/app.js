@@ -40,6 +40,26 @@ window.addEventListener("phx:page-loading-stop", _info => topbar.hide())
 // connect if there are any LiveViews on the page
 liveSocket.connect()
 
+// Japan tile map: guarantee each prefecture name fits its tile regardless of
+// font load / zoom / width. Measure and squeeze horizontally (from center, so
+// 3-char names like 鹿児島・北海道 stay centered and never spill right).
+function fitJtiles() {
+  document.querySelectorAll(".jmap__board .jtile").forEach(t => {
+    const n = t.querySelector(".jtile__name")
+    if (!n) return
+    n.style.transform = "none"
+    const avail = t.clientWidth - 4
+    const w = n.scrollWidth
+    if (w > avail && avail > 0) n.style.transform = `scaleX(${(avail / w).toFixed(3)})`
+  })
+}
+window.addEventListener("DOMContentLoaded", fitJtiles)
+window.addEventListener("resize", fitJtiles)
+window.addEventListener("phx:page-loading-stop", () => setTimeout(fitJtiles, 60))
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitJtiles)
+setTimeout(fitJtiles, 120)
+setTimeout(fitJtiles, 450)
+
 // expose liveSocket on window for web console debug logs and latency simulation:
 // >> liveSocket.enableDebug()
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
