@@ -1,52 +1,117 @@
-<Layouts.flash_group flash={@flash} />
+<Layouts.app flash={@flash} current_scope={@current_scope}>
+  <%!-- ===== HERO ===== --%>
+  <section class="hero">
+    <div class="wrap hero__inner">
+      <div>
+        <span class="eyebrow">日本各地の方言・言い回し</span>
+        <h1 class="hero__title">
+          気になったら、<span class="nb">調べて</span>・<span class="nb">眺めて</span>・<span class="nb">変換して遊ぶ。</span>
+        </h1>
+        <p class="hero__lead">
+          全国の方言を、堅い調べ物ではなく気軽に。すべての言葉に<strong>出典</strong>を添え、確かでないものは「真偽未確認」と正直に示します。
+        </p>
 
-<div id="home" class="mx-auto max-w-2xl space-y-8 py-10 px-4">
-  <header class="space-y-2 text-center">
-    <h1 class="text-3xl font-bold tracking-tight">dialect-pocket</h1>
-    <p class="text-sm text-gray-600">
-      日本各地の方言・言い回しを、気になったら調べて・眺めて・変換して遊ぶ。
-    </p>
-  </header>
+        <form action={~p"/search"} method="get" class="searchbar" style="margin-top:20px">
+          <input
+            id="home-search-input"
+            class="field"
+            type="search"
+            name="q"
+            placeholder="方言・読み・意味でさがす（例: なまら）"
+            autocomplete="off"
+          />
+          <button id="home-link-search" type="submit" class="btn btn--primary btn--lg">検索</button>
+        </form>
 
-  <nav id="home-nav" class="grid gap-3 sm:grid-cols-2">
-    <.link
-      navigate={~p"/search"}
-      id="home-link-search"
-      class="rounded-lg border border-gray-200 px-4 py-3 hover:border-blue-400 hover:bg-blue-50"
-    >
-      <div class="font-semibold text-blue-700">🔎 検索</div>
-      <div class="text-xs text-gray-500">方言・読み・意味から探す</div>
-    </.link>
+        <div class="hero__suggest">
+          <span class="tiny muted">例えば</span>
+          <.link navigate={~p"/search?q=ほかす"} class="suggest-chip">ほかす</.link>
+          <.link navigate={~p"/search?q=なまら"} class="suggest-chip">なまら</.link>
+          <.link navigate={~p"/search?q=わや"} class="suggest-chip">わや</.link>
+          <.link navigate={~p"/search?q=だんだん"} class="suggest-chip">だんだん</.link>
+        </div>
 
-    <.link
-      navigate={~p"/regions"}
-      id="home-link-regions"
-      class="rounded-lg border border-gray-200 px-4 py-3 hover:border-blue-400 hover:bg-blue-50"
-    >
-      <div class="font-semibold text-blue-700">🗾 地域から探す</div>
-      <div class="text-xs text-gray-500">都道府県・地域でドリルダウン</div>
-    </.link>
+        <div class="hero__stats">
+          <div class="stat-mini">
+            <span class="stat-mini__n">{@entry_count}</span>
+            <span class="stat-mini__l">収録ことば</span>
+          </div>
+          <div class="stat-mini">
+            <span class="stat-mini__n">{@region_count}</span>
+            <span class="stat-mini__l">地域</span>
+          </div>
+          <div class="stat-mini">
+            <span class="stat-mini__n">CC</span>
+            <span class="stat-mini__l">出典つき</span>
+          </div>
+        </div>
+      </div>
 
-    <.link
-      navigate={~p"/convert"}
-      id="home-link-convert"
-      class="rounded-lg border border-gray-200 px-4 py-3 hover:border-blue-400 hover:bg-blue-50"
-    >
-      <div class="font-semibold text-blue-700">🔁 変換</div>
-      <div class="text-xs text-gray-500">標準語→方言（語・文章）</div>
-    </.link>
+      <%!-- right: where data lives --%>
+      <div class="card hero__map">
+        <div class="hero__map-head">
+          <span class="eyebrow">地域から探す</span>
+          <.link id="home-link-regions" navigate={~p"/regions"} class="link-arrow">
+            すべて <.icon name="hero-arrow-right" class="size-4" />
+          </.link>
+        </div>
+        <div class="regrid">
+          <.link
+            :for={{region, count} <- Enum.take(@prefectures, 12)}
+            navigate={~p"/r/#{region.path}"}
+            class="regrid__item"
+          >
+            <span class="regrid__name">{region.name}</span>
+            <span class="regrid__count">{count}件</span>
+          </.link>
+        </div>
+        <p class="hero__map-foot tiny muted">データのある地域から、その土地の言葉へ。</p>
+      </div>
+    </div>
+  </section>
 
-    <.link
-      navigate={~p"/contribute"}
-      id="home-link-contribute"
-      class="rounded-lg border border-gray-200 px-4 py-3 hover:border-blue-400 hover:bg-blue-50"
-    >
-      <div class="font-semibold text-blue-700">✍️ 投稿</div>
-      <div class="text-xs text-gray-500">うちの言葉を追加する</div>
-    </.link>
-  </nav>
+  <%!-- ===== PILLARS ===== --%>
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">3つの入口</span>
+          <h2 class="h-sec">調べる・眺める・遊ぶ</h2>
+        </div>
+      </div>
+      <div class="pillars">
+        <.link navigate={~p"/search"} class="pillar card">
+          <span class="pillar__icon">
+            <.icon name="hero-magnifying-glass" class="size-6" style="color:var(--navy)" />
+          </span>
+          <span class="pillar__title">検索でしらべる</span>
+          <p class="pillar__body">見出し語・読み・意味から、その言葉の意味と使われる地域をすぐに。</p>
+        </.link>
+        <.link id="home-link-regions-2" navigate={~p"/regions"} class="pillar card">
+          <span class="pillar__icon">
+            <.icon name="hero-map" class="size-6" style="color:var(--navy)" />
+          </span>
+          <span class="pillar__title">地域でながめる</span>
+          <p class="pillar__body">都道府県・地域から、ご当地の言い回しをドリルダウンで眺める。</p>
+        </.link>
+        <.link id="home-link-convert" navigate={~p"/convert"} class="pillar card">
+          <span class="pillar__icon">
+            <.icon name="hero-arrows-right-left" class="size-6" style="color:var(--navy)" />
+          </span>
+          <span class="pillar__title">変換であそぶ</span>
+          <p class="pillar__body">標準語を方言に。文章の中の言葉だけ置き換えて、その土地らしさを。</p>
+        </.link>
+      </div>
 
-  <p class="text-center text-xs text-gray-400">
-    各項目には出典を表示します。未確認の情報には「真偽未確認」を明記します。
-  </p>
-</div>
+      <div class="contrib-prompt" style="margin-top:28px">
+        <div class="contrib-prompt__text">
+          <strong style="color:var(--navy)">うちの言葉、ありませんか？</strong>
+          <p class="tiny muted" style="margin:6px 0 0">ニックネームで投稿できます。確認のうえ、出典つきで公開します。</p>
+        </div>
+        <.link id="home-link-contribute" navigate={~p"/contribute"} class="btn btn--ghost">
+          方言を投稿
+        </.link>
+      </div>
+    </div>
+  </section>
+</Layouts.app>

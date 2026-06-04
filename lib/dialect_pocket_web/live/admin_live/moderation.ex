@@ -33,45 +33,51 @@ defmodule DialectPocketWeb.AdminLive.Moderation do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={@current_scope}>
-      <div id="moderation-page" class="mx-auto max-w-3xl space-y-6 py-6 px-4">
-        <header class="space-y-1">
-          <h1 class="text-xl font-semibold">モデレーション（未承認の投稿）</h1>
-          <p class="text-xs text-gray-500">承認すると公開されます。却下しても削除はせず非公開で保持します。</p>
-        </header>
+      <div id="moderation-page" class="wrap wrap-narrow" style="padding:32px 24px 72px">
+        <h1 class="page-title">モデレーション（未承認の投稿）</h1>
+        <p class="help" style="margin-top:6px">
+          承認すると公開されます。却下しても削除はせず非公開で保持します。
+        </p>
 
-        <p :if={@pending == []} id="moderation-empty" class="text-sm text-gray-500">
+        <p :if={@pending == []} id="moderation-empty" class="empty muted" style="margin-top:24px">
           未承認の投稿はありません。
         </p>
 
-        <ul id="moderation-list" class="divide-y divide-gray-100">
+        <ul
+          id="moderation-list"
+          class="card-grid"
+          style="list-style:none;margin:24px 0 0;padding:0"
+        >
           <li
             :for={entry <- @pending}
             id={"pending-#{entry.id}"}
             data-id={entry.id}
-            class="py-4 space-y-1"
+            class="card"
+            style="padding:18px 20px"
           >
-            <div class="flex items-baseline gap-2">
-              <span class="text-base font-semibold">{entry.headword}</span>
-              <span :if={entry.reading && entry.reading != ""} class="text-sm text-gray-500">
+            <div class="entry__top">
+              <span class="entry__word">{entry.headword}</span>
+              <span :if={entry.reading && entry.reading != ""} class="entry__reading">
                 【{entry.reading}】
               </span>
+              <span :if={entry.provenance} class="badge badge--user">
+                {entry.provenance.kind}{provenance_author(entry.provenance)}
+              </span>
             </div>
-            <p :if={entry.senses != []} class="text-sm text-gray-700">{hd(entry.senses).gloss}</p>
-            <div class="flex flex-wrap gap-2 text-xs text-gray-400">
-              <span :if={entry.entry_regions != []}>
+            <p :if={entry.senses != []} class="entry__gloss">{hd(entry.senses).gloss}</p>
+            <div class="entry__meta">
+              <span :if={entry.entry_regions != []} class="entry__region">
+                <.icon name="hero-map-pin" class="size-3" />
                 {entry.entry_regions |> Enum.map(& &1.region.name) |> Enum.join("・")}
               </span>
-              <span :if={entry.provenance}>
-                出典種別: {entry.provenance.kind}{provenance_author(entry.provenance)}
-              </span>
             </div>
-            <div class="flex gap-2 pt-1">
+            <div class="row" style="gap:8px;margin-top:14px">
               <button
                 id={"approve-#{entry.id}"}
                 phx-click="approve"
                 phx-value-id={entry.id}
                 data-confirm="このエントリを公開しますか？"
-                class="rounded bg-green-600 px-3 py-1 text-sm text-white hover:bg-green-700"
+                class="btn btn--primary"
               >
                 承認して公開
               </button>
@@ -80,7 +86,7 @@ defmodule DialectPocketWeb.AdminLive.Moderation do
                 phx-click="reject"
                 phx-value-id={entry.id}
                 data-confirm="このエントリを却下しますか？（非公開のまま保持）"
-                class="rounded bg-gray-200 px-3 py-1 text-sm text-gray-700 hover:bg-gray-300"
+                class="btn btn--ghost"
               >
                 却下
               </button>
