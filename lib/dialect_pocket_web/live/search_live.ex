@@ -8,7 +8,7 @@ defmodule DialectPocketWeb.SearchLive do
     ~H"""
     <Layouts.app flash={@flash} current_scope={@current_scope}>
       <div id="search-page" class="mx-auto max-w-2xl space-y-6 py-6 px-4">
-        <h1 class="text-xl font-semibold">方言辞典を検索</h1>
+        <h1 class="text-xl font-semibold">気になる方言をさがす</h1>
 
         <form
           id="search-form"
@@ -22,7 +22,7 @@ defmodule DialectPocketWeb.SearchLive do
             name="q"
             value={@q}
             phx-debounce="300"
-            placeholder="方言語・読み・意味で検索"
+            placeholder="方言・読み・意味でさがす（例: なまら）"
             autocomplete="off"
             class="flex-1 rounded border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
           />

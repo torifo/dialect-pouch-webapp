@@ -28,7 +28,7 @@ defmodule DialectPocketWeb.ConvertLive do
         <header class="space-y-1">
           <h1 class="text-xl font-semibold">標準語を方言に変換</h1>
           <p class="text-xs text-gray-500">
-            辞書に登録された方言のみを表示します。該当データが無い場合は推測せず「データなし」と表示します。
+            登録されている方言だけを表示します。見つからなければ推測せず「データなし」と出します。
           </p>
         </header>
 
