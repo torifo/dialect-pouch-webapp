@@ -48,28 +48,42 @@ defmodule DialectPocketWeb.RegionLive do
         id="region-page"
         data-region-path={@region.path}
         data-region-level={@region.level}
-        class="mx-auto max-w-2xl space-y-6 py-6 px-4"
+        class="wrap wrap-narrow"
+        style="padding: 32px 24px 72px;"
       >
         <%!-- Breadcrumb --%>
-        <nav id="region-breadcrumb" aria-label="パンくずリスト" class="text-sm text-gray-500">
-          <ol class="flex flex-wrap items-center gap-1">
-            <li>
-              <.link navigate={~p"/regions"} class="text-blue-600 hover:underline">
-                地域一覧
-              </.link>
-            </li>
-            <li :for={{crumb_name, crumb_path} <- @breadcrumbs} class="flex items-center gap-1">
-              <span aria-hidden="true">&rsaquo;</span>
-              <.link navigate={~p"/r/#{crumb_path}"} class="text-blue-600 hover:underline">
-                {crumb_name}
-              </.link>
-            </li>
-          </ol>
+        <nav id="region-breadcrumb" aria-label="パンくずリスト" class="crumbs">
+          <.link navigate={~p"/regions"} class="muted" style="color: var(--link);">
+            地域一覧
+          </.link>
+          <span
+            :for={{crumb_name, crumb_path} <- @breadcrumbs}
+            class="row"
+            style="gap: 8px; display: contents;"
+          >
+            <.icon
+              name="hero-chevron-right"
+              class="text-gray-400"
+              style="width: 13px; height: 13px; color: var(--ink-soft);"
+            />
+            <.link navigate={~p"/r/#{crumb_path}"} style="color: var(--link);">
+              {crumb_name}
+            </.link>
+          </span>
+          <.icon name="hero-chevron-right" style="width: 13px; height: 13px; color: var(--ink-soft);" />
+          <span style="color: var(--navy); font-weight: 700;">{@region.name}</span>
         </nav>
 
         <%!-- 見出し --%>
-        <header id="region-header">
-          <h1 class="text-2xl font-bold">{@region.name}</h1>
+        <header id="region-header" class="region-hero">
+          <div>
+            <h1 class="page-title" style="margin-bottom: 4px;">{@region.name}の方言</h1>
+            <p class="muted">{length(@entries)}件が登録されています</p>
+          </div>
+          <div class="region-hero__badge">
+            <span class="region-hero__count">{length(@entries)}</span>
+            <span class="tiny muted">登録件数</span>
+          </div>
         </header>
 
         <%!-- ドリルダウン: データのある子地域がある場合のみ表示 --%>
@@ -77,78 +91,77 @@ defmodule DialectPocketWeb.RegionLive do
           :if={@children_with_counts != []}
           id="region-drilldown"
           aria-label="絞り込む"
-          class="space-y-2"
+          style="margin-bottom: 28px;"
         >
-          <h2 class="text-sm font-semibold uppercase tracking-wide text-gray-400">絞り込む</h2>
-          <ul class="grid grid-cols-2 gap-2 sm:grid-cols-3">
-            <li
+          <h2 class="dsec__label">エリアで絞り込む</h2>
+          <div class="regrid">
+            <.link
               :for={{child, count} <- @children_with_counts}
+              navigate={~p"/r/#{child.path}"}
               id={"region-child-#{child.path}"}
               data-region-path={child.path}
+              class="regrid__item"
             >
-              <.link
-                navigate={~p"/r/#{child.path}"}
-                class="block rounded border border-gray-200 px-3 py-2 text-sm hover:bg-blue-50 hover:border-blue-300 transition-colors"
-              >
-                <span class="font-medium text-blue-700">{child.name}</span>
-                <span class="ml-1 text-gray-400 text-xs">({count}件)</span>
-              </.link>
-            </li>
-          </ul>
+              <span class="regrid__name">{child.name}</span>
+              <span class="regrid__count">{count}件</span>
+            </.link>
+          </div>
         </section>
 
         <%!-- エントリ一覧 --%>
-        <section id="region-entries" aria-label="この地域の方言" class="space-y-2">
-          <h2 class="text-sm font-semibold uppercase tracking-wide text-gray-400">
-            この地域の方言
-          </h2>
+        <section id="region-entries" aria-label="この地域の方言">
+          <div class="sec-head">
+            <h2 class="dsec__label" style="margin-bottom: 0;">この地域の方言</h2>
+          </div>
 
-          <p :if={@entries == []} id="region-entries-empty" class="text-sm text-gray-500">
-            この地域の登録はまだありません。
+          <p :if={@entries == []} id="region-entries-empty" class="empty">
+            <span class="muted">この地域の登録はまだありません。</span>
           </p>
 
-          <ul :if={@entries != []} id="region-entries-list" class="divide-y divide-gray-100">
-            <li
+          <div :if={@entries != []} id="region-entries-list" class="card-grid">
+            <.link
               :for={entry <- @entries}
+              navigate={~p"/e/#{entry.slug}"}
               id={"entry-#{entry.slug}"}
               data-slug={entry.slug}
-              class="py-3"
+              class="entry"
             >
-              <.link navigate={~p"/e/#{entry.slug}"} class="group block space-y-0.5">
-                <div class="flex items-baseline gap-2">
-                  <span
-                    id={"entry-#{entry.slug}-headword"}
-                    class="text-base font-semibold text-blue-700 group-hover:underline"
-                  >
-                    {entry.headword}
-                  </span>
-                  <span
-                    :if={entry.reading && entry.reading != ""}
-                    id={"entry-#{entry.slug}-reading"}
-                    class="text-sm text-gray-500"
-                  >
-                    【{entry.reading}】
-                  </span>
-                </div>
-
-                <p
-                  :if={entry.senses != []}
-                  id={"entry-#{entry.slug}-gloss"}
-                  class="text-sm text-gray-700"
+              <div class="entry__top">
+                <span id={"entry-#{entry.slug}-headword"} class="entry__word">
+                  {entry.headword}
+                </span>
+                <span
+                  :if={entry.reading && entry.reading != ""}
+                  id={"entry-#{entry.slug}-reading"}
+                  class="entry__reading"
                 >
-                  {hd(entry.senses).gloss}
-                </p>
-
+                  【{entry.reading}】
+                </span>
                 <span
                   :if={entry.provenance && entry.provenance.reliability != :verified}
                   id={"entry-#{entry.slug}-unverified"}
-                  class="text-xs text-amber-600"
+                  class="badge badge--unverified"
                 >
                   真偽未確認
                 </span>
-              </.link>
-            </li>
-          </ul>
+              </div>
+
+              <p
+                :if={entry.senses != []}
+                id={"entry-#{entry.slug}-gloss"}
+                class="entry__gloss"
+              >
+                {hd(entry.senses).gloss}
+              </p>
+
+              <div class="entry__meta">
+                <span class="entry__region">
+                  <.icon name="hero-map-pin" style="width: 13px; height: 13px;" />
+                  {entry.entry_regions |> Enum.map(& &1.region.name) |> Enum.join("・")}
+                </span>
+              </div>
+            </.link>
+          </div>
         </section>
       </div>
     </Layouts.app>

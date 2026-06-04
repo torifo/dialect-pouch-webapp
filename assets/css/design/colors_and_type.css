@@ -1,0 +1,187 @@
+/* ============================================================
+   GENIEE SEARCH — Design Tokens (CSS)
+   Source: 新営業資料_GENIEE_SEARCH_for_EC.pptx (46 slides)
+   ------------------------------------------------------------
+   Two scales are exposed:
+   - --pt-*  : 1:1 with the original PowerPoint pt values
+              (use only when rebuilding the deck at 1:1 fidelity)
+   - --fs-*  : a readable on-screen scale used by the HTML
+              templates in this design system. Larger than the
+              original because the user asked for sizes that
+              read comfortably on web/projector.
+   ============================================================ */
+
+/* Webfont — Japanese: Zen Kaku Gothic New (modern, refined gothic
+   widely adopted by premium Japanese B2B sites since 2021).
+   Latin: Inter. Both ship free from Google Fonts.
+   Replace with licensed Meiryo / Yu Gothic if available. */
+
+:root {
+  /* ── 1. BRAND ──────────────────────────────────────────── */
+  --color-brand-primary:        #1957A0; /* dominant navy — 60–70% weight */
+  --color-brand-primary-dark:   #004792; /* section dividers, gradient end */
+  --color-brand-primary-darker: #135294; /* footer accents */
+  --color-brand-primary-mid:    #125ABD; /* table sub-headers */
+  --color-brand-primary-light:  #5597D3; /* icons, hover */
+  --color-brand-primary-soft:   #8CB3E3; /* zebra rows, secondary diagrams */
+  --color-brand-primary-pale:   #D1E0F0; /* highlight row, soft input bg */
+
+  /* ── 2. ACCENT ─────────────────────────────────────────── */
+  --color-accent-info:        #219DDD; /* link, supporting icon */
+  --color-accent-info-bright: #009ADE; /* CURRENT step in process arrow */
+  --color-accent-info-vivid:  #00B0F0; /* chart data point */
+  --color-accent-alert:       #C00000; /* the "ace" red — emphasis numbers ≤2× per slide */
+  --color-accent-alert-soft:  #CC0000; /* label red */
+  --color-accent-success:     #005954; /* dark teal — CVR up, success metric */
+
+  /* ── 3. TEXT ───────────────────────────────────────────── */
+  --color-text-primary:   #000000;
+  --color-text-secondary: #333333;
+  --color-text-tertiary:  #434343;
+  --color-text-muted:     #595959;
+  --color-text-disabled:  #A5A5A5;
+  --color-text-inverse:   #FFFFFF;
+
+  /* ── 4. SURFACE / BORDER ───────────────────────────────── */
+  --color-surface-bg:           #FFFFFF;
+  --color-surface-subtle:       #F2F2F2;
+  --color-surface-callout-bg:   #FAFCFF;  /* alert callout panel */
+  --color-surface-alert-bg:     #FFF5F5;  /* red callout background */
+  --color-surface-border:       #D8D8D8;
+  --color-surface-border-strong:#BFBFBF;
+
+  /* ── 5. FONT FAMILIES ──────────────────────────────────── */
+  --font-ja:      "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  --font-en:      "Inter", "Helvetica Neue", "Arial", sans-serif;
+  --font-display: "Inter", "Impact", "Arial Black", sans-serif; /* large stat numerals */
+  /* Default to JA stack — it gracefully handles English glyphs too */
+  --font-base: var(--font-ja);
+
+  /* Enable proper Japanese kerning (palt) and Latin kerning. */
+  --font-feature: "palt" 1, "kern" 1;
+
+  /* ── 6. FONT WEIGHTS ───────────────────────────────────── */
+  --fw-regular: 400;
+  --fw-medium:  500; /* used sparingly */
+  --fw-bold:    700;
+
+  /* ── 7. ORIGINAL PT SCALE (fidelity) ───────────────────── */
+  --pt-xs:   8pt;
+  --pt-sm:   10pt;
+  --pt-base: 11pt;
+  --pt-md:   12pt;
+  --pt-lg:   14pt;
+  --pt-xl:   16pt;
+  --pt-2xl:  18pt;
+  --pt-3xl:  20pt;
+  --pt-4xl:  24pt;
+
+  /* ── 8. ON-SCREEN PX SCALE (readable) ──────────────────── */
+  /* Bumped up from the source pt values — minimum 14px body,
+     comfortable on projectors and laptops. */
+  --fs-xs:    13px; /* footnote / source */
+  --fs-sm:    15px; /* caption */
+  --fs-base:  17px; /* body — was 11pt */
+  --fs-md:    19px; /* emphasized body */
+  --fs-lg:    22px; /* sub-heading / table header */
+  --fs-xl:    26px; /* section heading */
+  --fs-2xl:   30px; /* slide title */
+  --fs-3xl:   36px; /* large heading */
+  --fs-4xl:   44px; /* section cover title */
+  --fs-stat:  88px; /* stat callout numeral */
+
+  /* ── 9. LINE HEIGHT ────────────────────────────────────── */
+  --lh-tight:  1.2;
+  --lh-normal: 1.6;
+  --lh-loose:  1.8;
+
+  /* ── 10. SPACING (4px scale) ───────────────────────────── */
+  --space-0:  0px;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* ── 11. RADIUS ────────────────────────────────────────── */
+  --radius-none: 0px;
+  --radius-sm:   2px;
+  --radius-md:   4px;   /* default button & card */
+  --radius-lg:   8px;
+  --radius-full: 9999px;
+
+  /* ── 12. BORDER WIDTH ──────────────────────────────────── */
+  --bw-thin:  0.5px;
+  --bw-base:  1px;
+  --bw-thick: 2px;     /* alert frame, secondary button */
+
+  /* ── 13. SHADOW ────────────────────────────────────────── */
+  --shadow-card:     0 2px 8px rgba(0,0,0,0.08);
+  --shadow-elevated: 0 4px 16px rgba(0,0,0,0.15);
+
+  /* ── 14. SEMANTIC ROLES (built from atoms) ─────────────── */
+  --bg:           var(--color-surface-bg);
+  --bg-subtle:    var(--color-surface-subtle);
+  --fg:           var(--color-text-primary);
+  --fg-muted:     var(--color-text-muted);
+  --border:       var(--color-surface-border);
+  --link:         var(--color-accent-info);
+  --primary:      var(--color-brand-primary);
+  --primary-on:   var(--color-text-inverse);
+
+  /* slide deck geometry (16:9) */
+  --slide-w: 1280px;
+  --slide-h: 720px;
+  --slide-pad-x: 56px;
+  --slide-pad-y: 32px;
+  --slide-header-h: 56px;
+  --slide-cover-bar-h: 96px;
+}
+
+/* ============================================================
+   Semantic element styles — apply by setting `class="ds-*"`
+   or by scoping these classes inside a `.ds` container.
+   ============================================================ */
+
+.ds { font-family: var(--font-base); color: var(--fg); line-height: var(--lh-normal); font-size: var(--fs-base); font-feature-settings: var(--font-feature); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body { font-feature-settings: var(--font-feature); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+
+.ds h1, .ds-h1 { font-size: var(--fs-3xl); font-weight: var(--fw-bold); line-height: var(--lh-tight); color: var(--primary); margin: 0 0 var(--space-4); }
+.ds h2, .ds-h2 { font-size: var(--fs-2xl); font-weight: var(--fw-bold); line-height: var(--lh-tight); color: var(--primary); margin: 0 0 var(--space-3); }
+.ds h3, .ds-h3 { font-size: var(--fs-xl);  font-weight: var(--fw-bold); line-height: var(--lh-tight); color: var(--primary); margin: 0 0 var(--space-3); }
+.ds h4, .ds-h4 { font-size: var(--fs-lg);  font-weight: var(--fw-bold); line-height: var(--lh-tight); color: var(--primary); margin: 0 0 var(--space-2); }
+
+.ds p, .ds-p { font-size: var(--fs-base); margin: 0 0 var(--space-3); }
+.ds small, .ds-small { font-size: var(--fs-sm); color: var(--fg-muted); }
+.ds-source { font-size: var(--fs-xs); color: var(--fg-muted); }
+.ds-stat { font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--fs-stat); line-height: 1; color: var(--color-accent-alert); letter-spacing: -0.02em; }
+.ds-stat-cool { font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--fs-stat); line-height: 1; color: var(--primary); letter-spacing: -0.02em; }
+
+.ds a, .ds-a { color: var(--link); text-decoration: underline; text-underline-offset: 0.2em; }
+.ds a:hover, .ds-a:hover { color: var(--color-brand-primary-dark); }
+
+/* Title bar (slide header) */
+.ds-title-bar {
+  height: var(--slide-header-h);
+  background: var(--primary);
+  color: var(--primary-on);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--slide-pad-x);
+  font-size: var(--fs-2xl); font-weight: var(--fw-bold);
+}
+
+/* Section cover bar */
+.ds-cover-bar {
+  height: var(--slide-cover-bar-h);
+  background: linear-gradient(90deg, var(--color-brand-primary-dark) 0%, var(--primary) 100%);
+  color: var(--primary-on);
+  display: flex; align-items: center;
+  padding: 0 var(--slide-pad-x);
+  font-size: var(--fs-4xl); font-weight: var(--fw-bold);
+}

@@ -21,36 +21,98 @@ defmodule DialectPocketWeb.ProvenanceComponents do
 
   def provenance_badge(%{provenance: nil} = assigns) do
     ~H"""
-    <span class="text-xs text-gray-400">出典情報なし</span>
+    <div class="prov-card">
+      <span class="badge badge--source">出典情報なし</span>
+    </div>
     """
   end
 
   def provenance_badge(%{provenance: %Provenance{reliability: :verified}} = assigns) do
     ~H"""
-    <span
-      class="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20"
-      data-reliability="verified"
-    >
-      確定
-    </span>
+    <div class="prov-card is-ok" data-reliability="verified">
+      <div class="row" style="justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+        <span class="badge badge--verified">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          確定
+        </span>
+      </div>
+      <dl class="prov-dl">
+        <div>
+          <dt>出典</dt>
+          <dd><.source_link provenance={@provenance} /></dd>
+        </div>
+        <div :if={@provenance.source_license && @provenance.source_license != ""}>
+          <dt>ライセンス</dt>
+          <dd>{@provenance.source_license}</dd>
+        </div>
+        <div :if={@provenance.observed_author && @provenance.observed_author != ""}>
+          <dt>投稿者</dt>
+          <dd>{@provenance.observed_author}</dd>
+        </div>
+        <div>
+          <dt>検証状態</dt>
+          <dd>確定（出典確認済み）</dd>
+        </div>
+      </dl>
+    </div>
     """
   end
 
   def provenance_badge(assigns) do
     ~H"""
-    <span
-      class="inline-flex flex-wrap items-center gap-1 text-xs text-amber-700"
+    <div
+      class="prov-card is-warn"
       data-reliability={to_string(@provenance.reliability)}
     >
-      出典: <.source_link provenance={@provenance} />
-      <span class="text-amber-600">(真偽未確認)</span>
-      <span :if={@provenance.source_license} class="text-gray-400">
-        / {@provenance.source_license}
-      </span>
-      <span :if={@provenance.observed_author} class="text-gray-500">
-        by {@provenance.observed_author}
-      </span>
-    </span>
+      <div class="row" style="justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+        <span class="badge badge--unverified">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 9v4" /><path d="M12 17h.01" /><circle cx="12" cy="12" r="9" />
+          </svg>
+          真偽未確認
+        </span>
+      </div>
+      <dl class="prov-dl">
+        <div>
+          <dt>出典</dt>
+          <dd><.source_link provenance={@provenance} /></dd>
+        </div>
+        <div :if={@provenance.source_license && @provenance.source_license != ""}>
+          <dt>ライセンス</dt>
+          <dd>{@provenance.source_license}</dd>
+        </div>
+        <div :if={@provenance.observed_author && @provenance.observed_author != ""}>
+          <dt>投稿者</dt>
+          <dd>{@provenance.observed_author}</dd>
+        </div>
+        <div>
+          <dt>検証状態</dt>
+          <dd>真偽未確認（要確認）</dd>
+        </div>
+      </dl>
+    </div>
     """
   end
 
@@ -68,11 +130,24 @@ defmodule DialectPocketWeb.ProvenanceComponents do
       href={@provenance.source_url}
       target="_blank"
       rel="noopener noreferrer"
-      class="underline hover:text-amber-800"
+      class="ext"
     >
       {if @provenance.source_platform && @provenance.source_platform != "",
         do: @provenance.source_platform,
         else: @provenance.source_url}
+      <svg
+        width="12"
+        height="12"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1" /><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1" />
+      </svg>
     </a>
     """
   end
@@ -88,7 +163,7 @@ defmodule DialectPocketWeb.ProvenanceComponents do
 
   def source_link(assigns) do
     ~H"""
-    <span class="text-gray-400">不明</span>
+    <span class="muted">不明</span>
     """
   end
 end

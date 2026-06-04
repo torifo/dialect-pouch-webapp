@@ -7,94 +7,107 @@ defmodule DialectPocketWeb.SearchLive do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={@current_scope}>
-      <div id="search-page" class="mx-auto max-w-2xl space-y-6 py-6 px-4">
-        <h1 class="text-xl font-semibold">気になる方言をさがす</h1>
+      <div id="search-page" class="wrap wrap-narrow" style="padding: 40px 24px 72px;">
+        <h1 class="page-title">方言を検索</h1>
+        <p class="muted" style="margin-top: 6px;">見出し語・読み・意味・用例から部分一致で探します。</p>
 
         <form
           id="search-form"
           phx-change="search"
           phx-submit="search"
-          class="flex gap-2"
+          class="searchbar"
+          style="margin-top: 22px;"
         >
-          <input
-            id="search-input"
-            type="search"
-            name="q"
-            value={@q}
-            phx-debounce="300"
-            placeholder="方言・読み・意味でさがす（例: なまら）"
-            autocomplete="off"
-            class="flex-1 rounded border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-          <button
-            type="submit"
-            class="rounded bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700"
-          >
+          <div style="position: relative; flex: 1;">
+            <span style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); pointer-events: none;">
+              <.icon name="hero-magnifying-glass" class="w-5 h-5" style="color: var(--ink-soft);" />
+            </span>
+            <input
+              id="search-input"
+              type="search"
+              name="q"
+              value={@q}
+              phx-debounce="300"
+              placeholder="方言・読み・意味でさがす（例: なまら）"
+              autocomplete="off"
+              autofocus
+              class="field"
+              style="padding-left: 46px;"
+            />
+          </div>
+          <button type="submit" class="btn btn--primary">
             検索
           </button>
         </form>
 
-        <div id="search-results" data-query={@q}>
+        <div id="search-results" data-query={@q} style="margin-top: 28px;">
           <%= cond do %>
             <% @q == "" -> %>
-              <p id="search-empty-prompt" class="text-sm text-gray-500">
-                キーワードを入力してください。
-              </p>
+              <div id="search-empty-prompt" class="empty">
+                <p class="muted">キーワードを入力してください。</p>
+              </div>
             <% @results == [] -> %>
-              <div id="search-no-results" class="space-y-1">
-                <p class="text-sm text-gray-700">「<strong>{@q}</strong>」に一致する項目はありませんでした。</p>
-                <p class="text-xs text-gray-500">
+              <div id="search-no-results" class="empty">
+                <p>「<strong>{@q}</strong>」に一致する項目はありませんでした。</p>
+                <p class="tiny muted" style="margin-top: 4px;">
                   別のキーワード・ひらがな・カタカナでお試しください。
                 </p>
               </div>
             <% true -> %>
-              <ul id="search-result-list" class="divide-y divide-gray-100">
+              <p class="tiny muted" style="margin-bottom: 12px;">{length(@results)}件 見つかりました</p>
+              <ul
+                id="search-result-list"
+                class="card-grid"
+                style="list-style: none; margin: 0; padding: 0;"
+              >
                 <li
                   :for={entry <- @results}
                   id={"entry-#{entry.slug}"}
                   data-slug={entry.slug}
-                  class="py-3"
                 >
-                  <.link navigate={~p"/e/#{entry.slug}"} class="group block space-y-0.5">
-                    <div class="flex items-baseline gap-2">
-                      <span
-                        id={"entry-#{entry.slug}-headword"}
-                        class="text-base font-semibold text-blue-700 group-hover:underline"
-                      >
+                  <.link navigate={~p"/e/#{entry.slug}"} class="entry">
+                    <div class="entry__top">
+                      <span id={"entry-#{entry.slug}-headword"} class="entry__word">
                         {entry.headword}
                       </span>
                       <span
                         :if={entry.reading && entry.reading != ""}
                         id={"entry-#{entry.slug}-reading"}
-                        class="text-sm text-gray-500"
+                        class="entry__reading"
                       >
                         【{entry.reading}】
                       </span>
+                      <%= if entry.provenance && entry.provenance.reliability == :verified do %>
+                        <span class="badge badge--verified">
+                          <.icon name="hero-check" class="w-3 h-3" />確定
+                        </span>
+                      <% else %>
+                        <span
+                          :if={entry.provenance && entry.provenance.reliability != :verified}
+                          id={"entry-#{entry.slug}-unverified"}
+                          class="badge badge--unverified"
+                        >
+                          <.icon name="hero-exclamation-circle" class="w-3 h-3" />真偽未確認
+                        </span>
+                      <% end %>
                     </div>
 
                     <p
                       :if={entry.senses != []}
                       id={"entry-#{entry.slug}-gloss"}
-                      class="text-sm text-gray-700"
+                      class="entry__gloss"
                     >
                       {hd(entry.senses).gloss}
                     </p>
 
-                    <div class="flex flex-wrap items-center gap-2 mt-0.5">
+                    <div class="entry__meta">
                       <span
                         :if={entry.entry_regions != []}
                         id={"entry-#{entry.slug}-regions"}
-                        class="text-xs text-gray-400"
+                        class="entry__region"
                       >
+                        <.icon name="hero-map-pin" class="w-3 h-3" />
                         {entry.entry_regions |> Enum.map(& &1.region.name) |> Enum.join("・")}
-                      </span>
-
-                      <span
-                        :if={entry.provenance && entry.provenance.reliability != :verified}
-                        id={"entry-#{entry.slug}-unverified"}
-                        class="text-xs text-amber-600"
-                      >
-                        真偽未確認
                       </span>
                     </div>
                   </.link>

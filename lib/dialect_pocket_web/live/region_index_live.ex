@@ -26,44 +26,38 @@ defmodule DialectPocketWeb.RegionIndexLive do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={@current_scope}>
-      <div id="region-index-page" class="mx-auto max-w-2xl space-y-6 py-6 px-4">
-        <header id="region-index-header">
-          <h1 class="text-xl font-semibold">地域から探す</h1>
-          <p class="mt-1 text-sm text-gray-500">
-            方言が登録されている地域を一覧表示しています。
-          </p>
-        </header>
-
-        <%!-- ※ 将来的に日本地図UIに置き換え予定（claude design GUIで調整） --%>
+      <div id="region-index-page" class="wrap wrap-narrow" style="padding: 40px 24px 72px;">
+        <h1 class="page-title">地域から探す</h1>
+        <p class="muted" style="margin-top: 6px;">
+          方言が登録されている地域です。クリックで一覧を開きます。
+        </p>
 
         <div
           :if={@prefectures_with_counts == []}
           id="region-index-empty"
-          class="text-sm text-gray-500"
+          class="empty"
         >
-          現在、登録されている地域データはありません。
+          <p class="muted">現在、登録されている地域データはありません。</p>
         </div>
 
-        <ul
+        <div
           :if={@prefectures_with_counts != []}
           id="region-index-list"
-          class="grid grid-cols-2 gap-2 sm:grid-cols-3"
+          class="regrid"
+          style="margin-top: 28px;"
         >
-          <li
+          <.link
             :for={{region, count} <- @prefectures_with_counts}
+            navigate={~p"/r/#{region.path}"}
             id={"region-item-#{region.path}"}
             data-region-path={region.path}
             data-region-level={region.level}
+            class="regrid__item"
           >
-            <.link
-              navigate={~p"/r/#{region.path}"}
-              class="block rounded border border-gray-200 px-3 py-2 text-sm hover:bg-blue-50 hover:border-blue-300 transition-colors"
-            >
-              <span class="font-medium text-blue-700">{region.name}</span>
-              <span class="ml-1 text-gray-400 text-xs">({count}件)</span>
-            </.link>
-          </li>
-        </ul>
+            <span class="regrid__name">{region.name}</span>
+            <span class="regrid__count">{count}件</span>
+          </.link>
+        </div>
       </div>
     </Layouts.app>
     """

@@ -23,50 +23,80 @@ defmodule DialectPocketWeb.EntryLive do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={@current_scope}>
-      <div id="entry-page" data-slug={@entry.slug} class="mx-auto max-w-2xl space-y-8 py-6 px-4">
+      <div
+        id="entry-page"
+        data-slug={@entry.slug}
+        class="wrap wrap-narrow"
+        style="padding: 32px 24px 72px;"
+      >
         <%!-- JSON-LD structured data --%>
         {Phoenix.HTML.raw(json_ld(@entry))}
 
         <%!-- Navigation --%>
         <div id="entry-nav-back">
-          <.link navigate={~p"/search"} class="text-sm text-blue-600 hover:underline">
-            &larr; 検索に戻る
+          <.link navigate={~p"/search"} class="link-back">
+            <.icon name="hero-arrow-left" class="w-4 h-4" />検索に戻る
           </.link>
         </div>
 
-        <%!-- Headword --%>
-        <header id="entry-header" class="space-y-1">
-          <h1 id="entry-headword" class="text-3xl font-bold tracking-tight">
-            {@entry.headword}
-          </h1>
+        <%!-- Headword hero --%>
+        <header id="entry-header" class="entry-hero">
+          <div class="row" style="gap: 12px; flex-wrap: wrap;">
+            <h1 id="entry-headword" class="entry-hero__word">
+              {@entry.headword}
+            </h1>
+            <%= if @entry.provenance && @entry.provenance.reliability == :verified do %>
+              <span class="badge badge--verified">
+                <.icon name="hero-check" class="w-3 h-3" />確定
+              </span>
+            <% else %>
+              <span
+                :if={@entry.provenance && @entry.provenance.reliability != :verified}
+                class="badge badge--unverified"
+              >
+                <.icon name="hero-exclamation-circle" class="w-3 h-3" />真偽未確認
+              </span>
+            <% end %>
+          </div>
           <p
             :if={@entry.reading && @entry.reading != ""}
             id="entry-reading"
-            class="text-base text-gray-500"
+            class="entry-hero__reading"
           >
             【{@entry.reading}】
           </p>
+          <div class="row" style="gap: 8px; margin-top: 14px; flex-wrap: wrap;">
+            <span
+              :for={er <- @entry.entry_regions}
+              id={"entry-region-#{er.region.name}"}
+              data-region-level={er.region.level}
+              class="chip"
+            >
+              {er.region.name}
+            </span>
+          </div>
         </header>
 
         <%!-- Senses --%>
-        <section id="entry-senses" aria-label="意味" class="space-y-2">
-          <h2 class="text-sm font-semibold uppercase tracking-wide text-gray-400">意味</h2>
-          <ol class="space-y-3 list-decimal list-inside">
+        <section id="entry-senses" aria-label="意味" class="dsec">
+          <h2 class="dsec__label">意味</h2>
+          <ol class="senses" style="list-style: none; margin: 0; padding: 0;">
             <li
               :for={{sense, idx} <- Enum.with_index(@entry.senses, 1)}
               id={"entry-sense-#{idx}"}
-              class="space-y-0.5"
+              class="sense"
             >
-              <span class="text-base">{sense.gloss}</span>
-              <p :if={sense.standard_lemma} class="ml-4 text-sm text-gray-600">
-                標準語: {sense.standard_lemma}
-              </p>
-              <p :if={sense.note} class="ml-4 text-xs text-gray-400 italic">
-                {sense.note}
-              </p>
+              <span class="sense__num">{idx}</span>
+              <div>
+                <p class="sense__gloss">{sense.gloss}</p>
+                <p :if={sense.standard_lemma} class="sense__std">
+                  標準語：<strong>{sense.standard_lemma}</strong>
+                </p>
+                <p :if={sense.note} class="sense__note">{sense.note}</p>
+              </div>
             </li>
           </ol>
-          <p :if={@entry.senses == []} class="text-sm text-gray-400">
+          <p :if={@entry.senses == []} class="muted tiny" style="margin: 0;">
             意味情報がありません。
           </p>
         </section>
@@ -76,17 +106,26 @@ defmodule DialectPocketWeb.EntryLive do
           :if={@entry.examples != []}
           id="entry-examples"
           aria-label="用例"
-          class="space-y-2"
+          class="dsec"
         >
-          <h2 class="text-sm font-semibold uppercase tracking-wide text-gray-400">用例</h2>
-          <ul class="space-y-3">
+          <h2 class="dsec__label">用例</h2>
+          <ul class="examples" style="list-style: none; margin: 0; padding: 0;">
             <li
               :for={{ex, idx} <- Enum.with_index(@entry.examples, 1)}
               id={"entry-example-#{idx}"}
-              class="rounded bg-gray-50 px-4 py-3 space-y-0.5"
+              class="example"
             >
-              <p class="text-base">{ex.text}</p>
-              <p :if={ex.translation} class="text-sm text-gray-500">{ex.translation}</p>
+              <span class="example__q">
+                <.icon
+                  name="hero-chat-bubble-left"
+                  class="w-4 h-4"
+                  style="color: var(--color-brand-primary-soft);"
+                />
+              </span>
+              <div>
+                <p class="example__text">{ex.text}</p>
+                <p :if={ex.translation} class="example__tr muted">{ex.translation}</p>
+              </div>
             </li>
           </ul>
         </section>
@@ -96,15 +135,15 @@ defmodule DialectPocketWeb.EntryLive do
           :if={@entry.entry_regions != []}
           id="entry-regions"
           aria-label="地域"
-          class="space-y-2"
+          class="dsec"
         >
-          <h2 class="text-sm font-semibold uppercase tracking-wide text-gray-400">地域</h2>
-          <div class="flex flex-wrap gap-2">
+          <h2 class="dsec__label">地域</h2>
+          <div class="row" style="flex-wrap: wrap; gap: 8px;">
             <span
               :for={er <- @entry.entry_regions}
               id={"entry-region-#{er.region.name}"}
               data-region-level={er.region.level}
-              class="rounded-full bg-blue-50 px-3 py-0.5 text-sm text-blue-700 ring-1 ring-inset ring-blue-600/20"
+              class="chip"
             >
               {er.region.name}
             </span>
@@ -112,7 +151,8 @@ defmodule DialectPocketWeb.EntryLive do
         </section>
 
         <%!-- Provenance --%>
-        <section id="entry-provenance" aria-label="出典" class="pt-2 border-t border-gray-100">
+        <section id="entry-provenance" aria-label="出典" class="dsec">
+          <h2 class="dsec__label">出典 / provenance</h2>
           <.provenance_badge provenance={@entry.provenance} />
         </section>
       </div>

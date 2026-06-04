@@ -35,40 +35,104 @@ defmodule DialectPocketWeb.Layouts do
 
   def app(assigns) do
     ~H"""
-    <header class="navbar px-4 sm:px-6 lg:px-8">
-      <div class="flex-1">
-        <a href="/" class="flex-1 flex w-fit items-center gap-2">
-          <img src={~p"/images/logo.svg"} width="36" />
-          <span class="text-sm font-semibold">v{Application.spec(:phoenix, :vsn)}</span>
-        </a>
-      </div>
-      <div class="flex-none">
-        <ul class="flex flex-column px-1 space-x-4 items-center">
-          <li>
-            <a href="https://phoenixframework.org/" class="btn btn-ghost">Website</a>
-          </li>
-          <li>
-            <a href="https://github.com/phoenixframework/phoenix" class="btn btn-ghost">GitHub</a>
-          </li>
-          <li>
-            <.theme_toggle />
-          </li>
-          <li>
-            <a href="https://hexdocs.pm/phoenix/overview.html" class="btn btn-primary">
-              Get Started <span aria-hidden="true">&rarr;</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </header>
+    <div class="app">
+      <input type="checkbox" id="nav-toggle" class="nav__toggle" hidden />
+      <header class="nav">
+        <div class="wrap nav__inner">
+          <.link navigate={~p"/"} class="brand">
+            <.brand_mark />
+            <span class="brand__name">
+              <span class="brand__ja">方言ポケット</span>
+              <span class="brand__en">dialect-pocket</span>
+            </span>
+          </.link>
+          <div class="nav__spacer"></div>
+          <nav class="nav__links">
+            <.link navigate={~p"/search"} class="nav__link">検索</.link>
+            <.link navigate={~p"/regions"} class="nav__link">地域から探す</.link>
+            <.link navigate={~p"/convert"} class="nav__link">変換</.link>
+            <.link navigate={~p"/contribute"} class="nav__link nav__link--quiet">投稿</.link>
+            <.link navigate={~p"/search"} class="nav__cta">
+              <.icon name="hero-magnifying-glass" class="size-4" /> 方言を検索
+            </.link>
+          </nav>
+          <label for="nav-toggle" class="nav__burger" aria-label="メニュー">
+            <span></span><span></span><span></span>
+          </label>
+        </div>
+        <div class="nav__sheet" id="nav-sheet">
+          <div class="wrap nav__sheet-inner">
+            <.link navigate={~p"/search"}>方言を検索</.link>
+            <.link navigate={~p"/regions"}>地域から探す</.link>
+            <.link navigate={~p"/convert"}>変換</.link>
+            <.link navigate={~p"/contribute"}>方言を投稿</.link>
+          </div>
+        </div>
+      </header>
 
-    <main class="px-4 py-20 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-2xl space-y-4">
+      <main style="flex:1">
         {render_slot(@inner_block)}
-      </div>
-    </main>
+      </main>
+
+      <.app_footer />
+    </div>
 
     <.flash_group flash={@flash} />
+    """
+  end
+
+  @doc "Brand pocket mark (navy)."
+  def brand_mark(assigns) do
+    ~H"""
+    <svg class="brand__mark" width="34" height="34" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+      <rect x="3" y="9" width="34" height="28" rx="5" fill="var(--color-brand-primary)" />
+      <path
+        d="M3 14 L20 22 L37 14 V11 a2 2 0 0 0-2-2 H5 a2 2 0 0 0-2 2 Z"
+        fill="var(--color-brand-primary-dark)"
+      />
+      <rect x="11" y="25" width="18" height="3.2" rx="1.6" fill="#fff" opacity="0.92" />
+      <rect x="11" y="30" width="11" height="3.2" rx="1.6" fill="var(--color-accent-info-bright)" />
+    </svg>
+    """
+  end
+
+  @doc "Site footer (navy)."
+  def app_footer(assigns) do
+    ~H"""
+    <footer class="footer">
+      <div class="wrap footer__inner">
+        <div style="max-width:300px">
+          <div class="brand" style="filter:brightness(0) invert(1)">
+            <.brand_mark />
+            <span class="brand__name">
+              <span class="brand__ja" style="color:#fff">方言ポケット</span>
+              <span class="brand__en" style="color:rgba(255,255,255,.6)">dialect-pocket</span>
+            </span>
+          </div>
+          <p style="color:rgba(255,255,255,.7);font-size:var(--fs-sm);margin-top:16px;line-height:1.7">
+            日本各地の方言を、気軽に調べて・眺めて・遊ぶ。出典をはっきり示し、「それっぽい嘘」を出さないことを大切にしています。
+          </p>
+        </div>
+        <div class="footer__col">
+          <h4>さがす</h4>
+          <ul>
+            <li><.link navigate={~p"/search"}>方言を検索</.link></li>
+            <li><.link navigate={~p"/regions"}>地域から探す</.link></li>
+            <li><.link navigate={~p"/convert"}>標準語を変換</.link></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>参加する</h4>
+          <ul>
+            <li><.link navigate={~p"/contribute"}>方言を投稿</.link></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bar wrap" style="max-width:var(--page-w)">
+        <span>© 2026 dialect-pocket</span>
+        <span>方言データは各エントリの出典に従います（一部 CC BY-SA 4.0）</span>
+      </div>
+    </footer>
     """
   end
 
