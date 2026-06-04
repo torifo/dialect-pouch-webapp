@@ -1,0 +1,77 @@
+# dialect-pocket 本番【VPS】向け compose。
+#
+# 方針: VPS ではビルドしない(メモリ ~2GB で不足)。イメージは GitHub Actions が
+# GHCR に push 済みのものを pull して使う。VPS の操作は pull && up -d のみ。
+#
+# 前提インフラ(VPS既存): 共有リバースプロキシ
+#   nginxproxy/nginx-proxy + acme-companion が常駐し、外部ネットワーク
+#   `global-proxy-network` 上のコンテナを VIRTUAL_HOST で自動ルーティング・自動TLS する。
+#   → 本アプリは個別 nginx 不要。VIRTUAL_HOST / LETSENCRYPT_HOST を設定するだけ。
+#   (オンプレ等で共有proxyが無い場合は docker-compose.onprem.yml を使う)
+#
+# 設置先(VPS): /home/ubuntu/Web/dialect-pocket
+# 使い方:
+#   1. ローカルで SECRET_KEY_BASE 生成: mix phx.gen.secret
+#   2. VPS の設置先に .env を用意:
+#        APP_HOST=dialect-pocket.example.com   # 公開ドメイン(VIRTUAL_HOST/PHX_HOST)
+#        POSTGRES_PASSWORD=...
+#        SECRET_KEY_BASE=...
+#        IMAGE_TAG=latest                        # 任意。SHA固定推奨も可
+#   3. デプロイ:
+#        docker compose -f docker-compose.prod.yml --env-file .env pull
+#        docker compose -f docker-compose.prod.yml --env-file .env up -d
+#   - app は起動時に /app/bin/migrate を実行してから /app/bin/server を起動する。
+#   - DATABASE_URL のホストは compose サービス名 `db`。
+
+services:
+  db:
+    # pg_bigm/PostGIS/ltree 入りイメージ(CI が docker/postgres からビルドして GHCR に push)。
+    # 素の postgres では migrations の CREATE EXTENSION が失敗するため必須。
+    image: ghcr.io/torifo/dialect-pocket-db:${IMAGE_TAG:-latest}
+    container_name: dialect_pocket_db_prod
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: dialect_pocket_prod
+    volumes:
+      - pgdata_prod:/var/lib/postgresql/data
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d dialect_pocket_prod"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    image: ghcr.io/torifo/dialect-pocket-web:${IMAGE_TAG:-latest}
+    container_name: dialect_pocket_app_prod
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      # 共有 nginx-proxy / acme-companion 連携(自動ルーティング・自動TLS)
+      VIRTUAL_HOST: ${APP_HOST}
+      VIRTUAL_PORT: "4000"
+      LETSENCRYPT_HOST: ${APP_HOST}
+      LETSENCRYPT_EMAIL: progbot.clover@gmail.com
+      # アプリ runtime 設定(config/runtime.exs が参照)
+      DATABASE_URL: "ecto://postgres:${POSTGRES_PASSWORD}@db/dialect_pocket_prod"
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      PHX_HOST: ${APP_HOST}
+      PORT: "4000"
+      POOL_SIZE: ${POOL_SIZE:-10}
+    command: sh -c "/app/bin/migrate && /app/bin/server"
+    networks:
+      - internal
+      - global-proxy-network
+
+networks:
+  internal:
+  global-proxy-network:
+    external: true
+
+volumes:
+  pgdata_prod:
