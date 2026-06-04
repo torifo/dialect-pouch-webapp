@@ -93,6 +93,9 @@ defmodule DialectPocket.Dictionary do
     Repo.one(from e in Entry, where: e.slug == ^slug, preload: ^@preloads)
   end
 
+  @doc "Admin lookup by id (any status), preloaded."
+  def get_entry!(id), do: Entry |> Repo.get!(id) |> Repo.preload(@preloads)
+
   @doc "List published entries (most recent first)."
   def list_published(limit \\ 50) do
     Repo.all(

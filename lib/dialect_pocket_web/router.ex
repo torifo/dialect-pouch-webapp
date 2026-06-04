@@ -64,6 +64,7 @@ defmodule DialectPocketWeb.Router do
       on_mount: [{DialectPocketWeb.AdminAuth, :require_authenticated}] do
       live "/admins/settings", AdminLive.Settings, :edit
       live "/admins/settings/confirm-email/:token", AdminLive.Settings, :confirm_email
+      live "/admin/moderation", AdminLive.Moderation, :index
     end
 
     post "/admins/update-password", AdminSessionController, :update_password
