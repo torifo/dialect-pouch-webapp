@@ -20,7 +20,7 @@ jobs:
       matrix:
         include:
           - name: web
-            image: dialect-pocket-web
+            image: dialect-pocket-webapp
             context: .
             dockerfile: Dockerfile
           - name: db

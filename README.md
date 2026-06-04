@@ -75,7 +75,7 @@ mix precommit     # compile --warnings-as-errors + deps.unlock --unused + format
 (migrations が `CREATE EXTENSION postgis / pg_bigm / ltree` を実行するため、素の postgres では失敗する)。
 
 イメージは GitHub Actions(`.github/workflows/build-image.yml`)が **GHCR** に push する:
-- `ghcr.io/torifo/dialect-pocket-web`(アプリ release)
+- `ghcr.io/torifo/dialect-pocket-webapp`(アプリ release)
 - `ghcr.io/torifo/dialect-pocket-db`(pg_bigm 入り PostgreSQL)
 
 ### 環境変数(config/runtime.exs)
@@ -99,6 +99,11 @@ docker compose -f docker-compose.prod.yml --env-file .env pull
 docker compose -f docker-compose.prod.yml --env-file .env up -d
 ```
 app は起動時に `migrate -> server` を自動実行する。デプロイ更新は push(CI が GHCR 更新)→ VPS で `pull && up -d`。
+
+初期シード(31地域/約372エントリ、出典付き・冪等)を投入する場合:
+```bash
+docker exec dialect_pocket_app_prod /app/bin/dialect_pocket eval "DialectPocket.Release.seed()"
+```
 
 ### オンプレ(`docker-compose.onprem.yml`・仮)
 共有proxyが無い前提の暫定構成。**例外として接続先でのビルドを許可**し、同梱 NGINX(`deploy/nginx.conf`)を前段に置く。

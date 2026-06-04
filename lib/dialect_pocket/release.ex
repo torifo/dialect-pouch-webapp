@@ -18,6 +18,22 @@ defmodule DialectPocket.Release do
     {:ok, _, _} = Ecto.Migrator.with_repo(repo, &Ecto.Migrator.run(&1, :down, to: version))
   end
 
+  @doc """
+  Seed the database from priv/repo/seeds.exs (regions + cited default dialect
+  entries). Idempotent: the script skips if entries already exist.
+
+  Run in production:
+      bin/dialect_pocket eval "DialectPocket.Release.seed()"
+  """
+  def seed do
+    load_app()
+    seeds = Path.join([:code.priv_dir(@app), "repo", "seeds.exs"])
+
+    for repo <- repos() do
+      {:ok, _, _} = Ecto.Migrator.with_repo(repo, fn _repo -> Code.eval_file(seeds) end)
+    end
+  end
+
   defp repos do
     Application.fetch_env!(@app, :ecto_repos)
   end

@@ -45,7 +45,7 @@ services:
       retries: 10
 
   app:
-    image: ghcr.io/torifo/dialect-pocket-web:${IMAGE_TAG:-latest}
+    image: ghcr.io/torifo/dialect-pocket-webapp:${IMAGE_TAG:-latest}
     container_name: dialect_pocket_app_prod
     restart: unless-stopped
     depends_on:
