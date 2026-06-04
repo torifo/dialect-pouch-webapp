@@ -2,70 +2,127 @@
   <%!-- ===== HERO ===== --%>
   <section class="hero">
     <div class="wrap hero__inner">
-      <div>
+      <div class="hero__copy">
         <span class="eyebrow">日本各地の方言・言い回し</span>
         <h1 class="hero__title">
-          気になったら、<span class="nb">調べて</span>・<span class="nb">眺めて</span>・<span class="nb">変換して遊ぶ。</span>
+          <span class="nb">うちの言葉、</span><span class="nb">ちょっと調べてみる？</span>
         </h1>
         <p class="hero__lead">
-          全国の方言を、堅い調べ物ではなく気軽に。すべての言葉に<strong>出典</strong>を添え、確かでないものは「真偽未確認」と正直に示します。
+          気になった方言を、気軽に調べて・眺めて・遊ぶ。すべてのエントリに<strong>出典</strong>を付け、推測した「それっぽい嘘」は出しません。
         </p>
 
-        <form action={~p"/search"} method="get" class="searchbar" style="margin-top:20px">
-          <input
-            id="home-search-input"
-            class="field"
-            type="search"
-            name="q"
-            placeholder="方言・読み・意味でさがす（例: なまら）"
-            autocomplete="off"
-          />
-          <button id="home-link-search" type="submit" class="btn btn--primary btn--lg">検索</button>
+        <form action={~p"/search"} method="get" class="hero__search">
+          <div class="searchbar">
+            <div style="position:relative;flex:1">
+              <span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);pointer-events:none">
+                <.icon name="hero-magnifying-glass" class="size-5" style="color:var(--ink-soft)" />
+              </span>
+              <input
+                id="home-search-input"
+                class="field"
+                style="padding-left:46px"
+                type="search"
+                name="q"
+                placeholder="方言・読み・意味で検索（例: なまら）"
+                autocomplete="off"
+              />
+            </div>
+            <button id="home-link-search" class="btn btn--primary btn--lg" type="submit">
+              検索
+            </button>
+          </div>
+          <div class="hero__suggest">
+            <span class="tiny muted">人気の検索：</span>
+            <.link navigate={~p"/search?q=なまら"} class="suggest-chip">なまら</.link>
+            <.link navigate={~p"/search?q=ほんま"} class="suggest-chip">ほんま</.link>
+            <.link navigate={~p"/search?q=めんそーれ"} class="suggest-chip">めんそーれ</.link>
+            <.link navigate={~p"/search?q=とても"} class="suggest-chip">とても</.link>
+          </div>
         </form>
-
-        <div class="hero__suggest">
-          <span class="tiny muted">例えば</span>
-          <.link navigate={~p"/search?q=ほかす"} class="suggest-chip">ほかす</.link>
-          <.link navigate={~p"/search?q=なまら"} class="suggest-chip">なまら</.link>
-          <.link navigate={~p"/search?q=わや"} class="suggest-chip">わや</.link>
-          <.link navigate={~p"/search?q=だんだん"} class="suggest-chip">だんだん</.link>
-        </div>
 
         <div class="hero__stats">
           <div class="stat-mini">
-            <span class="stat-mini__n">{@entry_count}</span>
-            <span class="stat-mini__l">収録ことば</span>
+            <span class="stat-mini__n">{@entry_count}+</span>
+            <span class="stat-mini__l">登録エントリ</span>
           </div>
           <div class="stat-mini">
-            <span class="stat-mini__n">{@region_count}</span>
-            <span class="stat-mini__l">地域</span>
+            <span class="stat-mini__n">{Enum.count(@tiles, &(&1.count > 0))}</span>
+            <span class="stat-mini__l">都道府県</span>
           </div>
           <div class="stat-mini">
-            <span class="stat-mini__n">CC</span>
-            <span class="stat-mini__l">出典つき</span>
+            <span
+              class="stat-mini__n"
+              style="color:var(--color-accent-success);font-family:var(--font-ja);font-size:var(--fs-xl)"
+            >
+              出典付き
+            </span>
+            <span class="stat-mini__l">すべてのデータ</span>
           </div>
         </div>
       </div>
 
-      <%!-- right: where data lives --%>
-      <div class="card hero__map">
+      <%!-- right: Japan tile heatmap ===== --%>
+      <div class="hero__map card">
         <div class="hero__map-head">
-          <span class="eyebrow">地域から探す</span>
+          <span class="row" style="gap:8px">
+            <.icon name="hero-map" class="size-5" style="color:var(--navy)" />
+            <strong style="color:var(--navy)">地域から探す</strong>
+          </span>
           <.link id="home-link-regions" navigate={~p"/regions"} class="link-arrow">
-            すべて <.icon name="hero-arrow-right" class="size-4" />
+            一覧へ <.icon name="hero-arrow-right" class="size-4" />
           </.link>
         </div>
-        <div class="regrid">
-          <.link
-            :for={{region, count} <- Enum.take(@prefectures, 12)}
-            navigate={~p"/r/#{region.path}"}
-            class="regrid__item"
-          >
-            <span class="regrid__name">{region.name}</span>
-            <span class="regrid__count">{count}件</span>
-          </.link>
+
+        <div class="jmap">
+          <div class="jmap__scroll">
+            <div
+              class="jmap__board"
+              style="grid-template-columns:repeat(13,1fr);grid-template-rows:repeat(13,1fr)"
+            >
+              <%= for t <- @tiles do %>
+                <%= if t.count > 0 do %>
+                  <.link
+                    navigate={~p"/r/#{t.path}"}
+                    class="jtile"
+                    data-len={String.length(t.name)}
+                    style={"grid-column:#{t.col};grid-row:#{t.row};#{t.heat}"}
+                    title={"#{t.name} ・ #{t.count}件"}
+                    aria-label={"#{t.name} #{t.count}件"}
+                  >
+                    <span class="jtile__name">{t.name}</span>
+                    <span class="jtile__count">{t.count}</span>
+                  </.link>
+                <% else %>
+                  <div
+                    class="jtile"
+                    data-len={String.length(t.name)}
+                    style={"grid-column:#{t.col};grid-row:#{t.row};#{t.heat};cursor:default"}
+                    title={"#{t.name} ・ 未登録"}
+                  >
+                    <span class="jtile__name">{t.name}</span>
+                    <span class="jtile__count">0</span>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="jmap__legend">
+            <span class="tiny muted">登録件数</span>
+            <span class="legend-scale">
+              <i style="background:var(--color-surface-subtle);border-color:var(--hair)"></i>
+              <i style="background:var(--color-brand-primary-pale)"></i>
+              <i style="background:var(--color-brand-primary-soft)"></i>
+              <i style="background:var(--color-brand-primary-light)"></i>
+              <i style="background:var(--color-brand-primary)"></i>
+            </span>
+            <span class="tiny muted">少 → 多</span>
+          </div>
         </div>
-        <p class="hero__map-foot tiny muted">データのある地域から、その土地の言葉へ。</p>
+
+        <div class="hero__map-foot tiny muted">
+          タイルにカーソルを合わせると拡大、クリックでその地域の方言へ。
+        </div>
       </div>
     </div>
   </section>
@@ -73,43 +130,136 @@
   <%!-- ===== PILLARS ===== --%>
   <section class="section">
     <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <span class="eyebrow">3つの入口</span>
-          <h2 class="h-sec">調べる・眺める・遊ぶ</h2>
-        </div>
-      </div>
       <div class="pillars">
-        <.link navigate={~p"/search"} class="pillar card">
+        <div class="pillar card">
           <span class="pillar__icon">
             <.icon name="hero-magnifying-glass" class="size-6" style="color:var(--navy)" />
           </span>
-          <span class="pillar__title">検索でしらべる</span>
-          <p class="pillar__body">見出し語・読み・意味から、その言葉の意味と使われる地域をすぐに。</p>
-        </.link>
-        <.link id="home-link-regions-2" navigate={~p"/regions"} class="pillar card">
+          <h3 class="pillar__title">検索</h3>
+          <p class="pillar__body muted">見出し語・読み・意味・用例を横断して部分一致で引けます。ひらがな・カタカナどちらでも。</p>
+          <.link id="home-link-search-2" navigate={~p"/search"} class="link-arrow">
+            検索する <.icon name="hero-arrow-right" class="size-4" />
+          </.link>
+        </div>
+        <div class="pillar card">
           <span class="pillar__icon">
             <.icon name="hero-map" class="size-6" style="color:var(--navy)" />
           </span>
-          <span class="pillar__title">地域でながめる</span>
-          <p class="pillar__body">都道府県・地域から、ご当地の言い回しをドリルダウンで眺める。</p>
-        </.link>
-        <.link id="home-link-convert" navigate={~p"/convert"} class="pillar card">
+          <h3 class="pillar__title">地域ブラウズ</h3>
+          <p class="pillar__body muted">地方 → 都道府県 → エリアとたどって「うちの言葉」を発見。件数の多い地域がひと目で。</p>
+          <.link navigate={~p"/regions"} class="link-arrow">
+            地域から探す <.icon name="hero-arrow-right" class="size-4" />
+          </.link>
+        </div>
+        <div class="pillar card">
           <span class="pillar__icon">
             <.icon name="hero-arrows-right-left" class="size-6" style="color:var(--navy)" />
           </span>
-          <span class="pillar__title">変換であそぶ</span>
-          <p class="pillar__body">標準語を方言に。文章の中の言葉だけ置き換えて、その土地らしさを。</p>
+          <h3 class="pillar__title">変換</h3>
+          <p class="pillar__body muted">標準語を指定地域の方言へ言い換え。登録済みデータだけを表示し、推測生成はしません。</p>
+          <.link id="home-link-convert" navigate={~p"/convert"} class="link-arrow">
+            変換してみる <.icon name="hero-arrow-right" class="size-4" />
+          </.link>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%!-- ===== FEATURED ===== --%>
+  <section :if={@featured != []} class="section section--subtle">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">PICK UP</span>
+          <h2 class="h-sec">いま面白い方言</h2>
+        </div>
+        <.link navigate={~p"/search"} class="link-arrow">
+          もっと見る <.icon name="hero-arrow-right" class="size-4" />
         </.link>
       </div>
+      <div class="card-grid">
+        <.link :for={e <- @featured} navigate={~p"/e/#{e.slug}"} class="entry">
+          <div class="entry__top">
+            <span class="entry__word">{e.headword}</span>
+            <span
+              :if={e.reading && e.reading != "" && e.reading != e.headword}
+              class="entry__reading"
+            >
+              【{e.reading}】
+            </span>
+            <span
+              :if={e.provenance && e.provenance.reliability != :verified}
+              class="badge badge--unverified"
+            >
+              真偽未確認
+            </span>
+          </div>
+          <p :if={e.senses != []} class="entry__gloss">{hd(e.senses).gloss}</p>
+          <div class="entry__meta">
+            <span :if={e.entry_regions != []} class="entry__region">
+              <.icon name="hero-map-pin" class="size-3" />
+              {e.entry_regions |> Enum.map(& &1.region.name) |> Enum.join("・")}
+            </span>
+          </div>
+        </.link>
+      </div>
+    </div>
+  </section>
 
-      <div class="contrib-prompt" style="margin-top:28px">
+  <%!-- ===== TRUST ===== --%>
+  <section class="section">
+    <div class="wrap trust">
+      <div class="trust__copy">
+        <span class="eyebrow">出典を一級市民に</span>
+        <h2 class="h-sec">「それっぽい嘘」を、出さない。</h2>
+        <p class="muted" style="margin-top:14px;line-height:1.9">
+          方言は地域や世代で揺れます。だからこそ、どこから来た情報かをはっきり示します。変換は登録データのルックアップに限定し、AIによる推測は使いません。未確認の情報には
+          <span class="badge badge--unverified" style="margin:0 4px">真偽未確認</span>
+          を付けて、確定情報と区別します。
+        </p>
+        <div class="row" style="gap:10px;margin-top:20px;flex-wrap:wrap">
+          <span class="badge badge--verified">確定</span>
+          <span class="badge badge--unverified">真偽未確認</span>
+          <span class="badge badge--source">オープンデータ</span>
+          <span class="badge badge--user">ユーザー投稿</span>
+        </div>
+      </div>
+      <div class="trust__demo card">
+        <div class="trust__demo-row">
+          <div class="row" style="gap:10px">
+            <span class="entry__word" style="font-size:var(--fs-md)">めんそーれ</span>
+            <span class="badge badge--verified">確定</span>
+          </div>
+          <p class="tiny muted" style="margin:6px 0 0">出典: Wikipedia「沖縄方言」 / CC BY-SA 4.0</p>
+        </div>
+        <div class="trust__demo-row">
+          <div class="row" style="gap:10px">
+            <span class="entry__word" style="font-size:var(--fs-md)">わや</span>
+            <span class="badge badge--unverified">真偽未確認</span>
+          </div>
+          <p class="tiny muted" style="margin:6px 0 0">
+            出典: Wikipedia「広島弁」ほか（reliability: unverified）
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%!-- ===== CONTRIBUTE BAND ===== --%>
+  <section class="section">
+    <div class="wrap">
+      <div class="contrib-prompt">
         <div class="contrib-prompt__text">
-          <strong style="color:var(--navy)">うちの言葉、ありませんか？</strong>
-          <p class="tiny muted" style="margin:6px 0 0">ニックネームで投稿できます。確認のうえ、出典つきで公開します。</p>
+          <span class="row" style="gap:8px;color:var(--navy)">
+            <.icon name="hero-users" class="size-5" style="color:var(--navy)" />
+            <strong>みんなで育てる方言コレクション</strong>
+          </span>
+          <p class="muted" style="margin:8px 0 0;line-height:1.8">
+            地元の言葉を知っていたら、ニックネームで気軽に投稿。キュレーターの確認をへて公開されます。
+          </p>
         </div>
         <.link id="home-link-contribute" navigate={~p"/contribute"} class="btn btn--ghost">
-          方言を投稿
+          <.icon name="hero-pencil-square" class="size-4" /> 方言を投稿する
         </.link>
       </div>
     </div>
