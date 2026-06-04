@@ -934,14 +934,22 @@ textarea.m-field { resize: none; line-height: 1.7; }
   border-radius: var(--radius-full); background: var(--color-brand-primary-pale); color: var(--color-brand-primary-dark); }
 
 /* ---------- Map (mobile) ---------- */
-.m-map .jmap__board { min-width: 0; max-width: 100%; }
+.m-map .jmap__board { min-width: 0; max-width: 100%; container-type: inline-size; }
 /* On a phone the tiles are small — give the whole tile to the prefecture
    name so it always fits (count is shown in the info card on tap). */
-.m-map .jtile { justify-content: center; gap: 0; padding: 1px 2px; }
+.m-map .jtile { justify-content: center; align-items: stretch; gap: 0; padding: 1px; text-align: center; }
 .m-map .jtile__count { display: none; }
-.m-map .jtile__name { font-size: 11px; font-weight: var(--fw-bold); letter-spacing: -.04em; width: 100%; text-align: center; }
-.m-map .jtile[data-len="3"] .jtile__name { font-size: 10px; letter-spacing: -.06em; }
-.m-map .jtile[data-len="4"] .jtile__name { font-size: 9px; letter-spacing: -.07em; }
+/* Block + width:100% + text-align:center centers the name cleanly (the base
+   inline-block let nowrap text spill right). Container-query font sizing
+   (cqw against the board) auto-shrinks so 3-char names like 鹿児島・北海道・
+   和歌山 fit at any screen width; the app.js scaleX pass is a final safety net. */
+.m-map .jtile__name {
+  display: block; width: 100%; text-align: center; transform-origin: center center;
+  white-space: nowrap; line-height: 1.02; font-weight: var(--fw-bold);
+  font-size: clamp(7px, 4.6cqw, 12px); letter-spacing: -.03em;
+}
+.m-map .jtile[data-len="3"] .jtile__name { font-size: clamp(5px, 2.15cqw, 10px); letter-spacing: -.06em; }
+.m-map .jtile[data-len="4"] .jtile__name { font-size: clamp(4.5px, 1.7cqw, 9px); letter-spacing: -.08em; }
 .m-mapcard { border: 1px solid var(--color-surface-border); border-radius: var(--radius-md); background: #fff; padding: 16px 14px; }
 .m-mapinfo { border: 1px solid var(--color-surface-border); border-radius: var(--radius-md);
   background: var(--color-surface-callout-bg); padding: 14px 16px; margin-top: 12px; min-height: 64px; }

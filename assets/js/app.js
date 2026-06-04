@@ -59,6 +59,7 @@ window.addEventListener("phx:page-loading-stop", () => setTimeout(fitJtiles, 60)
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitJtiles)
 setTimeout(fitJtiles, 120)
 setTimeout(fitJtiles, 450)
+setTimeout(fitJtiles, 1200)
 
 // expose liveSocket on window for web console debug logs and latency simulation:
 // >> liveSocket.enableDebug()
