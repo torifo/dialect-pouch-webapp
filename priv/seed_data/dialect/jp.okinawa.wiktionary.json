@@ -1,0 +1,17 @@
+{
+  "region_path": "jp.okinawa",
+  "region_name": "沖縄",
+  "prefecture": "沖縄県",
+  "source": {
+    "platform": "wiktionary",
+    "url": "https://en.wiktionary.org/wiki/めんそーれ",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-04"
+  },
+  "entries": [
+    {"headword": "めんそーれ", "reading": "めんそーれ", "meaning": "ようこそ・いらっしゃい", "example": "沖縄で歓迎のあいさつとして使われる"},
+    {"headword": "めんそーれー", "reading": "めんそーれー", "meaning": "ようこそ・いらっしゃい", "example": "めんそーれ の長音表記"}
+  ]
+}

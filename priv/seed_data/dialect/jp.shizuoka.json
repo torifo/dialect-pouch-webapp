@@ -1,0 +1,30 @@
+{
+  "region_path": "jp.shizuoka",
+  "region_name": "静岡",
+  "prefecture": "静岡県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/静岡弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-04"
+  },
+  "entries": [
+    {"headword": "あおたん", "reading": "あおたん", "meaning": "青あざ", "example": ""},
+    {"headword": "あくつ", "reading": "あくつ", "meaning": "かかと", "example": ""},
+    {"headword": "あんてぇ", "reading": "あんてぇ", "meaning": "あいつ", "example": ""},
+    {"headword": "うちっち", "reading": "うちっち", "meaning": "私の家・私たちのグループ", "example": ""},
+    {"headword": "おじゃみ", "reading": "おじゃみ", "meaning": "お手玉", "example": ""},
+    {"headword": "おだっくい", "reading": "おだっくい", "meaning": "お調子者", "example": ""},
+    {"headword": "きんのう", "reading": "きんのう", "meaning": "昨日", "example": ""},
+    {"headword": "けった", "reading": "けった", "meaning": "自転車", "example": ""},
+    {"headword": "いのく", "reading": "いのく", "meaning": "動く", "example": ""},
+    {"headword": "うっちゃる", "reading": "うっちゃる", "meaning": "捨てる", "example": ""},
+    {"headword": "かじる", "reading": "かじる", "meaning": "引っ掻く", "example": ""},
+    {"headword": "ごんわく", "reading": "ごんわく", "meaning": "腹が立つ", "example": ""},
+    {"headword": "ちみくる", "reading": "ちみくる", "meaning": "つねる", "example": ""},
+    {"headword": "ちんぶりかく", "reading": "ちんぶりかく", "meaning": "すねる・ごねる", "example": ""},
+    {"headword": "とぶ", "reading": "とぶ", "meaning": "走る", "example": ""}
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "region_path": "jp.miyazaki",
+  "region_name": "宮崎",
+  "prefecture": "宮崎県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/宮崎弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-04"
+  },
+  "entries": [
+    {"headword": "こっせん", "reading": "こっせん", "meaning": "同意を求める表現", "example": ""},
+    {"headword": "てげ", "reading": "てげ", "meaning": "とても", "example": ""},
+    {"headword": "てげてげ", "reading": "てげてげ", "meaning": "そこそこ・適当に", "example": ""},
+    {"headword": "よだきい", "reading": "よだきい", "meaning": "面倒くさくてだるい", "example": ""},
+    {"headword": "のさん", "reading": "のさん", "meaning": "辛い・嫌い", "example": ""},
+    {"headword": "ひん", "reading": "ひん", "meaning": "とても", "example": "接頭詞"},
+    {"headword": "ほんじゃまこち", "reading": "ほんじゃまこち", "meaning": "本当に", "example": ""},
+    {"headword": "じゃひか", "reading": "じゃひか", "meaning": "ですか", "example": ""},
+    {"headword": "げな", "reading": "げな", "meaning": "伝聞・推測", "example": ""},
+    {"headword": "と", "reading": "と", "meaning": "〜の（疑問の終助詞）", "example": ""},
+    {"headword": "け", "reading": "け", "meaning": "〜か（疑問の終助詞）", "example": ""},
+    {"headword": "が", "reading": "が", "meaning": "〜よ（終助詞）", "example": ""},
+    {"headword": "じ", "reading": "じ", "meaning": "〜よ（終助詞）", "example": ""},
+    {"headword": "かい", "reading": "かい", "meaning": "〜から（原因・理由）", "example": ""}
+  ]
+}

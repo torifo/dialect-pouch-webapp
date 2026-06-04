@@ -1,0 +1,30 @@
+{
+  "region_path": "jp.nagano",
+  "region_name": "長野",
+  "prefecture": "長野県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/長野県方言",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-04"
+  },
+  "entries": [
+    {"headword": "あいく", "reading": "あいく", "meaning": "歩く", "example": ""},
+    {"headword": "あいさ", "reading": "あいさ", "meaning": "間", "example": ""},
+    {"headword": "あおのけ", "reading": "あおのけ", "meaning": "あおむけ", "example": ""},
+    {"headword": "あかす", "reading": "あかす", "meaning": "告げる・密告する", "example": ""},
+    {"headword": "あげる", "reading": "あげる", "meaning": "嘔吐する", "example": ""},
+    {"headword": "あたける", "reading": "あたける", "meaning": "暴れ回る", "example": ""},
+    {"headword": "あっこ", "reading": "あっこ", "meaning": "かかと", "example": ""},
+    {"headword": "あったら", "reading": "あったら", "meaning": "惜しい", "example": ""},
+    {"headword": "あすぶ", "reading": "あすぶ", "meaning": "遊ぶ", "example": ""},
+    {"headword": "あばける", "reading": "あばける", "meaning": "ふざけて騒ぐ", "example": ""},
+    {"headword": "あめんぼう", "reading": "あめんぼう", "meaning": "つらら", "example": ""},
+    {"headword": "あらかた", "reading": "あらかた", "meaning": "ほぼ", "example": ""},
+    {"headword": "いきあう", "reading": "いきあう", "meaning": "出くわす・遭遇する", "example": ""},
+    {"headword": "いごく", "reading": "いごく", "meaning": "動く", "example": ""},
+    {"headword": "いちゃつく", "reading": "いちゃつく", "meaning": "狼狽する・あわてふためく", "example": ""}
+  ]
+}

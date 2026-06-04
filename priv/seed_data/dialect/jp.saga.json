@@ -1,0 +1,30 @@
+{
+  "region_path": "jp.saga",
+  "region_name": "佐賀",
+  "prefecture": "佐賀県",
+  "source": {
+    "platform": "wikipedia",
+    "url": "https://ja.wikipedia.org/wiki/佐賀弁",
+    "license": "CC BY-SA 4.0",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-04"
+  },
+  "entries": [
+    {"headword": "あいなか", "reading": "あいなか", "meaning": "間", "example": ""},
+    {"headword": "あがん", "reading": "あがん", "meaning": "あのように・あんなに", "example": ""},
+    {"headword": "あさん", "reading": "あさん", "meaning": "あなた", "example": ""},
+    {"headword": "あせがる", "reading": "あせがる", "meaning": "慌てる・焦る", "example": ""},
+    {"headword": "あったらか", "reading": "あったらか", "meaning": "もったいない", "example": ""},
+    {"headword": "あばかん", "reading": "あばかん", "meaning": "入りきらない", "example": ""},
+    {"headword": "いっちょん", "reading": "いっちょん", "meaning": "全然・まったく", "example": ""},
+    {"headword": "うーしかつ", "reading": "うーしかつ", "meaning": "適当な・大雑把な", "example": ""},
+    {"headword": "うっかんがす", "reading": "うっかんがす", "meaning": "壊す・だめにする", "example": ""},
+    {"headword": "うてあう", "reading": "うてあう", "meaning": "相手にする・構う", "example": ""},
+    {"headword": "うんにゃ", "reading": "うんにゃ", "meaning": "違う・いや", "example": ""},
+    {"headword": "えすか", "reading": "えすか", "meaning": "怖い・恐ろしい", "example": ""},
+    {"headword": "おいどん", "reading": "おいどん", "meaning": "俺たち", "example": ""},
+    {"headword": "おふたか", "reading": "おふたか", "meaning": "重たい・重い", "example": ""},
+    {"headword": "がばい", "reading": "がばい", "meaning": "とても・すごく", "example": ""}
+  ]
+}
