@@ -42,7 +42,7 @@ defmodule DialectPocketWeb.Layouts do
           <.link navigate={~p"/"} class="brand">
             <.brand_mark />
             <span class="brand__name">
-              <span class="brand__ja">方言ポケット</span>
+              <span class="brand__ja">方言袋</span>
               <span class="brand__en">dialect-pocket</span>
             </span>
           </.link>
@@ -105,7 +105,7 @@ defmodule DialectPocketWeb.Layouts do
           <div class="brand" style="filter:brightness(0) invert(1)">
             <.brand_mark />
             <span class="brand__name">
-              <span class="brand__ja" style="color:#fff">方言ポケット</span>
+              <span class="brand__ja" style="color:#fff">方言袋</span>
               <span class="brand__en" style="color:rgba(255,255,255,.6)">dialect-pocket</span>
             </span>
           </div>
