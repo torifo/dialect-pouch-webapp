@@ -72,6 +72,11 @@ defmodule DialectPocket.Regions do
     Repo.all(from r in Region, where: is_nil(r.parent_id), order_by: r.name)
   end
 
+  @doc "All regions (for sitemap / enumeration)."
+  def all do
+    Repo.all(from r in Region, order_by: r.path)
+  end
+
   @doc "Direct children of the given region."
   def children(%Region{id: id}) do
     Repo.all(from r in Region, where: r.parent_id == ^id, order_by: r.name)

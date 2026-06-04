@@ -21,6 +21,7 @@ defmodule DialectPocketWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/sitemap.xml", SitemapController, :index
 
     live_session :public,
       on_mount: [{DialectPocketWeb.AdminAuth, :mount_current_scope}] do

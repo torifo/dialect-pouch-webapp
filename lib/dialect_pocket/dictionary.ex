@@ -121,6 +121,16 @@ defmodule DialectPocket.Dictionary do
   def count_published,
     do: Repo.one(from e in Entry, where: e.status == :published, select: count())
 
+  @doc "Lightweight list of published slugs + update times for the sitemap."
+  def published_slugs do
+    Repo.all(
+      from e in Entry,
+        where: e.status == :published,
+        select: %{slug: e.slug, updated_at: e.updated_at},
+        order_by: [asc: e.slug]
+    )
+  end
+
   @doc """
   Published entries linked to `region_path` or any of its descendants
   (e.g. a prefecture page includes its area sub-regions). `[]` for unknown paths.
