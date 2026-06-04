@@ -1,8 +1,11 @@
 defmodule DialectPocketWeb.PageControllerTest do
   use DialectPocketWeb.ConnCase
 
-  test "GET /", %{conn: conn} do
+  test "GET / shows the dialect-pocket landing with feature links", %{conn: conn} do
     conn = get(conn, ~p"/")
-    assert html_response(conn, 200) =~ "Peace of mind from prototype to production"
+    body = html_response(conn, 200)
+    assert body =~ "dialect-pocket"
+    assert body =~ "home-link-search"
+    assert body =~ "home-link-convert"
   end
 end

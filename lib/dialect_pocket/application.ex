@@ -12,6 +12,7 @@ defmodule DialectPocket.Application do
       DialectPocket.Repo,
       {DNSCluster, query: Application.get_env(:dialect_pocket, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: DialectPocket.PubSub},
+      {DialectPocket.RateLimiter, [clean_period: :timer.minutes(10)]},
       {Oban, Application.fetch_env!(:dialect_pocket, Oban)},
       # Start to serve requests, typically the last entry
       DialectPocketWeb.Endpoint

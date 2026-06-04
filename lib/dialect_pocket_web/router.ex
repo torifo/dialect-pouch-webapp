@@ -29,6 +29,7 @@ defmodule DialectPocketWeb.Router do
       live "/convert", ConvertLive, :index
       live "/regions", RegionIndexLive, :index
       live "/r/:region_path", RegionLive, :show
+      live "/contribute", ContributeLive, :index
     end
   end
 
