@@ -2,4 +2,4 @@
 set -eu
 
 cd -P -- "$(dirname -- "$0")"
-PHX_SERVER=true exec ./dialect_pocket start
+PHX_SERVER=true exec ./dialect_pouch start

@@ -20,11 +20,11 @@ jobs:
       matrix:
         include:
           - name: web
-            image: dialect-pocket-webapp
+            image: dialect-pouch-webapp
             context: .
             dockerfile: Dockerfile
           - name: db
-            image: dialect-pocket-db
+            image: dialect-pouch-db
             context: ./docker/postgres
             dockerfile: ./docker/postgres/Dockerfile
     steps:

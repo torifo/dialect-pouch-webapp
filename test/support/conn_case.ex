@@ -1,4 +1,4 @@
-defmodule DialectPocketWeb.ConnCase do
+defmodule DialectPouchWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -11,7 +11,7 @@ defmodule DialectPocketWeb.ConnCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use DialectPocketWeb.ConnCase, async: true`, although
+  by setting `use DialectPouchWeb.ConnCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -20,19 +20,19 @@ defmodule DialectPocketWeb.ConnCase do
   using do
     quote do
       # The default endpoint for testing
-      @endpoint DialectPocketWeb.Endpoint
+      @endpoint DialectPouchWeb.Endpoint
 
-      use DialectPocketWeb, :verified_routes
+      use DialectPouchWeb, :verified_routes
 
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
-      import DialectPocketWeb.ConnCase
+      import DialectPouchWeb.ConnCase
     end
   end
 
   setup tags do
-    DialectPocket.DataCase.setup_sandbox(tags)
+    DialectPouch.DataCase.setup_sandbox(tags)
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 
@@ -45,8 +45,8 @@ defmodule DialectPocketWeb.ConnCase do
   test context.
   """
   def register_and_log_in_admin(%{conn: conn} = context) do
-    admin = DialectPocket.AccountsFixtures.admin_fixture()
-    scope = DialectPocket.Accounts.Scope.for_admin(admin)
+    admin = DialectPouch.AccountsFixtures.admin_fixture()
+    scope = DialectPouch.Accounts.Scope.for_admin(admin)
 
     opts =
       context
@@ -62,7 +62,7 @@ defmodule DialectPocketWeb.ConnCase do
   It returns an updated `conn`.
   """
   def log_in_admin(conn, admin, opts \\ []) do
-    token = DialectPocket.Accounts.generate_admin_session_token(admin)
+    token = DialectPouch.Accounts.generate_admin_session_token(admin)
 
     maybe_set_token_authenticated_at(token, opts[:token_authenticated_at])
 
@@ -74,6 +74,6 @@ defmodule DialectPocketWeb.ConnCase do
   defp maybe_set_token_authenticated_at(_token, nil), do: nil
 
   defp maybe_set_token_authenticated_at(token, authenticated_at) do
-    DialectPocket.AccountsFixtures.override_token_authenticated_at(token, authenticated_at)
+    DialectPouch.AccountsFixtures.override_token_authenticated_at(token, authenticated_at)
   end
 end

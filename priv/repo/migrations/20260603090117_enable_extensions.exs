@@ -1,4 +1,4 @@
-defmodule DialectPocket.Repo.Migrations.EnableExtensions do
+defmodule DialectPouch.Repo.Migrations.EnableExtensions do
   use Ecto.Migration
 
   def up do

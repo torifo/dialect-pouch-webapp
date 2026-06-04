@@ -1,6 +1,6 @@
 # レビュー: 基盤(Task 1.1) + Regions コンテキスト(Task 2.1)
 
-- 対象: dialect-pocket (Phoenix LiveView + PostgreSQL[ltree/PostGIS/pg_bigm] + Oban)
+- 対象: dialect-pouch (Phoenix LiveView + PostgreSQL[ltree/PostGIS/pg_bigm] + Oban)
 - レビュー日: 2026-06-03
 - 形態: 静的レビューのみ（本環境では Bash/ネットワーク不可。コード実行・テスト実行・依存取得は未実施）
 - レビュアー観点: 正確性/バグ・設計整合・セキュリティ/運用・テストの穴・次Waveへの申し送り
@@ -72,7 +72,7 @@
 **M-2. docker の postgres/postgres と initdb の冪等性・拡張二重作成**
 - 根拠: `docker-compose.yml:10-12` で `postgres/postgres`、`docker/postgres/initdb/01-extensions.sql` が dev DB に拡張作成。Ecto マイグレーションも同じ拡張を作る前提(Dockerfile:31)。
 - 評価: dev 限定・ポート 5432 を localhost に publish。弱パスワードは dev のみなら許容。`CREATE EXTENSION IF NOT EXISTS`(SQL:3-5)なので initdb とマイグレーションの二重実行は冪等で安全（ただしマイグレーション側も `IF NOT EXISTS` であることが条件 → 未検証, B-2参照)。
-- リスク(Medium): `initdb` スクリプトは **ボリューム初回作成時のみ**実行される（`pgdata` 永続化, compose:24-25)。既存ボリュームを使い回すと拡張が入らない罠。test DB(`dialect_pocket_test`)は initdb 対象外なので、test の拡張は **マイグレーション頼み**。test でマイグレーションが拡張を作らないと test が全滅する → B-1/B-2 の検証が test 通過の生命線。
+- リスク(Medium): `initdb` スクリプトは **ボリューム初回作成時のみ**実行される（`pgdata` 永続化, compose:24-25)。既存ボリュームを使い回すと拡張が入らない罠。test DB(`dialect_pouch_test`)は initdb 対象外なので、test の拡張は **マイグレーション頼み**。test でマイグレーションが拡張を作らないと test が全滅する → B-1/B-2 の検証が test 通過の生命線。
 - 推奨: README に「test DB の拡張はマイグレーションが作る」明記。`5432` をホストに晒したくなければ `127.0.0.1:5432:5432` バインドに。
 
 **M-3. Dockerfile の `with_llvm=no`・パッケージ purge・arm64 エミュレーション**
@@ -164,7 +164,7 @@ design.md:9,89,198 は **ltree + GiST** を明示指定。実装(`region.ex:19` 
 
 ## 追加すべきテスト（コピペ可能な ExUnit）
 
-`test/dialect_pocket/regions_test.exs` に不足。以下を追加推奨（`async: true`, `DataCase` 前提)。
+`test/dialect_pouch/regions_test.exs` に不足。以下を追加推奨（`async: true`, `DataCase` 前提)。
 
 ```elixir
   describe "subtree path-boundary safety" do
@@ -178,7 +178,7 @@ design.md:9,89,198 は **ltree + GiST** を明示指定。実装(`region.ex:19` 
     end
 
     test "subtree of jp.aomori does NOT leak jp.aomori2 (boundary match)", %{aomori: aomori} do
-      paths = aomori.path |> DialectPocket.Regions.subtree() |> Enum.map(& &1.path)
+      paths = aomori.path |> DialectPouch.Regions.subtree() |> Enum.map(& &1.path)
       assert "jp.aomori" in paths
       assert "jp.aomori.tsugaru" in paths
       # 'jp.aomori2' は 'jp.aomori' で始まるが配下ではない → 漏れてはいけない
@@ -186,7 +186,7 @@ design.md:9,89,198 は **ltree + GiST** を明示指定。実装(`region.ex:19` 
     end
 
     test "subtree_ids matches subtree and also excludes the prefix-sibling", %{aomori: aomori, aomori2: aomori2} do
-      ids = DialectPocket.Regions.subtree_ids(aomori.path)
+      ids = DialectPouch.Regions.subtree_ids(aomori.path)
       refute aomori2.id in ids
     end
   end
@@ -202,13 +202,13 @@ design.md:9,89,198 は **ltree + GiST** を明示指定。実装(`region.ex:19` 
     # 現状ガードが無ければ '%' が LIKE ワイルドカードとして効き全件返る(=このテストは赤になり、
     # ガード追加の必要性を可視化する)。
     test "a path containing '%' must not match everything", %{} do
-      results = DialectPocket.Regions.subtree("%")
+      results = DialectPouch.Regions.subtree("%")
       assert results == [], "LIKE wildcard '%' leaked through subtree/1 — add path validation"
     end
 
     test "a path containing '_' must not act as single-char wildcard" do
       # 'jp_aomori' は 'jp.aomori' を '_'(任意1文字)でマッチしうる
-      results = DialectPocket.Regions.subtree("jp_")
+      results = DialectPouch.Regions.subtree("jp_")
       assert results == []
     end
   end
@@ -220,7 +220,7 @@ design.md:9,89,198 は **ltree + GiST** を明示指定。実装(`region.ex:19` 
       c = create!(%{name: "C", level: :area, path: "jp.b.c", parent_id: b.id})
       _d = create!(%{name: "D", level: :area, path: "jp.b.c.d", parent_id: c.id})
 
-      paths = DialectPocket.Regions.subtree("jp.b") |> Enum.map(& &1.path)
+      paths = DialectPouch.Regions.subtree("jp.b") |> Enum.map(& &1.path)
       assert paths == ["jp.b", "jp.b.c", "jp.b.c.d"], "must be ordered by path and complete"
     end
   end
@@ -229,16 +229,16 @@ design.md:9,89,198 は **ltree + GiST** を明示指定。実装(`region.ex:19` 
     test "subtree of a leaf returns only itself" do
       jp = create!(%{name: "日本", level: :country, path: "jp"})
       leaf = create!(%{name: "葉", level: :prefecture, path: "jp.leaf", parent_id: jp.id})
-      assert [r] = DialectPocket.Regions.subtree(leaf.path)
+      assert [r] = DialectPouch.Regions.subtree(leaf.path)
       assert r.path == "jp.leaf"
     end
 
     test "subtree of a non-existent path returns []" do
-      assert DialectPocket.Regions.subtree("does.not.exist") == []
+      assert DialectPouch.Regions.subtree("does.not.exist") == []
     end
 
     test "get_region_by_path returns nil for missing path (distinguishable from empty subtree)" do
-      assert DialectPocket.Regions.get_region_by_path("nope") == nil
+      assert DialectPouch.Regions.get_region_by_path("nope") == nil
     end
   end
 
@@ -247,32 +247,32 @@ design.md:9,89,198 は **ltree + GiST** を明示指定。実装(`region.ex:19` 
       # 同名 rootが2件 → order_by: name だけだと順序不定(M-5)。id タイブレークを期待。
       _r1 = create!(%{name: "同名", level: :country, path: "jp"})
       _r2 = create!(%{name: "同名", level: :country, path: "us"})
-      ids1 = DialectPocket.Regions.roots() |> Enum.map(& &1.id)
-      ids2 = DialectPocket.Regions.roots() |> Enum.map(& &1.id)
+      ids1 = DialectPouch.Regions.roots() |> Enum.map(& &1.id)
+      ids2 = DialectPouch.Regions.roots() |> Enum.map(& &1.id)
       assert ids1 == ids2, "roots/0 order must be stable; add id tiebreaker to order_by"
     end
 
     test "unicode region name round-trips" do
       assert {:ok, r} =
-               DialectPocket.Regions.create_region(%{name: "鹿児島県（奄美）", level: :prefecture, path: "jp.kagoshima"})
+               DialectPouch.Regions.create_region(%{name: "鹿児島県（奄美）", level: :prefecture, path: "jp.kagoshima"})
       assert r.name == "鹿児島県（奄美）"
     end
   end
 
   describe "path format edge cases" do
     test "rejects path with trailing dot" do
-      assert {:error, cs} = DialectPocket.Regions.create_region(%{name: "x", level: :area, path: "jp.aomori."})
+      assert {:error, cs} = DialectPouch.Regions.create_region(%{name: "x", level: :area, path: "jp.aomori."})
       assert errors_on(cs)[:path]
     end
 
     test "rejects path with empty label (double dot)" do
-      assert {:error, cs} = DialectPocket.Regions.create_region(%{name: "x", level: :area, path: "jp..aomori"})
+      assert {:error, cs} = DialectPouch.Regions.create_region(%{name: "x", level: :area, path: "jp..aomori"})
       assert errors_on(cs)[:path]
     end
 
     test "rejects uppercase and wildcard chars in label" do
       for bad <- ["JP", "jp.A", "jp.a%b", "jp.a_b", "jp.a b"] do
-        assert {:error, cs} = DialectPocket.Regions.create_region(%{name: "x", level: :area, path: bad})
+        assert {:error, cs} = DialectPouch.Regions.create_region(%{name: "x", level: :area, path: bad})
         assert errors_on(cs)[:path], "expected #{bad} to be rejected"
       end
     end
@@ -284,14 +284,14 @@ design.md:9,89,198 は **ltree + GiST** を明示指定。実装(`region.ex:19` 
       kago = create!(%{name: "鹿児島", level: :prefecture, path: "jp.kagoshima", parent_id: jp.id})
       # 親は kagoshima なのに path は aomori 配下 → 整合違反として弾きたい
       assert {:error, _cs} =
-               DialectPocket.Regions.create_region(%{name: "矛盾", level: :area, path: "jp.aomori.x", parent_id: kago.id})
+               DialectPouch.Regions.create_region(%{name: "矛盾", level: :area, path: "jp.aomori.x", parent_id: kago.id})
     end
   end
 
   describe "unique constraint surfaces as changeset error (not raised)" do
     test "duplicate path returns {:error, changeset}, never raises" do
       create!(%{name: "日本", level: :country, path: "jp"})
-      assert {:error, cs} = DialectPocket.Regions.create_region(%{name: "dup", level: :country, path: "jp"})
+      assert {:error, cs} = DialectPouch.Regions.create_region(%{name: "dup", level: :country, path: "jp"})
       assert errors_on(cs)[:path]
     end
   end

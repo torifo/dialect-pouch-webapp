@@ -1,24 +1,24 @@
 #!/usr/bin/env bash
-# dialect-pocket DB バックアップスクリプト
+# dialect-pouch DB バックアップスクリプト
 #
 # 本番 PostgreSQL コンテナから pg_dump を取り、gzip 圧縮してタイムスタンプ付きで保存する。
 # cron 等から定期実行する想定(単一ノード運用前提の定期バックアップ)。
 #
 # 例: 毎日 03:30 に実行する crontab エントリ
-#   30 3 * * * /path/to/dialect-pocket/deploy/backup.sh >> /var/log/dialect-pocket-backup.log 2>&1
+#   30 3 * * * /path/to/dialect-pouch/deploy/backup.sh >> /var/log/dialect-pouch-backup.log 2>&1
 #
 # 環境変数で上書き可能:
-#   DB_CONTAINER  バックアップ対象の DB コンテナ名(既定: dialect_pocket_db_prod)
+#   DB_CONTAINER  バックアップ対象の DB コンテナ名(既定: dialect_pouch_db_prod)
 #   DB_USER       接続ユーザー(既定: postgres)
-#   DB_NAME       データベース名(既定: dialect_pocket_prod)
+#   DB_NAME       データベース名(既定: dialect_pouch_prod)
 #   BACKUP_DIR    保存先ディレクトリ(既定: ./backups)
 #   RETENTION     保持世代数(既定: 14。これより古いものは削除)
 
 set -euo pipefail
 
-DB_CONTAINER="${DB_CONTAINER:-dialect_pocket_db_prod}"
+DB_CONTAINER="${DB_CONTAINER:-dialect_pouch_db_prod}"
 DB_USER="${DB_USER:-postgres}"
-DB_NAME="${DB_NAME:-dialect_pocket_prod}"
+DB_NAME="${DB_NAME:-dialect_pouch_prod}"
 BACKUP_DIR="${BACKUP_DIR:-./backups}"
 RETENTION="${RETENTION:-14}"
 
@@ -46,12 +46,12 @@ echo "==> done"
 
 # --- 復元手順(参考) ---
 # 1. 復元先 DB が空であること(必要なら drop/create):
-#      docker exec -i dialect_pocket_db_prod \
-#        psql -U postgres -c "DROP DATABASE IF EXISTS dialect_pocket_prod;"
-#      docker exec -i dialect_pocket_db_prod \
-#        psql -U postgres -c "CREATE DATABASE dialect_pocket_prod;"
+#      docker exec -i dialect_pouch_db_prod \
+#        psql -U postgres -c "DROP DATABASE IF EXISTS dialect_pouch_prod;"
+#      docker exec -i dialect_pouch_db_prod \
+#        psql -U postgres -c "CREATE DATABASE dialect_pouch_prod;"
 # 2. gzip を展開しながら psql に流し込む:
-#      gunzip -c backups/dialect_pocket_prod_YYYYMMDD_HHMMSS.sql.gz \
-#        | docker exec -i dialect_pocket_db_prod psql -U postgres dialect_pocket_prod
+#      gunzip -c backups/dialect_pouch_prod_YYYYMMDD_HHMMSS.sql.gz \
+#        | docker exec -i dialect_pouch_db_prod psql -U postgres dialect_pouch_prod
 #    ※ 拡張(postgis/pg_bigm/ltree)はダンプ内に CREATE EXTENSION が含まれるが、
 #      DB イメージは docker/postgres の pg_bigm 入りを使うこと。

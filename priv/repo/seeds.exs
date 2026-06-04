@@ -1,4 +1,4 @@
-# Seeds dialect-pocket from priv/seed_data/.
+# Seeds dialect-pouch from priv/seed_data/.
 #
 #     mix run priv/repo/seeds.exs
 #
@@ -9,9 +9,9 @@
 
 require Logger
 
-alias DialectPocket.{Dictionary, Regions}
+alias DialectPouch.{Dictionary, Regions}
 
-seed_dir = Path.join(:code.priv_dir(:dialect_pocket), "seed_data")
+seed_dir = Path.join(:code.priv_dir(:dialect_pouch), "seed_data")
 
 read_json = fn path -> path |> File.read!() |> Jason.decode!() end
 

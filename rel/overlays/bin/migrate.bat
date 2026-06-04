@@ -1,1 +1,1 @@
-call "%~dp0\dialect_pocket" eval DialectPocket.Release.migrate
+call "%~dp0\dialect_pouch" eval DialectPouch.Release.migrate

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# dialect-pocket dev toolchain setup (macOS / Homebrew / asdf)
+# dialect-pouch dev toolchain setup (macOS / Homebrew / asdf)
 # Installs Erlang + Elixir via asdf and the Phoenix project generator.
 # Erlang is compiled from source on first install (10-20 min).
 set -euo pipefail

@@ -23,7 +23,7 @@ erl_crash.dump
 /tmp/
 
 # Ignore package tarball (built via "mix hex.build").
-dialect_pocket-*.tar
+dialect_pouch-*.tar
 
 # Ignore assets that are produced by build tools.
 /priv/static/assets/
@@ -35,7 +35,7 @@ dialect_pocket-*.tar
 npm-debug.log
 /assets/node_modules/
 
-# dialect-pocket: OS / editor / secrets / language server
+# dialect-pouch: OS / editor / secrets / language server
 .DS_Store
 *.swp
 .idea/

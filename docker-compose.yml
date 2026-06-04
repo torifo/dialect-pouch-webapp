@@ -1,15 +1,15 @@
-# Dev dependencies for dialect-pocket.
+# Dev dependencies for dialect-pouch.
 # Elixir/Phoenix run on the host (asdf); only PostgreSQL runs in Docker.
 services:
   db:
     build:
       context: ./docker/postgres
-    image: dialect-pocket-postgres:16-bigm
-    container_name: dialect_pocket_db
+    image: dialect-pouch-postgres:16-bigm
+    container_name: dialect_pouch_db
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: dialect_pocket_dev
+      POSTGRES_DB: dialect_pouch_dev
     ports:
       - "5432:5432"
     volumes:

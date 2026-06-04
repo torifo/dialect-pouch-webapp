@@ -1,9 +1,9 @@
-defmodule DialectPocket.MixProject do
+defmodule DialectPouch.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :dialect_pocket,
+      app: :dialect_pouch,
       version: "0.1.0",
       elixir: "~> 1.15",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -20,7 +20,7 @@ defmodule DialectPocket.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {DialectPocket.Application, []},
+      mod: {DialectPouch.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -67,7 +67,7 @@ defmodule DialectPocket.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.2.0"},
       {:bandit, "~> 1.5"},
-      # dialect-pocket additions
+      # dialect-pouch additions
       {:oban, "~> 2.19"},
       {:geo_postgis, "~> 3.7"},
       {:hammer, "~> 7.0"}
@@ -87,10 +87,10 @@ defmodule DialectPocket.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["compile", "tailwind dialect_pocket", "esbuild dialect_pocket"],
+      "assets.build": ["compile", "tailwind dialect_pouch", "esbuild dialect_pouch"],
       "assets.deploy": [
-        "tailwind dialect_pocket --minify",
-        "esbuild dialect_pocket --minify",
+        "tailwind dialect_pouch --minify",
+        "esbuild dialect_pouch --minify",
         "phx.digest"
       ],
       precommit: ["compile --warnings-as-errors", "deps.unlock --unused", "format", "test"]

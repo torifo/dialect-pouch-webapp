@@ -1,4 +1,4 @@
-/* dialect-pocket — screen-specific styles */
+/* dialect-pouch — screen-specific styles */
 
 /* ---------- Page title ---------- */
 .page-title { font-size: var(--fs-2xl); font-weight: var(--fw-bold); color: var(--navy); margin: 0; line-height: var(--lh-tight); }

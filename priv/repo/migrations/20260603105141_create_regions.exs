@@ -1,4 +1,4 @@
-defmodule DialectPocket.Repo.Migrations.CreateRegions do
+defmodule DialectPouch.Repo.Migrations.CreateRegions do
   use Ecto.Migration
 
   def change do

@@ -1,4 +1,4 @@
-# dialect-pocket 【オンプレ(仮)】向け compose。
+# dialect-pouch 【オンプレ(仮)】向け compose。
 #
 # 方針(VPSとの違い): オンプレは接続先でのビルドを許可(例外)。共有proxyが無い前提で
 # 同梱の NGINX(deploy/nginx.conf)を前段に置き、イメージも接続先で build する。
@@ -7,7 +7,7 @@
 # 使い方(オンプレ host, リポジトリを clone した上で):
 #   1. SECRET_KEY_BASE 生成: mix phx.gen.secret
 #   2. .env を用意:
-#        APP_HOST=dialect-pocket.local
+#        APP_HOST=dialect-pouch.local
 #        POSTGRES_PASSWORD=...
 #        SECRET_KEY_BASE=...
 #   3. ビルド&起動(接続先でビルド):
@@ -19,19 +19,19 @@ services:
   db:
     build:
       context: ./docker/postgres
-    image: dialect-pocket-db:onprem
-    container_name: dialect_pocket_db_onprem
+    image: dialect-pouch-db:onprem
+    container_name: dialect_pouch_db_onprem
     restart: unless-stopped
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: dialect_pocket_prod
+      POSTGRES_DB: dialect_pouch_prod
     volumes:
       - pgdata_onprem:/var/lib/postgresql/data
     networks:
       - internal
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d dialect_pocket_prod"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d dialect_pouch_prod"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -39,16 +39,16 @@ services:
   app:
     build:
       context: .
-    image: dialect-pocket-web:onprem
-    container_name: dialect_pocket_app_onprem
+    image: dialect-pouch-web:onprem
+    container_name: dialect_pouch_app_onprem
     restart: unless-stopped
     depends_on:
       db:
         condition: service_healthy
     environment:
-      DATABASE_URL: "ecto://postgres:${POSTGRES_PASSWORD}@db/dialect_pocket_prod"
+      DATABASE_URL: "ecto://postgres:${POSTGRES_PASSWORD}@db/dialect_pouch_prod"
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
-      PHX_HOST: ${APP_HOST:-dialect-pocket.local}
+      PHX_HOST: ${APP_HOST:-dialect-pouch.local}
       PORT: "4000"
       POOL_SIZE: ${POOL_SIZE:-10}
     command: sh -c "/app/bin/migrate && /app/bin/server"
@@ -57,7 +57,7 @@ services:
 
   nginx:
     image: nginx:1.29-alpine
-    container_name: dialect_pocket_nginx_onprem
+    container_name: dialect_pouch_nginx_onprem
     restart: unless-stopped
     depends_on:
       - app

@@ -4,7 +4,7 @@
 @import "tailwindcss" source(none);
 @source "../css";
 @source "../js";
-@source "../../lib/dialect_pocket_web";
+@source "../../lib/dialect_pouch_web";
 
 /* A Tailwind plugin that makes "hero-#{ICON}" classes available.
    The heroicons installation itself is managed by your mix.exs */
@@ -104,7 +104,7 @@
 
 /* This file is for your main application CSS */
 
-/* ===== dialect-pocket design system (vendored from claude design) ===== */
+/* ===== dialect-pouch design system (vendored from claude design) ===== */
 /* ============================================================
    GENIEE SEARCH — Design Tokens (CSS)
    Source: 新営業資料_GENIEE_SEARCH_for_EC.pptx (46 slides)
@@ -293,7 +293,7 @@ body { font-feature-settings: var(--font-feature); -webkit-font-smoothing: antia
   font-size: var(--fs-4xl); font-weight: var(--fw-bold);
 }
 /* ============================================================
-   dialect-pocket — app styles
+   dialect-pouch — app styles
    Built on GENIEE SEARCH tokens (colors_and_type.css).
    Direction: navy authority (trust / provenance) softened a
    little for a consumer audience — generous whitespace, gentle
@@ -552,7 +552,7 @@ button { font-family: inherit; }
   .section { padding: 44px 0; }
   .wrap { padding: 0 18px; }
 }
-/* dialect-pocket — screen-specific styles */
+/* dialect-pouch — screen-specific styles */
 
 /* ---------- Page title ---------- */
 .page-title { font-size: var(--fs-2xl); font-weight: var(--fw-bold); color: var(--navy); margin: 0; line-height: var(--lh-tight); }

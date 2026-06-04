@@ -1,4 +1,4 @@
-defmodule DialectPocket.Repo.Migrations.CreateAdminsAuthTables do
+defmodule DialectPouch.Repo.Migrations.CreateAdminsAuthTables do
   use Ecto.Migration
 
   def change do

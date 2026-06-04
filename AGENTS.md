@@ -70,7 +70,7 @@ LiveViews that require login should **always be placed inside the __existing__ `
       pipe_through [:browser, :require_authenticated_admin]
 
       live_session :require_authenticated_admin,
-        on_mount: [{DialectPocketWeb.AdminAuth, :require_authenticated}] do
+        on_mount: [{DialectPouchWeb.AdminAuth, :require_authenticated}] do
         # phx.gen.auth generated routes
         live "/admins/settings", AdminLive.Settings, :edit
         live "/admins/settings/confirm-email/:token", AdminLive.Settings, :confirm_email
@@ -95,7 +95,7 @@ LiveViews that can work with or without authentication, **always use the __exist
       pipe_through [:browser]
 
       live_session :current_admin,
-        on_mount: [{DialectPocketWeb.AdminAuth, :mount_current_scope}] do
+        on_mount: [{DialectPouchWeb.AdminAuth, :mount_current_scope}] do
         # our own routes that work with or without authentication
         live "/", PublicLive
       end
