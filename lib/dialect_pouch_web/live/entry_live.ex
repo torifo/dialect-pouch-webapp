@@ -407,8 +407,11 @@ defmodule DialectPouchWeb.EntryLive do
     end
   end
 
+  @impl true
   def handle_event("report_remark", %{"id" => id}, socket) do
-    {:ok, _} = Feedback.report_remark(id)
+    # `id` is client-supplied; a stale/unknown id just no-ops with the same
+    # confirmation rather than crashing the LiveView.
+    Feedback.report_remark(id)
     {:noreply, put_flash(socket, :info, "通報しました。確認します。")}
   end
 

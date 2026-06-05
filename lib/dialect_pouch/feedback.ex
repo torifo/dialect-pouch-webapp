@@ -42,13 +42,21 @@ defmodule DialectPouch.Feedback do
     )
   end
 
-  @doc "Bump the report counter (detection受け皿). Returns `{:ok, remark}`."
+  @doc """
+  Bump the report counter (detection受け皿). `id` may be client-supplied, so a
+  missing remark is reported as `{:error, :not_found}` rather than raising.
+  Returns `{:ok, remark}` | `{:error, :not_found}`.
+  """
   def report_remark(id) do
-    remark = Repo.get!(Remark, id)
+    case Repo.get(Remark, id) do
+      nil ->
+        {:error, :not_found}
 
-    remark
-    |> Ecto.Changeset.change(report_count: remark.report_count + 1)
-    |> Repo.update()
+      remark ->
+        remark
+        |> Ecto.Changeset.change(report_count: remark.report_count + 1)
+        |> Repo.update()
+    end
   end
 
   @doc "Remarks that have been reported at least once (for curators)."
