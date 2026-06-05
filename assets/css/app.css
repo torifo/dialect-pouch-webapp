@@ -726,7 +726,9 @@ a.ext:hover { color: var(--navy-dark); text-decoration: underline; }
   border-radius: var(--radius-md); padding: 0 12px; background: #fff; }
 .select-wrap--block { display: flex; width: 100%; }
 .select { font-family: inherit; font-size: var(--fs-sm); border: none; background: none; padding: 12px 6px;
-  color: var(--ink); cursor: pointer; outline: none; width: 100%; }
+  color: var(--ink); cursor: pointer; outline: none; width: 100%;
+  /* neutralize daisyUI's .select component styles that clip a native <select> */
+  display: block; height: auto; appearance: auto; -webkit-appearance: auto; box-shadow: none; }
 
 /* ---------- CONVERT ---------- */
 .convert-none { background: var(--color-surface-subtle); border: 1px solid var(--hair); border-radius: var(--radius-md); padding: 20px 22px; }
