@@ -4,6 +4,7 @@ defmodule DialectPouchWeb.EntryLiveTest do
   import Phoenix.LiveViewTest
 
   alias DialectPouch.Dictionary
+  alias DialectPouch.Feedback
 
   defp pub!(overrides) do
     base = %{
@@ -54,5 +55,54 @@ defmodule DialectPouchWeb.EntryLiveTest do
 
   test "an unknown slug raises (404)", %{conn: conn} do
     assert_raise Ecto.NoResultsError, fn -> live(conn, ~p"/e/does-not-exist") end
+  end
+
+  test "submitting a remark shows it immediately", %{conn: conn} do
+    entry = published_entry_fixture()
+
+    {:ok, lv, _html} = live(conn, ~p"/e/#{entry.slug}")
+
+    lv
+    |> form("#remark-form", %{
+      "kind" => "obsolete",
+      "body" => "今はあまり使いません",
+      "nickname" => "どさんこ"
+    })
+    |> render_submit()
+
+    assert render(lv) =~ "今はあまり使いません"
+    assert render(lv) =~ "どさんこ"
+    assert [%{body: "今はあまり使いません"}] = Feedback.list_remarks(entry.id)
+  end
+
+  test "submitting a remark without a nickname shows an error", %{conn: conn} do
+    entry = published_entry_fixture()
+    {:ok, lv, _html} = live(conn, ~p"/e/#{entry.slug}")
+
+    html =
+      lv
+      |> form("#remark-form", %{"kind" => "meaning", "body" => "違う", "nickname" => ""})
+      |> render_submit()
+
+    assert html =~ "ニックネーム"
+    assert Feedback.list_remarks(entry.id) == []
+  end
+
+  defp published_entry_fixture do
+    {:ok, jp} = DialectPouch.Regions.create_region(%{name: "日本", level: :country, path: "jp"})
+
+    {:ok, entry} =
+      DialectPouch.Dictionary.create_entry(
+        %{
+          headword: "なまら",
+          slug: "なまら",
+          status: :published,
+          senses: [%{gloss: "とても", standard_lemma: "とても"}],
+          provenance: %{kind: :manual, reliability: :verified}
+        },
+        [jp.id]
+      )
+
+    entry
   end
 end
