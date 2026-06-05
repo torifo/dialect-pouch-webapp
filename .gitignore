@@ -43,9 +43,3 @@ npm-debug.log
 .elixir_ls/
 .env
 *.secret
-
-# 第三者サイト(hougen-pocket.site)由来のスクレイプ生成物。コミット/公開しない。
-# 取り込むなら出典明記の provenance 付きで(無出典の一括取り込み禁止)。
-/priv/seed_data/imports/
-/scripts/export_hougen_pocket_site.mjs
-
