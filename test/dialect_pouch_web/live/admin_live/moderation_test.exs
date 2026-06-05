@@ -3,7 +3,7 @@ defmodule DialectPouchWeb.AdminLive.ModerationTest do
 
   import Phoenix.LiveViewTest
 
-  alias DialectPouch.{Dictionary, Regions}
+  alias DialectPouch.{Dictionary, Regions, Feedback}
 
   defp draft! do
     {:ok, jp} = Regions.create_region(%{name: "日本", level: :country, path: "jp"})
@@ -66,5 +66,49 @@ defmodule DialectPouchWeb.AdminLive.ModerationTest do
       assert Dictionary.get_published_by_slug(e.slug) == nil
       assert Dictionary.get_entry!(e.id).status == :rejected
     end
+
+    test "lists reported remarks and can hide them", %{conn: conn} do
+      entry = published_entry_with_remark_fixture()
+      [remark] = Feedback.list_remarks(entry.id)
+      {:ok, _} = Feedback.report_remark(remark.id)
+
+      {:ok, lv, html} = live(conn, ~p"/admin/moderation")
+      assert html =~ "通報された指摘"
+      assert html =~ remark.body
+
+      lv |> element("#hide-remark-#{remark.id}") |> render_click()
+
+      assert Feedback.list_remarks(entry.id) == []
+    end
+  end
+
+  defp published_entry_with_remark_fixture do
+    {:ok, jp} = DialectPouch.Regions.create_region(%{name: "日本", level: :country, path: "jp"})
+
+    {:ok, entry} =
+      DialectPouch.Dictionary.create_entry(
+        %{
+          headword: "なまら",
+          slug: "なまら",
+          status: :published,
+          senses: [%{gloss: "とても", standard_lemma: "とても"}],
+          provenance: %{kind: :manual, reliability: :verified}
+        },
+        [jp.id]
+      )
+
+    {:ok, _} =
+      Feedback.create_remark(
+        %{
+          "entry_id" => entry.id,
+          "kind" => "meaning",
+          "body" => "違うと思います",
+          "author_kind" => "nickname",
+          "author_nickname" => "通報対象"
+        },
+        "mod-fix"
+      )
+
+    entry
   end
 end

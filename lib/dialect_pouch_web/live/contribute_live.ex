@@ -43,7 +43,7 @@ defmodule DialectPouchWeb.ContributeLive do
         >
           <h1 class="page-title">方言を投稿する</h1>
           <p class="help" style="margin-top: 6px;">
-            投稿は確認のうえ公開されます（公開まで未承認の状態で保存されます）。
+            ニックネームを入れた投稿はそのまま公開されます。匿名の場合は確認のうえ公開されます。
           </p>
 
           <div
@@ -52,7 +52,7 @@ defmodule DialectPouchWeb.ContributeLive do
             class="note note--ok"
             style="margin-top: 20px;"
           >
-            <.icon name="hero-check-circle" /> 投稿ありがとうございます。承認後に公開されます。
+            <.icon name="hero-check-circle" /> 投稿ありがとうございます。ニックネーム付きの投稿はそのまま公開されます。
           </div>
 
           <div
@@ -173,11 +173,11 @@ defmodule DialectPouchWeb.ContributeLive do
         <div class="m-pad">
           <h1 class="m-h2" style="font-size:22px">方言を投稿する</h1>
           <p class="m-help" style="margin-top:6px;margin-bottom:16px">
-            投稿は確認のうえ公開されます。
+            ニックネーム付きは即時公開、匿名は確認のうえ公開されます。
           </p>
 
           <div :if={@status == :ok} class="m-note m-note--ok">
-            <.icon name="hero-check-circle" class="size-4" /> 投稿ありがとうございます。承認後に公開されます。
+            <.icon name="hero-check-circle" class="size-4" /> 投稿ありがとうございます。ニックネーム付きの投稿はそのまま公開されます。
           </div>
           <div :if={@status == :rate_limited} class="m-note m-note--err">
             <.icon name="hero-exclamation-circle" class="size-4" /> 短時間に投稿が多すぎます。少し待ってからお試しください。

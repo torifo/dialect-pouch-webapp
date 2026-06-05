@@ -48,10 +48,12 @@ defmodule DialectPouch.Contributions do
         {:error, :invalid, [:region_path]}
 
       true ->
+        status = if blank?(nickname), do: :draft, else: :published
+
         %{
           headword: headword,
           reading: reading,
-          status: :draft,
+          status: status,
           slug: headword,
           senses: [%{gloss: meaning, standard_lemma: meaning}],
           examples: if(blank?(example), do: [], else: [%{text: example}]),

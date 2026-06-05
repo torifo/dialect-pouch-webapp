@@ -4,6 +4,7 @@ defmodule DialectPouchWeb.EntryLive do
   import DialectPouchWeb.ProvenanceComponents
 
   alias DialectPouch.Dictionary
+  alias DialectPouch.Feedback
 
   @impl true
   def mount(%{"slug" => slug}, _session, socket) do
@@ -13,10 +14,23 @@ defmodule DialectPouchWeb.EntryLive do
       raise Ecto.NoResultsError, queryable: DialectPouch.Dictionary.Entry
     end
 
+    rate_key =
+      if connected?(socket) do
+        case get_connect_info(socket, :peer_data) do
+          %{address: address} -> address |> :inet.ntoa() |> to_string()
+          _ -> "anon"
+        end
+      else
+        "anon"
+      end
+
     {:ok,
      socket
      |> assign(:entry, entry)
-     |> assign(:page_title, entry.headword)}
+     |> assign(:page_title, entry.headword)
+     |> assign(:rate_key, rate_key)
+     |> assign(:remark_error, nil)
+     |> assign(:remarks, Feedback.list_remarks(entry.id))}
   end
 
   @impl true
@@ -74,7 +88,7 @@ defmodule DialectPouchWeb.EntryLive do
           <div class="row" style="gap: 8px; margin-top: 14px; flex-wrap: wrap;">
             <span
               :for={er <- @entry.entry_regions}
-              id={"entry-region-#{er.region.name}"}
+              id={"entry-header-region-#{er.region.name}"}
               data-region-level={er.region.level}
               class="chip"
             >
@@ -134,6 +148,90 @@ defmodule DialectPouchWeb.EntryLive do
               </div>
             </li>
           </ul>
+        </section>
+
+        <%!-- Remarks (物申す) --%>
+        <section id="entry-remarks" aria-label="この言葉への声" class="dsec">
+          <h2 class="dsec__label">この言葉への声</h2>
+
+          <ul
+            :if={@remarks != []}
+            id="remark-list"
+            style="list-style:none;margin:0 0 18px;padding:0;display:grid;gap:10px;"
+          >
+            <li :for={r <- @remarks} id={"remark-#{r.id}"} class="card" style="padding:12px 14px;">
+              <div class="row" style="gap:8px;align-items:center;flex-wrap:wrap;">
+                <span class="badge badge--user">{remark_kind_label(r.kind)}</span>
+                <span class="tiny muted">— {r.author_nickname}</span>
+                <button
+                  type="button"
+                  phx-click="report_remark"
+                  phx-value-id={r.id}
+                  data-confirm="この投稿を通報しますか？"
+                  class="tiny muted"
+                  style="margin-left:auto;background:none;border:none;cursor:pointer;"
+                >
+                  通報
+                </button>
+              </div>
+              <p style="margin:6px 0 0;">{r.body}</p>
+            </li>
+          </ul>
+
+          <p :if={@remarks == []} class="muted tiny" style="margin:0 0 14px;">
+            まだ声はありません。違いや今の言い方があれば教えてください。
+          </p>
+
+          <div
+            :if={@remark_error}
+            id="remark-error"
+            class="note note--err"
+            style="margin-bottom:12px;"
+          >
+            <.icon name="hero-exclamation-circle" /> {@remark_error}
+          </div>
+
+          <form id="remark-form" phx-submit="submit_remark" class="form-card card">
+            <div class="form-2col">
+              <div class="fieldset">
+                <label class="label" for="remark-kind">種別</label>
+                <div class="select-wrap select-wrap--block">
+                  <select id="remark-kind" name="kind" class="select">
+                    <option :for={{label, value} <- remark_kind_options()} value={value}>
+                      {label}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="fieldset">
+                <label class="label" for="remark-nickname">
+                  ニックネーム<span class="req">*</span>
+                </label>
+                <input
+                  id="remark-nickname"
+                  name="nickname"
+                  class="field"
+                  placeholder="匿名では送れません"
+                />
+              </div>
+            </div>
+            <div class="fieldset">
+              <label class="label" for="remark-body">コメント<span class="req">*</span></label>
+              <textarea
+                id="remark-body"
+                name="body"
+                class="field"
+                rows="3"
+                placeholder="例: 今はあまり使いません / 意味は「すごく」に近いです"
+              ></textarea>
+            </div>
+            <div class="form-foot">
+              <p class="tiny muted">ニックネーム付きで即時に公開されます。</p>
+              <button type="submit" class="btn btn--primary">
+                <.icon name="hero-chat-bubble-left-right" /> 物申す
+              </button>
+            </div>
+          </form>
         </section>
 
         <%!-- Regions --%>
@@ -224,15 +322,118 @@ defmodule DialectPouchWeb.EntryLive do
             <p class="m-dsec__label">出典 / provenance</p>
             <.provenance_badge provenance={@entry.provenance} />
           </div>
+
+          <section id="m-entry-remarks" style="margin-top:24px;">
+            <h2 class="m-h2" style="font-size:18px;">この言葉への声</h2>
+
+            <ul
+              :if={@remarks != []}
+              style="list-style:none;margin:10px 0 14px;padding:0;display:grid;gap:8px;"
+            >
+              <li :for={r <- @remarks} id={"m-remark-#{r.id}"} class="m-note" style="display:block;">
+                <div class="row" style="gap:6px;align-items:center;flex-wrap:wrap;">
+                  <span class="m-badge m-badge--user">{remark_kind_label(r.kind)}</span>
+                  <span class="tiny muted">— {r.author_nickname}</span>
+                  <button
+                    type="button"
+                    phx-click="report_remark"
+                    phx-value-id={r.id}
+                    data-confirm="この投稿を通報しますか？"
+                    class="tiny muted"
+                    style="margin-left:auto;background:none;border:none;"
+                  >
+                    通報
+                  </button>
+                </div>
+                <p style="margin:6px 0 0;">{r.body}</p>
+              </li>
+            </ul>
+
+            <div :if={@remark_error} class="m-note m-note--err">
+              <.icon name="hero-exclamation-circle" class="size-4" /> {@remark_error}
+            </div>
+
+            <form id="m-remark-form" phx-submit="submit_remark">
+              <div class="m-fieldset">
+                <label class="m-label">種別</label>
+                <div class="m-selectwrap">
+                  <select class="m-select" name="kind">
+                    <option :for={{label, value} <- remark_kind_options()} value={value}>{label}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="m-fieldset">
+                <label class="m-label">ニックネーム<span class="m-req">*</span></label>
+                <input class="m-field" name="nickname" placeholder="匿名では送れません" />
+              </div>
+              <div class="m-fieldset">
+                <label class="m-label">コメント<span class="m-req">*</span></label>
+                <textarea class="m-field" name="body" rows="3" placeholder="例: 今はあまり使いません"></textarea>
+              </div>
+              <button type="submit" class="m-btn m-btn--primary">
+                <.icon name="hero-chat-bubble-left-right" class="size-4" /> 物申す
+              </button>
+            </form>
+          </section>
         </div>
       </div>
     </Layouts.app>
     """
   end
 
+  @impl true
+  def handle_event("submit_remark", params, socket) do
+    attrs = %{
+      "entry_id" => socket.assigns.entry.id,
+      "kind" => params["kind"],
+      "body" => params["body"],
+      "author_kind" => "nickname",
+      "author_nickname" => params["nickname"]
+    }
+
+    case Feedback.create_remark(attrs, socket.assigns.rate_key) do
+      {:ok, _remark} ->
+        {:noreply,
+         socket
+         |> assign(:remark_error, nil)
+         |> assign(:remarks, Feedback.list_remarks(socket.assigns.entry.id))}
+
+      {:error, :rate_limited} ->
+        {:noreply, assign(socket, :remark_error, "短時間に送信が多すぎます。少し待ってからお試しください。")}
+
+      {:error, _changeset} ->
+        {:noreply,
+         assign(socket, :remark_error, "ニックネームとコメントを入力してください（匿名では送れません）。")}
+    end
+  end
+
+  @impl true
+  def handle_event("report_remark", %{"id" => id}, socket) do
+    # `id` is client-supplied; a stale/unknown id just no-ops with the same
+    # confirmation rather than crashing the LiveView.
+    Feedback.report_remark(id)
+    {:noreply, put_flash(socket, :info, "通報しました。確認します。")}
+  end
+
   # ---------------------------------------------------------------------------
   # Private helpers
   # ---------------------------------------------------------------------------
+
+  defp remark_kind_options do
+    [
+      {"意味が違う", "meaning"},
+      {"読みが違う", "reading"},
+      {"地域が違う", "region"},
+      {"もう使わない", "obsolete"},
+      {"その他", "other"}
+    ]
+  end
+
+  defp remark_kind_label(:meaning), do: "意味が違う"
+  defp remark_kind_label(:reading), do: "読みが違う"
+  defp remark_kind_label(:region), do: "地域が違う"
+  defp remark_kind_label(:obsolete), do: "もう使わない"
+  defp remark_kind_label(:other), do: "その他"
 
   defp json_ld(entry) do
     description =
