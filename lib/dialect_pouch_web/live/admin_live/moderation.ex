@@ -7,13 +7,15 @@ defmodule DialectPouchWeb.AdminLive.Moderation do
   use DialectPouchWeb, :live_view
 
   alias DialectPouch.Dictionary
+  alias DialectPouch.Feedback
 
   @impl true
   def mount(_params, _session, socket) do
     {:ok,
      socket
      |> assign(:page_title, "モデレーション")
-     |> assign(:pending, Dictionary.list_pending())}
+     |> assign(:pending, Dictionary.list_pending())
+     |> assign(:reported, Feedback.list_reported())}
   end
 
   @impl true
@@ -27,7 +29,21 @@ defmodule DialectPouchWeb.AdminLive.Moderation do
     {:noreply, socket |> put_flash(:info, "却下しました（非公開のまま保持）") |> reload()}
   end
 
-  defp reload(socket), do: assign(socket, :pending, Dictionary.list_pending())
+  def handle_event("hide_remark", %{"id" => id}, socket) do
+    {:ok, _} = Feedback.hide_remark(id)
+    {:noreply, socket |> put_flash(:info, "指摘を非表示にしました") |> reload()}
+  end
+
+  def handle_event("unhide_remark", %{"id" => id}, socket) do
+    {:ok, _} = Feedback.unhide_remark(id)
+    {:noreply, socket |> put_flash(:info, "指摘を再表示しました") |> reload()}
+  end
+
+  defp reload(socket) do
+    socket
+    |> assign(:pending, Dictionary.list_pending())
+    |> assign(:reported, Feedback.list_reported())
+  end
 
   @impl true
   def render(assigns) do
@@ -89,6 +105,48 @@ defmodule DialectPouchWeb.AdminLive.Moderation do
                 class="btn btn--ghost"
               >
                 却下
+              </button>
+            </div>
+          </li>
+        </ul>
+
+        <h2 class="page-title" style="margin-top:40px;font-size:20px;">通報された指摘</h2>
+        <p class="help" style="margin-top:6px">
+          通報のあったユーザー指摘です。問題があれば非表示にできます（削除はしません）。
+        </p>
+
+        <p :if={@reported == []} class="empty muted" style="margin-top:16px">
+          通報された指摘はありません。
+        </p>
+
+        <ul style="list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px;">
+          <li :for={r <- @reported} id={"reported-#{r.id}"} class="card" style="padding:14px 16px;">
+            <div class="row" style="gap:8px;align-items:center;flex-wrap:wrap;">
+              <span class="badge badge--user">{r.kind}</span>
+              <span class="tiny muted">— {r.author_nickname}</span>
+              <span class="tiny muted">通報 {r.report_count} 件</span>
+              <span class="tiny muted">/ {r.entry && r.entry.headword}</span>
+            </div>
+            <p style="margin:6px 0 8px;">{r.body}</p>
+            <div class="row" style="gap:8px;">
+              <button
+                :if={r.status == :visible}
+                id={"hide-remark-#{r.id}"}
+                phx-click="hide_remark"
+                phx-value-id={r.id}
+                data-confirm="この指摘を非表示にしますか？"
+                class="btn btn--ghost"
+              >
+                非表示にする
+              </button>
+              <button
+                :if={r.status == :hidden}
+                id={"unhide-remark-#{r.id}"}
+                phx-click="unhide_remark"
+                phx-value-id={r.id}
+                class="btn btn--ghost"
+              >
+                再表示する
               </button>
             </div>
           </li>
