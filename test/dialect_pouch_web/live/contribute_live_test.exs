@@ -25,7 +25,7 @@ defmodule DialectPouchWeb.ContributeLiveTest do
     assert html =~ "見出し語"
   end
 
-  test "a valid submission is saved as a draft and shows success", %{conn: conn} do
+  test "a valid submission with nickname is published immediately and shows success", %{conn: conn} do
     setup_region()
     {:ok, lv, _html} = live(conn, ~p"/contribute")
 
@@ -42,7 +42,7 @@ defmodule DialectPouchWeb.ContributeLiveTest do
       |> render_submit()
 
     assert html =~ "contribute-success"
-    assert Dictionary.count_published() == 0
+    assert Dictionary.count_published() == 1
     assert DialectPouch.Repo.aggregate(Dictionary.Entry, :count) == 1
   end
 

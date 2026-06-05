@@ -32,15 +32,22 @@ defmodule DialectPouch.ContributionsTest do
     )
   end
 
-  test "saves a valid submission as an unpublished :user entry" do
+  test "publishes immediately when a nickname (素性) is present" do
     assert {:ok, %Entry{} = entry} = Contributions.create_submission(valid(), "k-ok")
-    assert entry.status == :draft
+    assert entry.status == :published
 
     loaded = DialectPouch.Dictionary.get_by_slug_admin(entry.slug)
     assert loaded.provenance.kind == :user
     assert loaded.provenance.observed_author == "どさんこ"
     assert [%{region: %{path: "jp.hokkaido"}}] = loaded.entry_regions
-    # not public until approved
+    # public right away
+    assert DialectPouch.Dictionary.get_published_by_slug(entry.slug)
+  end
+
+  test "saves as :draft when anonymous (no nickname)" do
+    attrs = valid(%{"nickname" => ""})
+    assert {:ok, %Entry{} = entry} = Contributions.create_submission(attrs, "k-anon")
+    assert entry.status == :draft
     assert DialectPouch.Dictionary.get_published_by_slug(entry.slug) == nil
   end
 
