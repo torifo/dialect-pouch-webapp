@@ -8,6 +8,7 @@ defmodule DialectPouch.Dictionary.Entry do
   import Ecto.Changeset
 
   alias DialectPouch.Dictionary.{Sense, Example, Provenance, EntryRegion}
+  alias DialectPouch.Feedback.Remark
 
   @statuses [:draft, :published, :rejected]
 
@@ -22,6 +23,7 @@ defmodule DialectPouch.Dictionary.Entry do
     has_many :examples, Example
     has_many :entry_regions, EntryRegion
     has_one :provenance, Provenance
+    has_many :remarks, Remark
 
     timestamps(type: :utc_datetime)
   end
