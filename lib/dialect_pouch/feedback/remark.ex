@@ -30,16 +30,17 @@ defmodule DialectPouch.Feedback.Remark do
   @doc false
   def changeset(remark, attrs) do
     remark
+    # `status` and `report_count` are NOT cast: they are moderation state, set
+    # only via Feedback.hide_remark/report_remark — never by the public create
+    # path. Their schema defaults (:visible / 0) apply on insert.
     |> cast(attrs, [
       :entry_id,
       :kind,
       :body,
       :author_nickname,
-      :author_kind,
-      :status,
-      :report_count
+      :author_kind
     ])
-    |> validate_required([:entry_id, :kind, :body, :author_kind, :status])
+    |> validate_required([:entry_id, :kind, :body, :author_kind])
     |> validate_nickname_present()
     |> assoc_constraint(:entry)
   end
