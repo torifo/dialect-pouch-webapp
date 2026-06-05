@@ -1,0 +1,17 @@
+{
+  "region_path": "jp.osaka",
+  "region_name": "大阪",
+  "prefecture": "大阪府",
+  "source": {
+    "platform": "OSAKA INFO",
+    "url": "https://osaka-info.jp/osaka/basic/osaka-dialect/",
+    "license": "著作権制限あり・リンク原則可",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-04"
+  },
+  "entries": [
+    {"headword": "まいど", "reading": "まいど", "meaning": "商人・営業の挨拶", "example": ""},
+    {"headword": "なんぼ", "reading": "なんぼ", "meaning": "いくら・値段はいくらか", "example": ""}
+  ]
+}

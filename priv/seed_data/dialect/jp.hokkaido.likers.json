@@ -1,0 +1,23 @@
+{
+  "region_path": "jp.hokkaido",
+  "region_name": "北海道",
+  "prefecture": "北海道",
+  "source": {
+    "platform": "北海道Likers",
+    "url": "https://hokkaidolikers.com/archives/41709",
+    "license": "©北海道Likers All Rights Reserved",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-04"
+  },
+  "entries": [
+    {"headword": "しゃっこい", "reading": "しゃっこい", "meaning": "冷たい", "example": ""},
+    {"headword": "うるかす", "reading": "うるかす", "meaning": "水に浸してふやかす", "example": ""},
+    {"headword": "おっちゃんこ", "reading": "おっちゃんこ", "meaning": "座る", "example": ""},
+    {"headword": "げっぱ", "reading": "げっぱ", "meaning": "最下位・ビリ", "example": ""},
+    {"headword": "じょっぴんかる", "reading": "じょっぴんかる", "meaning": "鍵をかける・戸締まりする", "example": ""},
+    {"headword": "つっぺ", "reading": "つっぺ", "meaning": "栓", "example": ""},
+    {"headword": "ばくる", "reading": "ばくる", "meaning": "交換する", "example": ""},
+    {"headword": "ぼっこ", "reading": "ぼっこ", "meaning": "棒・短めの棒", "example": ""}
+  ]
+}

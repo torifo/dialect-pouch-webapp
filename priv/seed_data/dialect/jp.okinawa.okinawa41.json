@@ -1,0 +1,32 @@
+{
+  "region_path": "jp.okinawa",
+  "region_name": "沖縄",
+  "prefecture": "沖縄県",
+  "source": {
+    "platform": "OKINAWA41",
+    "url": "https://www.okinawa41.go.jp/dialect",
+    "license": "©OKINAWA41 All Rights Reserved",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-04"
+  },
+  "entries": [
+    {"headword": "またやーたい", "reading": "またやーたい", "meaning": "また会いましょう", "example": ""},
+    {"headword": "まかちょーけー", "reading": "まかちょーけー", "meaning": "任せてくださいね", "example": ""},
+    {"headword": "ちゅら", "reading": "ちゅら", "meaning": "美しい", "example": ""},
+    {"headword": "ちゃーがんじゅうねー", "reading": "ちゃーがんじゅうねー", "meaning": "元気にしてた？", "example": ""},
+    {"headword": "ちむどんどん", "reading": "ちむどんどん", "meaning": "胸がどきどきする", "example": ""},
+    {"headword": "ちばりよー", "reading": "ちばりよー", "meaning": "がんばれ", "example": ""},
+    {"headword": "うきみそーちー", "reading": "うきみそーちー", "meaning": "おはようございます", "example": ""},
+    {"headword": "うーとーとー", "reading": "うーとーとー", "meaning": "神仏・先祖を拝む際に唱えることば", "example": ""},
+    {"headword": "あんじー", "reading": "あんじー", "meaning": "相づち・そうなの？", "example": ""},
+    {"headword": "まーさん", "reading": "まーさん", "meaning": "美味しい", "example": ""},
+    {"headword": "ぬーそーがー", "reading": "ぬーそーがー", "meaning": "何してる？", "example": ""},
+    {"headword": "ちーちーかーかー", "reading": "ちーちーかーかー", "meaning": "パサパサする", "example": ""},
+    {"headword": "あちこうこう", "reading": "あちこうこう", "meaning": "熱い・ほかほか", "example": ""},
+    {"headword": "あがいたんでぃ", "reading": "あがいたんでぃ", "meaning": "あらまあ", "example": ""},
+    {"headword": "くわっちーさびら", "reading": "くわっちーさびら", "meaning": "いただきます", "example": ""},
+    {"headword": "なんくるないさー", "reading": "なんくるないさー", "meaning": "なんとかなるさ", "example": ""},
+    {"headword": "いちゃりばちょーでー", "reading": "いちゃりばちょーでー", "meaning": "一度会ったら兄弟", "example": ""}
+  ]
+}

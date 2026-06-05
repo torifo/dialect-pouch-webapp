@@ -1,0 +1,25 @@
+{
+  "region_path": "jp.hokkaido",
+  "region_name": "北海道",
+  "prefecture": "北海道",
+  "source": {
+    "platform": "北海道方言・北海道弁辞典",
+    "url": "https://hokkaido-hougen.com/",
+    "license": "All Rights Reserved",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-04"
+  },
+  "entries": [
+    {"headword": "るいべ", "reading": "るいべ", "meaning": "鮭を凍らせたもの", "example": ""},
+    {"headword": "ごめ", "reading": "ごめ", "meaning": "かもめ", "example": ""},
+    {"headword": "べご", "reading": "べご", "meaning": "牛", "example": ""},
+    {"headword": "あが", "reading": "あが", "meaning": "赤ん坊", "example": ""},
+    {"headword": "あじゃ", "reading": "あじゃ", "meaning": "母", "example": ""},
+    {"headword": "あっぱ", "reading": "あっぱ", "meaning": "かあさん", "example": ""},
+    {"headword": "おとんぼ", "reading": "おとんぼ", "meaning": "末っ子", "example": ""},
+    {"headword": "じゃっぱじる", "reading": "じゃっぱじる", "meaning": "雑魚を入れた塩汁", "example": ""},
+    {"headword": "がこ", "reading": "がこ", "meaning": "漬物", "example": ""},
+    {"headword": "あぶらこ", "reading": "あぶらこ", "meaning": "アイナメ", "example": ""}
+  ]
+}

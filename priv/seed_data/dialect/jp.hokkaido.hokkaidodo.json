@@ -1,0 +1,23 @@
+{
+  "region_path": "jp.hokkaido",
+  "region_name": "北海道",
+  "prefecture": "北海道",
+  "source": {
+    "platform": "HokkaidoDo",
+    "url": "https://hokkaidodo.jp/dialect/",
+    "license": "明示オープンライセンスなし",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-04"
+  },
+  "entries": [
+    {"headword": "あおたん", "reading": "あおたん", "meaning": "あざ", "example": ""},
+    {"headword": "あきあじ", "reading": "あきあじ", "meaning": "鮭", "example": ""},
+    {"headword": "あずる", "reading": "あずる", "meaning": "冬道で車がスリップして動かない・焦る", "example": ""},
+    {"headword": "がす", "reading": "がす", "meaning": "霧", "example": ""},
+    {"headword": "かまかす", "reading": "かまかす", "meaning": "かきまぜる", "example": ""},
+    {"headword": "ごしょいも", "reading": "ごしょいも", "meaning": "じゃがいも", "example": ""},
+    {"headword": "ゆきはね", "reading": "ゆきはね", "meaning": "除雪", "example": ""},
+    {"headword": "りらびえ", "reading": "りらびえ", "meaning": "リラが咲くころの寒さ", "example": ""}
+  ]
+}

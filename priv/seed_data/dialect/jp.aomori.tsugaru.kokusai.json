@@ -1,0 +1,25 @@
+{
+  "region_path": "jp.aomori.tsugaru",
+  "region_name": "津軽",
+  "prefecture": "青森県",
+  "source": {
+    "platform": "青森県観光国際交流機構",
+    "url": "https://www.kokusai-koryu.jp/seikatujyouhou/seikatujyouhou-2371/",
+    "license": "明示オープンライセンスなし",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-04"
+  },
+  "entries": [
+    {"headword": "わ", "reading": "わ", "meaning": "私・僕", "example": ""},
+    {"headword": "な", "reading": "な", "meaning": "あなた", "example": ""},
+    {"headword": "おど", "reading": "おど", "meaning": "お父さん", "example": ""},
+    {"headword": "じっこ", "reading": "じっこ", "meaning": "おじいさん", "example": ""},
+    {"headword": "ばっこ", "reading": "ばっこ", "meaning": "おばあさん", "example": ""},
+    {"headword": "わらし", "reading": "わらし", "meaning": "子供", "example": ""},
+    {"headword": "けやぐ", "reading": "けやぐ", "meaning": "友達", "example": ""},
+    {"headword": "じゃんぼ", "reading": "じゃんぼ", "meaning": "髪の毛", "example": ""},
+    {"headword": "まなぐ", "reading": "まなぐ", "meaning": "目", "example": ""},
+    {"headword": "へっちょ", "reading": "へっちょ", "meaning": "へそ", "example": ""}
+  ]
+}

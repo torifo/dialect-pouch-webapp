@@ -7,6 +7,8 @@
   "regions": [
     {"path": "jp", "name": "日本", "level": "country", "parent_path": null},
 
+    {"path": "jp.kansai", "name": "関西", "level": "area", "parent_path": "jp"},
+
     {"path": "jp.hokkaido", "name": "北海道", "level": "prefecture", "parent_path": "jp"},
     {"path": "jp.aomori", "name": "青森県", "level": "prefecture", "parent_path": "jp"},
     {"path": "jp.akita", "name": "秋田県", "level": "prefecture", "parent_path": "jp"},

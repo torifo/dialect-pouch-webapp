@@ -1,0 +1,19 @@
+{
+  "region_path": "jp.aomori.tsugaru",
+  "region_name": "津軽",
+  "prefecture": "青森県",
+  "source": {
+    "platform": "つがる市",
+    "url": "https://www.city.tsugaru.aomori.jp/material/files/group/41/tsugaru_ziten06.pdf",
+    "license": "明示オープンライセンスなし",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-04"
+  },
+  "entries": [
+    {"headword": "か", "reading": "か", "meaning": "どうぞ・召し上がって", "example": ""},
+    {"headword": "け", "reading": "け", "meaning": "どうぞ・召し上がって", "example": ""},
+    {"headword": "く", "reading": "く", "meaning": "いただきます", "example": ""},
+    {"headword": "つがる", "reading": "つがる", "meaning": "空返事をする", "example": ""}
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "region_path": "jp.okinawa",
+  "region_name": "沖縄",
+  "prefecture": "沖縄県",
+  "source": {
+    "platform": "沖縄方言辞典 あじまぁ",
+    "url": "https://hougen.ajima.jp/category/conversation/greetings/",
+    "license": "明示CCなし・リンクフリー・©あじまぁ沖縄",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-04"
+  },
+  "entries": [
+    {"headword": "あちさいびーんやー", "reading": "あちさいびーんやー", "meaning": "暑いですね", "example": ""},
+    {"headword": "いい そーぐゎち でーびる", "reading": "いい そーぐゎち でーびる", "meaning": "明けましておめでとうございます", "example": ""},
+    {"headword": "いみそーれ", "reading": "いみそーれ", "meaning": "お入りください", "example": ""},
+    {"headword": "うさがみそーれー", "reading": "うさがみそーれー", "meaning": "お召し上がりください", "example": ""},
+    {"headword": "うにげーさびら", "reading": "うにげーさびら", "meaning": "お願いします", "example": ""},
+    {"headword": "かりーさびら", "reading": "かりーさびら", "meaning": "乾杯", "example": ""},
+    {"headword": "くわっちーさびたん", "reading": "くわっちーさびたん", "meaning": "ごちそうさま", "example": ""},
+    {"headword": "ぐすーよー", "reading": "ぐすーよー", "meaning": "皆さん", "example": ""},
+    {"headword": "ぐぶりーさびら", "reading": "ぐぶりーさびら", "meaning": "失礼します", "example": ""},
+    {"headword": "ちゃーびらさい", "reading": "ちゃーびらさい", "meaning": "ごめんください", "example": ""},
+    {"headword": "ちゅーうがまびら", "reading": "ちゅーうがまびら", "meaning": "こんにちは", "example": ""},
+    {"headword": "にふぇーでーびる", "reading": "にふぇーでーびる", "meaning": "ありがとうございます", "example": ""},
+    {"headword": "にふぇーでーびたん", "reading": "にふぇーでーびたん", "meaning": "ありがとうございました", "example": ""},
+    {"headword": "にんじみそーれー", "reading": "にんじみそーれー", "meaning": "おやすみなさい", "example": ""},
+    {"headword": "はいさい", "reading": "はいさい", "meaning": "やあ", "example": ""},
+    {"headword": "はじみてぃやーさい", "reading": "はじみてぃやーさい", "meaning": "はじめまして", "example": ""},
+    {"headword": "ひーさいびーんやー", "reading": "ひーさいびーんやー", "meaning": "寒いですね", "example": ""},
+    {"headword": "またやーさい", "reading": "またやーさい", "meaning": "またね", "example": ""},
+    {"headword": "まーかいめんせーが", "reading": "まーかいめんせーが", "meaning": "どちらへおでかけですか", "example": ""},
+    {"headword": "ゆくいみそーれー", "reading": "ゆくいみそーれー", "meaning": "ひと休みなさいませ", "example": ""},
+    {"headword": "ゆたしく", "reading": "ゆたしく", "meaning": "よろしく", "example": ""},
+    {"headword": "わっさいびーん", "reading": "わっさいびーん", "meaning": "ごめんなさい", "example": ""},
+    {"headword": "んじちゃーびら", "reading": "んじちゃーびら", "meaning": "さよなら", "example": ""},
+    {"headword": "んじめんそーれー", "reading": "んじめんそーれー", "meaning": "いってらっしゃい", "example": ""},
+    {"headword": "んみゃーち", "reading": "んみゃーち", "meaning": "いらっしゃい・ようこそ", "example": ""},
+    {"headword": "おーりとーり", "reading": "おーりとーり", "meaning": "いらっしゃい・ようこそ", "example": ""}
+  ]
+}

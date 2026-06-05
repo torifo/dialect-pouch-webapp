@@ -1,0 +1,31 @@
+{
+  "region_path": "jp.kyoto",
+  "region_name": "京都",
+  "prefecture": "京都府",
+  "source": {
+    "platform": "京都民報・方言ドットコム等",
+    "url": "https://www.kyoto-minpo.net/html/naruhodo-kyoto/kotoba/index.html",
+    "license": "明示オープンライセンスなし",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-04"
+  },
+  "entries": [
+    {"headword": "あがる", "reading": "あがる", "meaning": "京都市内で北へ行く", "example": ""},
+    {"headword": "あじない", "reading": "あじない", "meaning": "食べ物がおいしくない", "example": ""},
+    {"headword": "あて", "reading": "あて", "meaning": "私", "example": ""},
+    {"headword": "いか", "reading": "いか", "meaning": "凧", "example": ""},
+    {"headword": "いきし", "reading": "いきし", "meaning": "行きがけ", "example": ""},
+    {"headword": "いちびる", "reading": "いちびる", "meaning": "調子に乗ってふざける", "example": ""},
+    {"headword": "いらう", "reading": "いらう", "meaning": "触る・いじる", "example": ""},
+    {"headword": "おいど", "reading": "おいど", "meaning": "おしり", "example": ""},
+    {"headword": "おいでやす", "reading": "おいでやす", "meaning": "いらっしゃい", "example": ""},
+    {"headword": "かなん", "reading": "かなん", "meaning": "いやだ・困る", "example": ""},
+    {"headword": "きばる", "reading": "きばる", "meaning": "がんばる・奮闘する", "example": ""},
+    {"headword": "ぐつわるい", "reading": "ぐつわるい", "meaning": "都合が悪い", "example": ""},
+    {"headword": "けなるい", "reading": "けなるい", "meaning": "うらやましい", "example": ""},
+    {"headword": "しまつする", "reading": "しまつする", "meaning": "節約する・倹約する", "example": ""},
+    {"headword": "しんきくさい", "reading": "しんきくさい", "meaning": "もどかしい・じれったい", "example": ""},
+    {"headword": "だんない", "reading": "だんない", "meaning": "差し支えない・大丈夫", "example": ""}
+  ]
+}

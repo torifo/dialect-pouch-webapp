@@ -1,0 +1,32 @@
+{
+  "region_path": "jp.hyogo.banshu",
+  "region_name": "播州",
+  "prefecture": "兵庫県",
+  "source": {
+    "platform": "播州弁辞典",
+    "url": "https://www.bansyuuben.jp/",
+    "license": "明示オープンライセンスなし",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-04"
+  },
+  "entries": [
+    {"headword": "あいさ", "reading": "あいさ", "meaning": "時々・途中・あいだ", "example": ""},
+    {"headword": "あいまこいま", "reading": "あいまこいま", "meaning": "あいだあいだ・要所要所", "example": ""},
+    {"headword": "うっとこ", "reading": "うっとこ", "meaning": "私の家・我が家", "example": ""},
+    {"headword": "うろがくる", "reading": "うろがくる", "meaning": "うろたえる", "example": ""},
+    {"headword": "おしたる", "reading": "おしたる", "meaning": "教える・教えてあげる", "example": ""},
+    {"headword": "おじゃみ", "reading": "おじゃみ", "meaning": "お手玉", "example": ""},
+    {"headword": "おってかー", "reading": "おってかー", "meaning": "いらっしゃいますか・在宅ですか", "example": ""},
+    {"headword": "おとろし", "reading": "おとろし", "meaning": "怖い・恐ろしい", "example": ""},
+    {"headword": "かえこと", "reading": "かえこと", "meaning": "交換・取り替え", "example": ""},
+    {"headword": "がさつい", "reading": "がさつい", "meaning": "あつかましい・乱雑・乱暴", "example": ""},
+    {"headword": "きづつない", "reading": "きづつない", "meaning": "気詰まり・恐縮・気が重い", "example": ""},
+    {"headword": "ごーわく", "reading": "ごーわく", "meaning": "腹が立つ・むかつく", "example": ""},
+    {"headword": "ごじゃ", "reading": "ごじゃ", "meaning": "無茶・無理・嘘・はったり", "example": ""},
+    {"headword": "さっちょこ", "reading": "さっちょこ", "meaning": "逆立ち", "example": ""},
+    {"headword": "さらっぴん", "reading": "さらっぴん", "meaning": "新品", "example": ""},
+    {"headword": "べっちょない", "reading": "べっちょない", "meaning": "大丈夫・問題ない", "example": ""},
+    {"headword": "めげる", "reading": "めげる", "meaning": "壊れる・故障する", "example": ""}
+  ]
+}

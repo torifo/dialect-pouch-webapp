@@ -1,0 +1,24 @@
+{
+  "region_path": "jp.aomori.tsugaru",
+  "region_name": "津軽",
+  "prefecture": "青森県",
+  "source": {
+    "platform": "黒石観光協会",
+    "url": "https://kuroishi.or.jp/about-2/welcome_jun/tugaruben/action",
+    "license": "無断転載・再利用不可 / All Rights Reserved",
+    "kind": "community",
+    "reliability": "unverified",
+    "observed_at": "2026-06-04"
+  },
+  "entries": [
+    {"headword": "あさぐ", "reading": "あさぐ", "meaning": "歩く", "example": ""},
+    {"headword": "おたる", "reading": "おたる", "meaning": "疲れてしまう", "example": ""},
+    {"headword": "かだる", "reading": "かだる", "meaning": "参加する", "example": ""},
+    {"headword": "こちょがす", "reading": "こちょがす", "meaning": "くすぐる", "example": ""},
+    {"headword": "ねっぱる", "reading": "ねっぱる", "meaning": "くっつく", "example": ""},
+    {"headword": "ふたぐ", "reading": "ふたぐ", "meaning": "叩く", "example": ""},
+    {"headword": "めぐせぇ", "reading": "めぐせぇ", "meaning": "恥ずかしい", "example": ""},
+    {"headword": "かに", "reading": "かに", "meaning": "ごめん", "example": ""},
+    {"headword": "じゃわめぐ", "reading": "じゃわめぐ", "meaning": "ぞくぞくする", "example": ""}
+  ]
+}
