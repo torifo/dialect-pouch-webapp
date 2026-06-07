@@ -1,5 +1,15 @@
 # 方言ポーチ(dialect-pouch)
 
+<!-- tech-stack:start (auto-generated) -->
+<p align="center">
+  <img src="https://img.shields.io/badge/Elixir-4B275F?style=for-the-badge&logo=elixir&logoColor=white" alt="Elixir">
+  <img src="https://img.shields.io/badge/Phoenix-FD4F00?style=for-the-badge&logo=phoenixframework&logoColor=white" alt="Phoenix">
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL">
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
+  <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS">
+</p>
+<!-- tech-stack:end -->
+
 日本各地の方言・言い回しを「気になったら気軽に調べ、眺め、変換して遊べる」consumer 向け Web アプリ。
 「調べ物」っぽい堅さを避け、検索流入(SEO)と地図ブラウズを入口に「へぇ、面白い」と楽しめる体験を提供する。
 
@@ -68,52 +78,9 @@ mix precommit     # compile --warnings-as-errors + deps.unlock --unused + format
 
 コミット前は `mix format` と `mix precommit` を通すこと。
 
-## 本番デプロイ
+## デプロイ
 
-アプリは `mix release`(生成済み `Dockerfile`)。最終イメージは `/app/bin/server` で起動し、
-マイグレーションは `/app/bin/migrate`。DB は**必ず** `docker/postgres` の pg_bigm 入りイメージを使う
-(migrations が `CREATE EXTENSION postgis / pg_bigm / ltree` を実行するため、素の postgres では失敗する)。
-
-イメージは GitHub Actions(`.github/workflows/build-image.yml`)が **GHCR** に push する:
-- `ghcr.io/torifo/dialect-pouch-webapp`(アプリ release)
-- `ghcr.io/torifo/dialect-pouch-db`(pg_bigm 入り PostgreSQL)
-
-### 環境変数(config/runtime.exs)
-| 変数 | 必須 | 内容 |
-|---|---|---|
-| `DATABASE_URL` | ✅ | `ecto://USER:PASS@HOST/DATABASE` |
-| `SECRET_KEY_BASE` | ✅ | `mix phx.gen.secret` で生成 |
-| `PHX_HOST` | ✅ | 公開ホスト名(URL 生成に使用) |
-| `PORT` | — | 待受ポート(既定 4000) |
-| `POOL_SIZE` | — | DB プールサイズ(既定 10) |
-
-### VPS(`docker-compose.prod.yml`)
-**VPS 上ではビルドしない**(メモリ不足)。GHCR の push 済みイメージを pull して使う。
-共有リバースプロキシ(nginxproxy/nginx-proxy + acme-companion、外部ネットワーク
-`global-proxy-network`)が `VIRTUAL_HOST` で自動ルーティング・自動TLSするため、個別 NGINX は不要。
-
-```bash
-# 設置先: /home/ubuntu/Web/dialect-pouch(リポを clone、または compose と .env のみ配置)
-# .env: APP_HOST=dialect-pouch.example.com / POSTGRES_PASSWORD=... / SECRET_KEY_BASE=... / IMAGE_TAG=latest
-docker compose -f docker-compose.prod.yml --env-file .env pull
-docker compose -f docker-compose.prod.yml --env-file .env up -d
-```
-app は起動時に `migrate -> server` を自動実行する。デプロイ更新は push(CI が GHCR 更新)→ VPS で `pull && up -d`。
-
-初期シード(31地域/約372エントリ、出典付き・冪等)を投入する場合:
-```bash
-docker exec dialect_pouch_app_prod /app/bin/dialect_pouch eval "DialectPouch.Release.seed()"
-```
-
-### オンプレ(`docker-compose.onprem.yml`・仮)
-共有proxyが無い前提の暫定構成。**例外として接続先でのビルドを許可**し、同梱 NGINX(`deploy/nginx.conf`)を前段に置く。
-```bash
-docker compose -f docker-compose.onprem.yml --env-file .env up -d --build
-```
-TLS は暫定で未設定(HTTP)。実環境に合わせて `deploy/nginx.conf` と 443/証明書を調整する。
-
-### バックアップ
-`deploy/backup.sh` が DB コンテナから `pg_dump` を取り、gzip でタイムスタンプ付き保存・世代管理する(cron 想定)。復元手順はスクリプト末尾コメント参照。
+本番デプロイ（VPS / オンプレ / バックアップ運用）の手順は [docs/deployment.md](docs/deployment.md) を参照。
 
 ## データ / provenance / ライセンス方針
 - **provenance を一級市民**として保持し、「それっぽい嘘」を構造的に避ける。変換は DB ルックアップ限定で推測生成しない。
