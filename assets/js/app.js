@@ -24,6 +24,7 @@ import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import {hooks as colocatedHooks} from "phoenix-colocated/dialect_pouch"
 import topbar from "../vendor/topbar"
+import {initPWA} from "./pwa.js"
 
 const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 const liveSocket = new LiveSocket("/live", Socket, {
@@ -39,6 +40,9 @@ window.addEventListener("phx:page-loading-stop", _info => topbar.hide())
 
 // connect if there are any LiveViews on the page
 liveSocket.connect()
+
+// PWA: service worker 登録・更新検知・インストール案内
+initPWA()
 
 // Japan tile map: guarantee each prefecture name fits its tile regardless of
 // font load / zoom / width. Measure and squeeze horizontally (from center, so
