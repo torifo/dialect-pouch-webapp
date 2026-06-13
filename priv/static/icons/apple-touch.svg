@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="方言ポーチ">
+  <title>方言ポーチ</title>
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#C2683C"/>
+      <stop offset="1" stop-color="#B6542E"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="#FBF7F1"/>
+  <g transform="translate(256 256) scale(0.84) translate(-256 -278)">
+    <path fill="url(#body)" d="M190 156
+      C120 182 92 250 96 318
+      C100 398 168 456 256 456
+      C344 456 412 398 416 318
+      C420 250 392 182 322 156 Z"/>
+    <path fill="#D98A5A" opacity="0.45" d="M150 220
+      C132 262 132 320 152 372
+      C168 330 168 268 176 224
+      C170 218 158 216 150 220 Z"/>
+    <path fill="#C2683C" d="M198 158
+      C182 124 204 102 224 100
+      C237 99 240 112 256 112
+      C272 112 275 99 288 100
+      C308 102 330 124 314 158 Z"/>
+    <g stroke="#8E3F1F" stroke-width="5" stroke-linecap="round" opacity="0.55">
+      <path d="M228 152 C226 134 230 120 236 110"/>
+      <path d="M256 154 L256 110"/>
+      <path d="M284 152 C286 134 282 120 276 110"/>
+    </g>
+    <rect x="178" y="144" width="156" height="34" rx="17" fill="#8E3F1F"/>
+    <g fill="none" stroke="#E0922F" stroke-width="13" stroke-linecap="round">
+      <path d="M186 161 C150 150 122 170 132 198 C140 220 172 220 180 198"/>
+      <path d="M326 161 C362 150 390 170 380 198 C372 220 340 220 332 198"/>
+    </g>
+    <circle cx="256" cy="161" r="11" fill="#E0922F"/>
+  </g>
+</svg>
