@@ -25,6 +25,10 @@ defmodule DialectPouchWeb.Endpoint do
     from: :dialect_pouch,
     gzip: not code_reloading?,
     only: DialectPouchWeb.static_paths(),
+    # Root-level files get digested to e.g. `manifest-<hash>.webmanifest` in prod,
+    # which `only:` (exact match) would reject. `only_matching` serves them by prefix
+    # so the PWA manifest / favicon / service worker resolve via ~p in production.
+    only_matching: ~w(favicon manifest sw),
     raise_on_missing_only: code_reloading?
 
   # Code reloading can be explicitly enabled under the
