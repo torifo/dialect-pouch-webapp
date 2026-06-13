@@ -132,17 +132,34 @@ defmodule DialectPouchWeb.Layouts do
     """
   end
 
-  @doc "Brand pouch mark (navy)."
+  @doc "Brand drawstring-pouch mark."
   def brand_mark(assigns) do
     ~H"""
     <svg class="brand__mark" width="34" height="34" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-      <rect x="3" y="9" width="34" height="28" rx="5" fill="var(--color-brand-primary)" />
+      <!-- bag body -->
       <path
-        d="M3 14 L20 22 L37 14 V11 a2 2 0 0 0-2-2 H5 a2 2 0 0 0-2 2 Z"
-        fill="var(--color-brand-primary-dark)"
+        fill="var(--color-brand-primary)"
+        d="M14 13 C8 15 6 21 6.5 26 C7 32 13 36.5 20 36.5 C27 36.5 33 32 33.5 26 C34 21 32 15 26 13 Z"
       />
-      <rect x="11" y="25" width="18" height="3.2" rx="1.6" fill="#fff" opacity="0.92" />
-      <rect x="11" y="30" width="11" height="3.2" rx="1.6" fill="var(--color-accent-info-bright)" />
+      <!-- gathered top -->
+      <path
+        fill="var(--color-brand-primary)"
+        d="M15.5 13 C13.5 9.5 16 7.7 18.2 7.7 C19.1 7.7 19.4 8.7 20 8.7 C20.6 8.7 20.9 7.7 21.8 7.7 C24 7.7 26.5 9.5 24.5 13 Z"
+      />
+      <!-- cinch band -->
+      <rect x="12.5" y="11.6" width="15" height="3.6" rx="1.8" fill="var(--color-brand-primary-dark)" />
+      <!-- drawstrings -->
+      <g
+        fill="none"
+        stroke="var(--color-accent-info-bright)"
+        stroke-width="1.5"
+        stroke-linecap="round"
+      >
+        <path d="M14 13.6 C10.8 12.5 9 14.2 9.9 16.4 C10.5 17.9 12.9 17.9 13.5 16.2" />
+        <path d="M26 13.6 C29.2 12.5 31 14.2 30.1 16.4 C29.5 17.9 27.1 17.9 26.5 16.2" />
+      </g>
+      <!-- knot -->
+      <circle cx="20" cy="13.4" r="1.3" fill="var(--color-accent-info-bright)" />
     </svg>
     """
   end
