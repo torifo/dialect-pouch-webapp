@@ -20,13 +20,21 @@ const isIOSSafari = () =>
   !/crios|fxios|edgios/i.test(navigator.userAgent);
 
 // ── トースト用コンテナ ─────────────────────────────────────
+// Common box style: full-width within viewport padding, capped + centered.
+const BOX_BASE =
+  "background:#FBF2E8;border:1px solid #E7DCCB;color:#2B231C;border-radius:.75rem;" +
+  "padding:.6rem .8rem;width:100%;max-width:420px;box-sizing:border-box;pointer-events:auto;";
+
 function toastHost() {
   let host = document.getElementById("pwa-toasts");
   if (!host) {
     host = document.createElement("div");
     host.id = "pwa-toasts";
-    host.className = "toast toast-center toast-bottom z-50";
-    host.style.cssText = "position:fixed;left:50%;bottom:1rem;transform:translateX(-50%);z-index:60;";
+    // Span the viewport with side padding and center children, so a capped-width
+    // box never overflows off-screen on narrow (mobile) viewports.
+    host.style.cssText =
+      "position:fixed;left:0;right:0;bottom:1rem;z-index:60;display:flex;" +
+      "flex-direction:column;align-items:center;gap:.5rem;padding:0 1rem;pointer-events:none;";
     document.body.appendChild(host);
   }
   return host;
@@ -42,12 +50,13 @@ function showUpdateToast(worker) {
   dismissBox("pwa-update");
   const box = document.createElement("div");
   box.id = "pwa-update";
-  box.className = "alert shadow-lg";
+  box.className = "shadow-lg";
   box.style.cssText =
-    "background:#FBF2E8;border:1px solid #E7DCCB;color:#2B231C;max-width:92vw;align-items:center;gap:.75rem;";
+    BOX_BASE +
+    "display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem .75rem;";
   box.innerHTML = `
-    <span style="font-size:.95rem;">新しいバージョンがあります</span>
-    <span style="display:flex;gap:.4rem;">
+    <span style="font-size:.95rem;flex:1 1 auto;min-width:0;">新しいバージョンがあります</span>
+    <span style="display:flex;gap:.4rem;flex:0 0 auto;">
       <button type="button" data-act="reload" class="btn btn-sm"
         style="background:#B6542E;border-color:#B6542E;color:#fff;">更新</button>
       <button type="button" data-act="later" class="btn btn-sm btn-ghost"
@@ -68,12 +77,13 @@ function showInstallBanner(deferredPrompt) {
   dismissBox("pwa-install");
   const box = document.createElement("div");
   box.id = "pwa-install";
-  box.className = "alert shadow-lg";
+  box.className = "shadow-lg";
   box.style.cssText =
-    "background:#FBF2E8;border:1px solid #E7DCCB;color:#2B231C;max-width:92vw;align-items:center;gap:.75rem;";
+    BOX_BASE +
+    "display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem .75rem;";
   box.innerHTML = `
-    <span style="font-size:.95rem;">方言ポーチをホーム画面に追加</span>
-    <span style="display:flex;gap:.4rem;">
+    <span style="font-size:.95rem;flex:1 1 auto;min-width:0;">方言ポーチをホーム画面に追加</span>
+    <span style="display:flex;gap:.4rem;flex:0 0 auto;">
       <button type="button" data-act="install" class="btn btn-sm"
         style="background:#B6542E;border-color:#B6542E;color:#fff;">インストール</button>
       <button type="button" data-act="close" class="btn btn-sm btn-ghost"
@@ -97,9 +107,9 @@ function showIOSInstallHint() {
   dismissBox("pwa-install");
   const box = document.createElement("div");
   box.id = "pwa-install";
-  box.className = "alert shadow-lg";
+  box.className = "shadow-lg";
   box.style.cssText =
-    "background:#FBF2E8;border:1px solid #E7DCCB;color:#2B231C;max-width:92vw;align-items:flex-start;gap:.5rem;flex-direction:column;";
+    BOX_BASE + "display:flex;flex-direction:column;align-items:stretch;gap:.4rem;";
   box.innerHTML = `
     <div style="display:flex;width:100%;justify-content:space-between;align-items:center;gap:.5rem;">
       <span style="font-size:.95rem;">ホーム画面に追加できます</span>
